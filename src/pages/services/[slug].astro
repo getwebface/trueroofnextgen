@@ -1,16 +1,13 @@
 ---
-import { getCollection } from 'astro:content';
+import { getEntry } from 'astro:content';
 import MainLayout from '../../layouts/MainLayout.astro';
 
-export async function getStaticPaths() {
-  const services = await getCollection('services');
-  return services.map(service => ({
-    params: { slug: service.slug },
-    props: { service },
-  }));
-}
+const { slug } = Astro.params;
+if (!slug) return Astro.redirect('/404');
 
-const { service } = Astro.props;
+const service = await getEntry('services', slug);
+if (!service) return Astro.redirect('/404');
+
 const { Content } = await service.render();
 ---
 <MainLayout>

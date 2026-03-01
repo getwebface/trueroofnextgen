@@ -1,16 +1,13 @@
 ---
-import { getCollection } from 'astro:content';
+import { getEntry } from 'astro:content';
 import MainLayout from '../../layouts/MainLayout.astro';
 
-export async function getStaticPaths() {
-  const locations = await getCollection('locations');
-  return locations.map(location => ({
-    params: { slug: location.slug },
-    props: { location },
-  }));
-}
+const { slug } = Astro.params;
+if (!slug) return Astro.redirect('/404');
 
-const { location } = Astro.props;
+const location = await getEntry('locations', slug);
+if (!location) return Astro.redirect('/404');
+
 const { Content } = await location.render();
 const { weatherContext } = Astro.locals;
 
