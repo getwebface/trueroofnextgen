@@ -41,7 +41,7 @@ const iconMap: Record<string, string> = {
       </p>
       <div class="hero-ctas">
         <a href="#quote" class="cta-primary">
-          {weatherMode === 'STORM_EMERGENCY' ? '🚨 Emergency Booking' : '📋 Get a Free Quote'}
+          {urgency >= 4 ? '🚨 Emergency Booking' : '📋 Get a Free Quote'}
         </a>
         <a href="tel:0400000000" class="cta-secondary">📞 Call Us Now</a>
       </div>
