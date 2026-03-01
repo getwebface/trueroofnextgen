@@ -1,43 +1,125 @@
 ---
 // src/components/WeatherBanner.astro
+// Driven by the new rich WeatherContext — copies compose from actual atmospheric event + temporal context
+
 const { weatherContext } = Astro.locals;
-const weatherMode = weatherContext?.weatherMode || 'DEFAULT';
-const city = weatherContext?.city || 'Melbourne';
-const temp = weatherContext?.temperature ? Math.round(weatherContext.temperature) : null;
-const condition = weatherContext?.condition || '';
+const { event, urgency, copyHints, city, temperature, timeOfDay, season, dayOfWeek, isWeekend, topService } = weatherContext || {};
 
-type BannerConfig = { class: string; emoji: string; text: string };
+// Build the banner message from actual weather context
+function buildBannerMessage(): { text: string; cssClass: string; emoji: string } {
+  const temp = temperature != null ? `${Math.round(temperature)}°C` : '';
+  const time = copyHints?.timeGreeting || 'Right now';
+  const svc = topService?.trigger || 'your roof';
+  const day = isWeekend ? `${dayOfWeek}` : dayOfWeek;
 
-const bannerMap: Record<string, BannerConfig> = {
-  STORM_EMERGENCY: {
-    class: 'storm',
-    emoji: '🚨',
-    text: `STORM ALERT: ${city} is experiencing severe weather — Emergency leak repair crews on standby!`
-  },
-  RAIN_ACTIVE: {
-    class: 'rain',
-    emoji: '🌧️',
-    text: `Raining in ${city}? Roof leaking right now? Call us for same-day emergency repairs.`
-  },
-  PREVENTATIVE: {
-    class: 'preventative',
-    emoji: '🍂',
-    text: `Autumn in ${city} — Perfect time for a roof check-up before winter. Book your free inspection.`
-  },
-  ROOF_RESTORATION: {
-    class: 'restoration',
-    emoji: '☀️',
-    text: `${temp ? temp + '°C and ' : ''}${condition.toLowerCase()} in ${city} — Ideal conditions for tile restoration. Get your free quote today!`
-  },
-  DEFAULT: {
-    class: 'default-mode',
-    emoji: '🏠',
-    text: `Serving ${city} & surrounding suburbs — Melbourne\'s trusted tile restoration specialists.`
+  switch (event) {
+    case 'HAIL_STORM':
+      return {
+        cssClass: 'storm',
+        emoji: '🚨',
+        text: `HAILSTORM ALERT in ${city} — Emergency crews available now. Hail causes immediate tile and flashing damage.`,
+      };
+    case 'THUNDERSTORM':
+      return {
+        cssClass: 'storm',
+        emoji: '⛈️',
+        text: `Storm hitting ${city} right now — Check your roof after. We're on standby for ${svc}.`,
+      };
+    case 'HIGH_WIND':
+      return {
+        cssClass: 'storm',
+        emoji: '💨',
+        text: `Strong winds in ${city} ${temp ? `(${temp})` : ''} — High winds can lift tiles and flashings. Call us if you notice any movement.`,
+      };
+    case 'HEAVY_RAIN':
+      return {
+        cssClass: 'rain',
+        emoji: '🌧️',
+        text: `Heavy rain in ${city} — If you're noticing a leak right now, every hour matters. We offer same-day urgent repairs.`,
+      };
+    case 'DRIZZLE':
+      return {
+        cssClass: 'rain',
+        emoji: '🌦️',
+        text: `Raining in ${city} — A dripping ceiling often reveals ${svc}. Book a free inspection while it's fresh.`,
+      };
+    case 'CLEAR_HOT':
+      return {
+        cssClass: 'clear-hot',
+        emoji: '☀️',
+        text: `${temp} and sunny in ${city} ${time ? `— ${time}` : ''} — Great drying conditions for our pointing and coating work. ${isWeekend ? 'Book before the week fills up.' : 'Lock in your quote today.'}`,
+      };
+    case 'CLEAR_MILD':
+      return {
+        cssClass: 'clear',
+        emoji: '🌤️',
+        text: `${season === 'AUTUMN' ? '🍂 Autumn window' : '☀️ Clear skies'} in ${city} ${temp ? `• ${temp}` : ''} — ${copyHints?.seasonalTip || 'Ideal conditions for roof work. Book your free inspection.'}`,
+      };
+    case 'FROST':
+      return {
+        cssClass: 'frost',
+        emoji: '❄️',
+        text: `Frost in ${city} this ${timeOfDay?.toLowerCase()} — Cold snaps crack pointing mortar and cause tile movement. Inspect your roof now.`,
+      };
+    case 'FOG':
+      return {
+        cssClass: 'overcast',
+        emoji: '🌫️',
+        text: `Foggy ${day} in ${city} — Persistent moisture breeds moss and lichen that silently damage tiles. Book a ${season === 'AUTUMN' || season === 'WINTER' ? 'pre-winter' : 'seasonal'} inspection.`,
+      };
+    case 'OVERCAST':
+      return {
+        cssClass: 'overcast',
+        emoji: '☁️',
+        text: `${time} in ${city} — ${copyHints?.seasonalTip || 'Overcast days are perfect for our inspection team. Book your free assessment.'}`,
+      };
+    default:
+      return {
+        cssClass: 'default-mode',
+        emoji: '🏠',
+        text: `TrueRoof — Melbourne's trusted tile restoration specialists. Serving ${city} & surrounds.`,
+      };
   }
-};
+}
 
-const banner = bannerMap[weatherMode] || bannerMap.DEFAULT;
+const banner = buildBannerMessage();
+const urgencyClass = urgency && urgency >= 4 ? ' urgent' : '';
 ---
-<div class={`weather-banner ${banner.class}`} role="alert" aria-live="polite">
-  <span>{banner.emoji} {banner.text}</span>
+<div class={`weather-banner ${banner.cssClass}${urgencyClass}`} role="alert" aria-live="polite">
+  <span class="banner-inner">
+    <span class="banner-emoji">{banner.emoji}</span>
+    <span>{banner.text}</span>
+    {urgency && urgency >= 4 && (
+      <a href="tel:0400000000" class="banner-cta">Call Now →</a>
+    )}
+  </span>
 </div>
+
+<style>
+.banner-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.625rem;
+  flex-wrap: wrap;
+}
+.banner-emoji { flex-shrink: 0; }
+.banner-cta {
+  display: inline-flex;
+  align-items: center;
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 9999px;
+  padding: 0.2rem 0.75rem;
+  font-weight: 700;
+  font-size: 0.8rem;
+  color: inherit;
+  text-decoration: none;
+  margin-left: 0.25rem;
+  transition: background 0.2s;
+}
+.banner-cta:hover { background: rgba(255,255,255,0.25); }
+.weather-banner.urgent {
+  animation: slideDown 0.5s ease-out, pulseGlow 2s ease-in-out infinite;
+}
+</style>

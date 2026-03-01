@@ -12,11 +12,24 @@ if (!location) return Astro.redirect('/404');
 
 const { Content } = await location.render();
 const { weatherContext } = Astro.locals;
-const weatherMode = weatherContext?.weatherMode || 'DEFAULT';
-const city = weatherContext?.city || location.data.title;
+const event = weatherContext?.event;
+const urgency = weatherContext?.urgency || 1;
 
-// Weather-aware headline
-const overrideHeadline = location.data.weatherOverrides?.[weatherMode as keyof typeof location.data.weatherOverrides];
+// Weather-reactive headline — maps event to location-specific override
+const eventToMode: Record<string, string> = {
+  HAIL_STORM: 'STORM_EMERGENCY',
+  THUNDERSTORM: 'STORM_EMERGENCY',
+  HIGH_WIND: 'STORM_EMERGENCY',
+  HEAVY_RAIN: 'RAIN_ACTIVE',
+  DRIZZLE: 'RAIN_ACTIVE',
+  FROST: 'PREVENTATIVE',
+  OVERCAST: 'PREVENTATIVE',
+  FOG: 'PREVENTATIVE',
+  CLEAR_MILD: 'ROOF_RESTORATION',
+  CLEAR_HOT: 'ROOF_RESTORATION',
+};
+const overrideKey = event ? (eventToMode[event] || 'DEFAULT') : 'DEFAULT';
+const overrideHeadline = location.data.weatherOverrides?.[overrideKey as keyof typeof location.data.weatherOverrides];
 const headline = overrideHeadline || location.data.title;
 
 // Get FAQs for this location
@@ -159,7 +172,7 @@ const services = await getCollection('services');
           <span class="badge">✅ Free Inspection</span>
         </div>
       </div>
-      <QuoteForm client:load weatherMode={weatherMode} city={location.data.title} />
+      <QuoteForm client:load ctx={weatherContext} />
     </div>
   </section>
 

@@ -12,10 +12,6 @@ const services = await getCollection('services');
 const faqs = await getCollection('faqs');
 
 const { weatherContext } = Astro.locals;
-const weatherMode = weatherContext?.weatherMode || 'DEFAULT';
-const city = weatherContext?.city || 'Melbourne';
-const temperature = weatherContext?.temperature;
-const condition = weatherContext?.condition;
 
 // Icon mapping for services
 const iconMap: Record<string, string> = {
@@ -24,74 +20,81 @@ const iconMap: Record<string, string> = {
   'shield-check': '🛡️',
 };
 
-// Build FAQ items
-const faqItems = faqs.map(faq => ({
-  question: faq.data.question,
-  answer: faq.data.answer,
-}));
+// Build service → icon label
+const serviceIconLabel: Record<string, { icon: string; urgencyHint?: string }> = {};
+if (weatherContext) {
+  for (const sig of weatherContext.services) {
+    serviceIconLabel[sig.slug] = { icon: '', urgencyHint: sig.trigger };
+  }
+}
 
-// Add some default FAQs if we don't have many
+// FAQ content
+const baseFaqs = faqs.map(f => ({ question: f.data.question, answer: f.data.answer }));
 const defaultFaqs = [
-  { question: 'How much does a tile roof restoration cost?', answer: 'A typical restoration ranges from $3,500 to $8,000 depending on roof size, condition, and coating requirements. We provide free inspections and detailed quotes with no obligation.' },
-  { question: 'Do you offer emergency repairs?', answer: 'Yes! We have emergency crews on standby for storm damage, active leaks, and urgent flashing repairs. Call us 24/7 for emergency situations.' },
-  { question: 'What areas do you service?', answer: 'We service all of Melbourne and surrounding suburbs including the northern corridor (Wallan, Kilmore, Broadford) and eastern suburbs. Contact us to check if we cover your area.' },
-  { question: 'How long does a roof restoration take?', answer: 'A typical restoration takes 3-5 days depending on roof size and weather conditions. We plan around the weather forecast to ensure optimal curing conditions for pointing and coating.' },
-  { question: 'Is restoration better than replacement?', answer: 'In most cases, absolutely. A professional restoration costs a fraction of a full re-roof and can extend your roof\'s life by 15-20 years. Our 4-stage process addresses every common issue with tiled roofs.' },
+  { question: 'How much does a tile roof restoration cost?', answer: 'A typical restoration ranges from $3,500 to $8,000 depending on roof size, condition, and the services required. We provide free, no-obligation inspections with detailed written quotes.' },
+  { question: 'Do you offer emergency repairs?', answer: 'Yes — we have emergency crews available for storm damage, active leaks, and urgent flashing repairs. Call us 24/7 for genuine emergencies.' },
+  { question: 'What\'s the difference between cleaning, pointing, and restoration?', answer: 'Cleaning removes moss, lichen and grime. Re-bedding and flexi-pointing secures ridge caps with modern flexible compound. A full restoration combines all stages plus a protective coating — it\'s the most cost-effective way to extend your roof\'s life by 15–20 years.' },
+  { question: 'How long does a roof restoration take?', answer: 'A typical restoration takes 3–5 days depending on roof size and conditions. We plan around the weather forecast to ensure pointing and coating cure correctly.' },
+  { question: 'How do I know if my roof needs restoration vs. just a clean?', answer: 'If your ridge caps are cracked, mortar is flaking, or tiles are visibly broken, you need a restoration. If the roof is structurally sound but just dirty, a clean and inspection will suffice. Our free inspection will tell you exactly what\'s needed — no upselling.' },
 ];
+const allFaqs = [...baseFaqs, ...defaultFaqs.filter(d => !baseFaqs.some(f => f.question === d.question))];
 
-const allFaqs = [...faqItems, ...defaultFaqs.filter(d => !faqItems.some(f => f.question === d.question))];
+// Weather-informed service ordering
+const serviceOrder = weatherContext?.services.map(s => s.slug) || [];
+const sortedServices = [...services].sort((a, b) => {
+  const ai = serviceOrder.indexOf(a.slug);
+  const bi = serviceOrder.indexOf(b.slug);
+  if (ai === -1 && bi === -1) return 0;
+  if (ai === -1) return 1;
+  if (bi === -1) return -1;
+  return ai - bi;
+});
 ---
 <MainLayout>
 
-  {/* ── Hero Section (React, client-side hydrated) ── */}
-  <WeatherHero
-    client:load
-    weatherMode={weatherMode}
-    city={city}
-    temperature={temperature}
-    condition={condition}
-  />
+  <!-- Hero Section (React, weather-reactive) -->
+  <WeatherHero client:load ctx={weatherContext} />
 
-  {/* ── Trust Bar ── */}
+  <!-- Trust Bar -->
   <TrustBar />
 
-  {/* ── Services Section ── */}
+  <!-- Services Section — weather-ranked order -->
   <section id="services" style="padding: 5rem 0;">
     <div class="container">
       <div style="margin-bottom: 3rem;">
         <h2 class="section-heading">Our Restoration <span class="accent-text">Services</span></h2>
         <p class="section-subheading">
-          Specialized care for Melbourne's terracotta and concrete tile roofs — from cleaning to full restoration.
+          {weatherContext?.copyHints?.seasonalTip || 'Specialized care for Melbourne\'s terracotta and concrete tile roofs — from cleaning to full restoration.'}
         </p>
       </div>
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
-        {services.map(service => (
-          <a href={`/services/${service.slug}`} class="service-card">
-            <div class="service-icon">
-              {iconMap[service.data.icon || ''] || '🏠'}
-            </div>
-            <h3>{service.data.title}</h3>
-            <p>{service.data.description}</p>
-            <span class="card-link">Learn More →</span>
-          </a>
-        ))}
+        {sortedServices.map((service, i) => {
+          const hint = serviceIconLabel[service.slug]?.urgencyHint;
+          return (
+            <a href={`/services/${service.slug}`} class={`service-card ${i === 0 ? 'featured' : ''}`}>
+              <div class="service-icon">{iconMap[service.data.icon || ''] || '🏠'}</div>
+              <h3>{service.data.title}</h3>
+              <p>{service.data.description}</p>
+              {hint && <div class="service-hint">📍 {hint}</div>}
+              <span class="card-link">Learn More →</span>
+            </a>
+          );
+        })}
       </div>
     </div>
   </section>
 
-  {/* ── 4-Stage Process ── */}
+  <!-- 4-Stage Process -->
   <div id="process" class="section-dark">
     <ProcessSteps />
   </div>
 
-  {/* ── Locations Section ── */}
+  <!-- Locations Section -->
   <section id="locations" style="padding: 5rem 0;">
     <div class="container">
       <div style="margin-bottom: 3rem;">
         <h2 class="section-heading">Serving <span class="accent-text">Melbourne</span> & Beyond</h2>
-        <p class="section-subheading">
-          We restore roofs across Melbourne and the surrounding suburbs. Find your area below.
-        </p>
+        <p class="section-subheading">Find your suburb and see what's relevant for your area right now.</p>
       </div>
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem;">
         {locations.map(location => (
@@ -109,7 +112,7 @@ const allFaqs = [...faqItems, ...defaultFaqs.filter(d => !faqItems.some(f => f.q
     </div>
   </section>
 
-  {/* ── FAQ Section ── */}
+  <!-- FAQ Section -->
   <section class="section-dark" style="padding: 5rem 0;">
     <div class="container" style="max-width: 48rem;">
       <div style="text-align: center; margin-bottom: 2.5rem;">
@@ -122,35 +125,53 @@ const allFaqs = [...faqItems, ...defaultFaqs.filter(d => !faqItems.some(f => f.q
     </div>
   </section>
 
-  {/* ── Quote Section ── */}
+  <!-- Quote Section -->
   <section id="quote" class="quote-section">
     <div class="container" style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;">
       <div>
-        <h2 class="section-heading" style="margin-bottom: 1rem;">Ready to Restore<br/><span class="accent-text">Your Roof?</span></h2>
+        <h2 class="section-heading" style="margin-bottom: 1rem;">
+          Ready to Restore<br/><span class="accent-text">Your Roof?</span>
+        </h2>
         <p style="color: rgba(255,255,255,0.5); font-size: 1.05rem; line-height: 1.7; margin-bottom: 2rem;">
-          Fill in the form and one of our team will call you back within 2 hours.
-          Or if it's urgent, call us directly — we're always happy to chat.
+          {weatherContext?.urgency && weatherContext.urgency >= 4
+            ? 'Weather is active — the sooner we assess your roof, the less damage occurs. Fill in your details and we\'ll call back within the hour.'
+            : 'Fill in the form and one of our team will call you back within 2 hours. Or call us directly — we\'re always happy to chat.'}
         </p>
         <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
           <span style="font-size: 2rem;">📞</span>
           <div>
-            <div style="font-size: 0.75rem; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.05em;">Call Us Anytime</div>
+            <div style="font-size: 0.75rem; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.05em;">
+              {weatherContext?.urgency && weatherContext.urgency >= 4 ? 'Emergency Line — Call Now' : 'Call Us Anytime'}
+            </div>
             <a href="tel:0400000000" style="font-family: Outfit, sans-serif; font-weight: 800; font-size: 1.5rem; color: white; text-decoration: none;">0400 000 000</a>
           </div>
         </div>
         <div style="display: flex; flex-wrap: wrap; gap: 0.75rem;">
           <span class="badge">✅ Free Inspections</span>
-          <span class="badge">✅ Same-Day Quotes</span>
           <span class="badge">✅ No Obligation</span>
+          {weatherContext?.urgency && weatherContext.urgency >= 4 && <span class="badge" style="background: rgba(239,68,68,0.15); color: #fca5a5; border-color: rgba(239,68,68,0.3);">🚨 Urgent Response</span>}
         </div>
       </div>
-      <QuoteForm client:load weatherMode={weatherMode} city={city} />
+      <QuoteForm client:load ctx={weatherContext} />
     </div>
   </section>
 
 </MainLayout>
 
 <style>
+  .service-card.featured {
+    border-top: 2px solid var(--color-brand-orange);
+  }
+  .service-hint {
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.45);
+    font-style: italic;
+    margin-bottom: 0.75rem;
+    padding: 0.375rem 0.75rem;
+    background: rgba(255,255,255,0.03);
+    border-radius: 0.5rem;
+    border-left: 2px solid rgba(249, 115, 22, 0.4);
+  }
   @media (max-width: 768px) {
     #quote .container {
       grid-template-columns: 1fr !important;

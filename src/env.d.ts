@@ -1,6 +1,8 @@
 /// <reference path="../.astro/types.d.ts" />
 /// <reference types="astro/client" />
 
+import type { WeatherContext } from './utils/weatherProcessor';
+
 declare namespace App {
   interface Locals {
     runtime: {
@@ -11,13 +13,7 @@ declare namespace App {
       env?: any;
       waitUntil?: (promise: Promise<any>) => void;
     };
-    weatherContext: {
-      city: string;
-      weatherMode: string;
-      windSpeed: number;
-      precipitation: number;
-      temperature: number;
-      condition: string;
-    };
+    weatherContext: WeatherContext;
+    weatherCSSMode: string; // e.g. 'weather-storm', 'weather-rain', 'weather-clear'
   }
 }
