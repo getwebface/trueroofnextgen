@@ -1,0 +1,29 @@
+---
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const locations = await getCollection('locations');
+  return locations.map(location => ({
+    params: { slug: location.slug },
+    props: { location },
+  }));
+}
+
+const { location } = Astro.props;
+const { Content } = await location.render();
+---
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>{location.data.title} - Roofing Services</title>
+  </head>
+  <body class="bg-slate-50 text-slate-900">
+    <main class="max-w-4xl mx-auto p-8">
+      <h1 class="text-4xl font-bold mb-4">{location.data.title}</h1>
+      <p class="text-lg text-slate-600 mb-8">{location.data.description}</p>
+      <div class="prose prose-slate">
+        <Content />
+      </div>
+    </main>
+  </body>
+</html>
