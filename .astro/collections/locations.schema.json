@@ -1,0 +1,109 @@
+{
+  "$ref": "#/definitions/locations",
+  "definitions": {
+    "locations": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "postcode": {
+          "type": "string"
+        },
+        "coordinates": {
+          "type": "object",
+          "properties": {
+            "lat": {
+              "type": "number"
+            },
+            "lng": {
+              "type": "number"
+            }
+          },
+          "required": [
+            "lat",
+            "lng"
+          ],
+          "additionalProperties": false
+        },
+        "weatherOverrides": {
+          "type": "object",
+          "properties": {
+            "STORM_EMERGENCY": {
+              "type": "string"
+            },
+            "RAIN_ACTIVE": {
+              "type": "string"
+            },
+            "PREVENTATIVE": {
+              "type": "string"
+            },
+            "ROOF_REPLACEMENT": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        },
+        "serviceFocus": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "localStats": {
+          "type": "object",
+          "properties": {
+            "avgRoofAge": {
+              "type": "string"
+            },
+            "lastStormDate": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        },
+        "nearbySuburbs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "localCommonRoofTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "lastInspected": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date-time"
+            },
+            {
+              "type": "string",
+              "format": "date"
+            },
+            {
+              "type": "integer",
+              "format": "unix-time"
+            }
+          ]
+        },
+        "$schema": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "title",
+        "description",
+        "postcode"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}
