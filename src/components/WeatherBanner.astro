@@ -1,0 +1,43 @@
+---
+// src/components/WeatherBanner.astro
+const { weatherContext } = Astro.locals;
+const weatherMode = weatherContext?.weatherMode || 'DEFAULT';
+const city = weatherContext?.city || 'Melbourne';
+const temp = weatherContext?.temperature ? Math.round(weatherContext.temperature) : null;
+const condition = weatherContext?.condition || '';
+
+type BannerConfig = { class: string; emoji: string; text: string };
+
+const bannerMap: Record<string, BannerConfig> = {
+  STORM_EMERGENCY: {
+    class: 'storm',
+    emoji: '🚨',
+    text: `STORM ALERT: ${city} is experiencing severe weather — Emergency leak repair crews on standby!`
+  },
+  RAIN_ACTIVE: {
+    class: 'rain',
+    emoji: '🌧️',
+    text: `Raining in ${city}? Roof leaking right now? Call us for same-day emergency repairs.`
+  },
+  PREVENTATIVE: {
+    class: 'preventative',
+    emoji: '🍂',
+    text: `Autumn in ${city} — Perfect time for a roof check-up before winter. Book your free inspection.`
+  },
+  ROOF_RESTORATION: {
+    class: 'restoration',
+    emoji: '☀️',
+    text: `${temp ? temp + '°C and ' : ''}${condition.toLowerCase()} in ${city} — Ideal conditions for tile restoration. Get your free quote today!`
+  },
+  DEFAULT: {
+    class: 'default-mode',
+    emoji: '🏠',
+    text: `Serving ${city} & surrounding suburbs — Melbourne\'s trusted tile restoration specialists.`
+  }
+};
+
+const banner = bannerMap[weatherMode] || bannerMap.DEFAULT;
+---
+<div class={`weather-banner ${banner.class}`} role="alert" aria-live="polite">
+  <span>{banner.emoji} {banner.text}</span>
+</div>

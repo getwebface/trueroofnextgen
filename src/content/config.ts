@@ -15,7 +15,7 @@ const locationsCollection = defineCollection({
       STORM_EMERGENCY: z.string().optional(),
       RAIN_ACTIVE: z.string().optional(),
       PREVENTATIVE: z.string().optional(),
-      ROOF_REPLACEMENT: z.string().optional(),
+      ROOF_RESTORATION: z.string().optional(),
     }).optional(),
     serviceFocus: z.array(z.string()).optional(),
     localStats: z.object({

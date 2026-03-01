@@ -9,7 +9,7 @@ weatherOverrides:
   STORM_EMERGENCY: "Emergency Tile Leak & Flashing Repairs Melbourne"
   RAIN_ACTIVE: "Stop Tiled Roof Leaks Today"
   PREVENTATIVE: "Protect Your Melbourne Tiles Before Winter"
-  ROOF_REPLACEMENT: "Perfect Weather for Full Tile Restoration"
+  ROOF_RESTORATION: "Perfect Weather for Full Tile Restoration"
 serviceFocus: ["Tile Cleaning", "Flexi-Pointing", "Metal Flashing Replacement", "Valley Repairs"]
 localStats:
   avgRoofAge: "45 years"

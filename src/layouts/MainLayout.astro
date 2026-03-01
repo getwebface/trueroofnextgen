@@ -1,46 +1,126 @@
 ---
 // src/layouts/MainLayout.astro
 import Analytics from '../components/Analytics.astro';
+import WeatherBanner from '../components/WeatherBanner.astro';
 
 const { weatherContext } = Astro.locals;
 const weatherMode = weatherContext?.weatherMode || 'DEFAULT';
-const city = weatherContext?.city || 'Unknown';
+const city = weatherContext?.city || 'Melbourne';
+
+// Map weather mode to body class
+const weatherClassMap: Record<string, string> = {
+  STORM_EMERGENCY: 'weather-storm',
+  RAIN_ACTIVE: 'weather-rain',
+  PREVENTATIVE: 'weather-preventative',
+  ROOF_RESTORATION: 'weather-restoration',
+  DEFAULT: 'weather-default',
+};
+const weatherClass = weatherClassMap[weatherMode] || 'weather-default';
 
 const isEmergency = weatherMode === 'STORM_EMERGENCY';
-const themeClass = isEmergency ? 'theme-emergency bg-red-50' : 'theme-default bg-slate-50';
-const buttonClass = isEmergency ? 'bg-red-600 hover:bg-red-700 text-white' : 'bg-blue-600 hover:bg-blue-700 text-white';
 ---
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Melbourne Roof Tile Restoration</title>
-    <script is:inline define:vars={{ weatherMode, city }}>
+    <title>True Roof — Melbourne Tile Restoration Specialists</title>
+    <meta name="description" content="Melbourne's trusted tile restoration experts. Professional cleaning, re-bedding, flexi-pointing, and metal flashing repairs. Free inspections. 25+ years experience." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <script is:inline define:vars={{ weatherMode, city, temperature: weatherContext?.temperature, condition: weatherContext?.condition }}>
       window.__WEATHER_MODE__ = weatherMode;
       window.__SUBURB__ = city;
+      window.__TEMPERATURE__ = temperature;
+      window.__CONDITION__ = condition;
     </script>
     <Analytics />
   </head>
-  <body class={`text-slate-900 transition-colors duration-300 ${themeClass}`}>
-    {isEmergency && (
-      <div class="bg-red-600 text-white text-center py-3 font-bold">
-        🚨 STORM WARNING: {city} is expecting severe weather. Emergency leak repair teams are on standby!
-      </div>
-    )}
-    
-    <header class="max-w-6xl mx-auto p-6 flex justify-between items-center">
-      <div class="text-2xl font-black tracking-tighter uppercase">Melbourne Roof Tile Restoration</div>
-      <button class={`px-6 py-2 rounded-full font-semibold transition-colors ${buttonClass}`}>
-        {isEmergency ? 'Emergency Call 24/7' : 'Get a Quote'}
-      </button>
-    </header>
+  <body class={weatherClass}>
 
-    <main class="max-w-6xl mx-auto p-6">
+    <!-- Weather Banner -->
+    <WeatherBanner />
+
+    <!-- Sticky Navbar -->
+    <nav class="navbar">
+      <div class="navbar-inner">
+        <a href="/" class="nav-logo">True<span>Roof</span></a>
+        <ul class="nav-links">
+          <li><a href="/#services">Services</a></li>
+          <li><a href="/#process">Our Process</a></li>
+          <li><a href="/#locations">Locations</a></li>
+          <li><a href="#quote">Get a Quote</a></li>
+        </ul>
+        <div style="display: flex; align-items: center; gap: 1rem;">
+          <a href="tel:0400000000" class="nav-phone">
+            <span>📞</span>
+            <span>0400 000 000</span>
+          </a>
+          <a href="#quote" class="cta-primary" style="padding: 0.6rem 1.5rem; font-size: 0.85rem;">
+            {isEmergency ? 'Emergency Call' : 'Free Quote'}
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Page Content -->
+    <main>
       <slot />
     </main>
 
-    <footer class="max-w-6xl mx-auto p-6 mt-12 border-t border-slate-200 text-slate-500 text-sm">
-      &copy; {new Date().getFullYear()} True Roof. All rights reserved.
+    <!-- Footer -->
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div>
+            <div class="footer-brand">True<span>Roof</span></div>
+            <p class="footer-desc">
+              Melbourne's trusted tile restoration specialists. We restore terracotta and concrete tile roofs
+              to their former glory — no shortcuts, just quality craftsmanship backed by 25+ years of experience.
+            </p>
+            <a href="tel:0400000000" class="cta-primary" style="padding: 0.6rem 1.25rem; font-size: 0.85rem;">
+              📞 Call Us Now
+            </a>
+          </div>
+          <div>
+            <div class="footer-heading">Services</div>
+            <ul class="footer-links">
+              <li><a href="/services/tiled-restoration">Tile Restoration</a></li>
+              <li><a href="/services/cleaning">Roof Cleaning</a></li>
+              <li><a href="/services/metal-flashings">Metal Flashings</a></li>
+              <li><a href="#quote">Free Inspection</a></li>
+            </ul>
+          </div>
+          <div>
+            <div class="footer-heading">Locations</div>
+            <ul class="footer-links">
+              <li><a href="/locations/melbourne">Melbourne</a></li>
+              <li><a href="/locations/wallan">Wallan</a></li>
+            </ul>
+          </div>
+          <div>
+            <div class="footer-heading">Contact</div>
+            <ul class="footer-links">
+              <li><a href="tel:0400000000">0400 000 000</a></li>
+              <li><a href="mailto:info@trueroof.com.au">info@trueroof.com.au</a></li>
+              <li><span style="color: rgba(255,255,255,0.3); font-size: 0.8rem;">Licensed & Insured</span></li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          &copy; {new Date().getFullYear()} True Roof. All rights reserved. Melbourne, Australia.
+        </div>
+      </div>
     </footer>
+
+    <!-- Sticky Mobile CTA Bar -->
+    <div class="mobile-cta">
+      <a href="tel:0400000000" class="cta-primary" style="font-size: 0.85rem;">
+        📞 Call Now
+      </a>
+      <a href="#quote" class="cta-secondary" style="font-size: 0.85rem;">
+        📋 Free Quote
+      </a>
+    </div>
+
   </body>
 </html>

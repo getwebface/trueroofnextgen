@@ -1,44 +1,160 @@
 ---
 import MainLayout from '../layouts/MainLayout.astro';
 import { getCollection } from 'astro:content';
+import TrustBar from '../components/TrustBar.astro';
+import ProcessSteps from '../components/ProcessSteps.astro';
+import WeatherHero from '../components/WeatherHero.tsx';
+import QuoteForm from '../components/QuoteForm.tsx';
+import FAQAccordion from '../components/FAQAccordion.tsx';
 
 const locations = await getCollection('locations');
 const services = await getCollection('services');
+const faqs = await getCollection('faqs');
+
+const { weatherContext } = Astro.locals;
+const weatherMode = weatherContext?.weatherMode || 'DEFAULT';
+const city = weatherContext?.city || 'Melbourne';
+const temperature = weatherContext?.temperature;
+const condition = weatherContext?.condition;
+
+// Icon mapping for services
+const iconMap: Record<string, string> = {
+  droplet: '💧',
+  wrench: '🔧',
+  'shield-check': '🛡️',
+};
+
+// Build FAQ items
+const faqItems = faqs.map(faq => ({
+  question: faq.data.question,
+  answer: faq.data.answer,
+}));
+
+// Add some default FAQs if we don't have many
+const defaultFaqs = [
+  { question: 'How much does a tile roof restoration cost?', answer: 'A typical restoration ranges from $3,500 to $8,000 depending on roof size, condition, and coating requirements. We provide free inspections and detailed quotes with no obligation.' },
+  { question: 'Do you offer emergency repairs?', answer: 'Yes! We have emergency crews on standby for storm damage, active leaks, and urgent flashing repairs. Call us 24/7 for emergency situations.' },
+  { question: 'What areas do you service?', answer: 'We service all of Melbourne and surrounding suburbs including the northern corridor (Wallan, Kilmore, Broadford) and eastern suburbs. Contact us to check if we cover your area.' },
+  { question: 'How long does a roof restoration take?', answer: 'A typical restoration takes 3-5 days depending on roof size and weather conditions. We plan around the weather forecast to ensure optimal curing conditions for pointing and coating.' },
+  { question: 'Is restoration better than replacement?', answer: 'In most cases, absolutely. A professional restoration costs a fraction of a full re-roof and can extend your roof\'s life by 15-20 years. Our 4-stage process addresses every common issue with tiled roofs.' },
+];
+
+const allFaqs = [...faqItems, ...defaultFaqs.filter(d => !faqItems.some(f => f.question === d.question))];
 ---
 <MainLayout>
-  <section class="py-12 text-center">
-    <h1 class="text-6xl font-black tracking-tighter mb-6">MELBOURNE'S TILE RESTORATION SPECIALISTS</h1>
-    <p class="text-xl text-slate-600 max-w-2xl mx-auto mb-10">
-      We don't just replace roofs; we restore them to their former glory. Specialized care for Melbourne's terracotta and concrete tile roofs.
-    </p>
-    <div class="flex justify-center gap-4">
-      <a href="/services/cleaning" class="bg-blue-600 text-white px-8 py-3 rounded-full font-bold hover:bg-blue-700 transition-colors">Our Services</a>
-      <a href="#locations" class="border border-slate-200 px-8 py-3 rounded-full font-bold hover:bg-slate-50 transition-colors">View Locations</a>
+
+  {/* ── Hero Section (React, client-side hydrated) ── */}
+  <WeatherHero
+    client:load
+    weatherMode={weatherMode}
+    city={city}
+    temperature={temperature}
+    condition={condition}
+  />
+
+  {/* ── Trust Bar ── */}
+  <TrustBar />
+
+  {/* ── Services Section ── */}
+  <section id="services" style="padding: 5rem 0;">
+    <div class="container">
+      <div style="margin-bottom: 3rem;">
+        <h2 class="section-heading">Our Restoration <span class="accent-text">Services</span></h2>
+        <p class="section-subheading">
+          Specialized care for Melbourne's terracotta and concrete tile roofs — from cleaning to full restoration.
+        </p>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+        {services.map(service => (
+          <a href={`/services/${service.slug}`} class="service-card">
+            <div class="service-icon">
+              {iconMap[service.data.icon || ''] || '🏠'}
+            </div>
+            <h3>{service.data.title}</h3>
+            <p>{service.data.description}</p>
+            <span class="card-link">Learn More →</span>
+          </a>
+        ))}
+      </div>
     </div>
   </section>
 
-  <section id="locations" class="py-12 border-t border-slate-100">
-    <h2 class="text-3xl font-bold mb-8">Serving Melbourne & Beyond</h2>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-      {locations.map(location => (
-        <a href={`/locations/${location.slug}`} class="group p-6 bg-white rounded-2xl shadow-sm hover:shadow-md transition-all border border-slate-100">
-          <h3 class="text-xl font-bold group-hover:text-blue-600 transition-colors">{location.data.title}</h3>
-          <p class="text-slate-500 text-sm mt-2">{location.data.description}</p>
-        </a>
-      ))}
+  {/* ── 4-Stage Process ── */}
+  <div id="process" class="section-dark">
+    <ProcessSteps />
+  </div>
+
+  {/* ── Locations Section ── */}
+  <section id="locations" style="padding: 5rem 0;">
+    <div class="container">
+      <div style="margin-bottom: 3rem;">
+        <h2 class="section-heading">Serving <span class="accent-text">Melbourne</span> & Beyond</h2>
+        <p class="section-subheading">
+          We restore roofs across Melbourne and the surrounding suburbs. Find your area below.
+        </p>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem;">
+        {locations.map(location => (
+          <a href={`/locations/${location.slug}`} class="location-card">
+            <h3>{location.data.title}</h3>
+            <p>{location.data.description}</p>
+            {location.data.localStats?.avgRoofAge && (
+              <div style="margin-top: 0.75rem;">
+                <span class="badge">Avg Roof Age: {location.data.localStats.avgRoofAge}</span>
+              </div>
+            )}
+          </a>
+        ))}
+      </div>
     </div>
   </section>
 
-  <section class="py-12 border-t border-slate-100">
-    <h2 class="text-3xl font-bold mb-8">Our Restoration Services</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-      {services.map(service => (
-        <div class="p-8 bg-slate-900 text-white rounded-3xl">
-          <h3 class="text-2xl font-bold mb-4">{service.data.title}</h3>
-          <p class="text-slate-400 mb-6">{service.data.description}</p>
-          <a href={`/services/${service.slug}`} class="text-blue-400 font-bold hover:underline">Learn More &rarr;</a>
+  {/* ── FAQ Section ── */}
+  <section class="section-dark" style="padding: 5rem 0;">
+    <div class="container" style="max-width: 48rem;">
+      <div style="text-align: center; margin-bottom: 2.5rem;">
+        <h2 class="section-heading">Common <span class="accent-text">Questions</span></h2>
+        <p class="section-subheading" style="margin-left: auto; margin-right: auto;">
+          Everything you need to know about tile roof restoration in Melbourne.
+        </p>
+      </div>
+      <FAQAccordion client:load items={allFaqs} />
+    </div>
+  </section>
+
+  {/* ── Quote Section ── */}
+  <section id="quote" class="quote-section">
+    <div class="container" style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;">
+      <div>
+        <h2 class="section-heading" style="margin-bottom: 1rem;">Ready to Restore<br/><span class="accent-text">Your Roof?</span></h2>
+        <p style="color: rgba(255,255,255,0.5); font-size: 1.05rem; line-height: 1.7; margin-bottom: 2rem;">
+          Fill in the form and one of our team will call you back within 2 hours.
+          Or if it's urgent, call us directly — we're always happy to chat.
+        </p>
+        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+          <span style="font-size: 2rem;">📞</span>
+          <div>
+            <div style="font-size: 0.75rem; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.05em;">Call Us Anytime</div>
+            <a href="tel:0400000000" style="font-family: Outfit, sans-serif; font-weight: 800; font-size: 1.5rem; color: white; text-decoration: none;">0400 000 000</a>
+          </div>
         </div>
-      ))}
+        <div style="display: flex; flex-wrap: wrap; gap: 0.75rem;">
+          <span class="badge">✅ Free Inspections</span>
+          <span class="badge">✅ Same-Day Quotes</span>
+          <span class="badge">✅ No Obligation</span>
+        </div>
+      </div>
+      <QuoteForm client:load weatherMode={weatherMode} city={city} />
     </div>
   </section>
+
 </MainLayout>
+
+<style>
+  @media (max-width: 768px) {
+    #quote .container {
+      grid-template-columns: 1fr !important;
+      gap: 2rem !important;
+    }
+  }
+</style>

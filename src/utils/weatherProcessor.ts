@@ -1,4 +1,4 @@
-export type WeatherMode = 'STORM_EMERGENCY' | 'RAIN_ACTIVE' | 'PREVENTATIVE' | 'ROOF_REPLACEMENT' | 'DEFAULT';
+export type WeatherMode = 'STORM_EMERGENCY' | 'RAIN_ACTIVE' | 'PREVENTATIVE' | 'ROOF_RESTORATION' | 'DEFAULT';
 
 export interface WeatherData {
   windSpeed: number; // km/h
@@ -23,7 +23,7 @@ export function determineWeatherMode(data: WeatherData, date: Date = new Date())
   }
 
   if (data.temperature >= 15 && data.temperature <= 25 && data.condition.toLowerCase().includes('clear')) {
-    return 'ROOF_REPLACEMENT';
+    return 'ROOF_RESTORATION';
   }
 
   return 'DEFAULT';

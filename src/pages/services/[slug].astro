@@ -1,6 +1,7 @@
 ---
-import { getEntry } from 'astro:content';
+import { getEntry, getCollection } from 'astro:content';
 import MainLayout from '../../layouts/MainLayout.astro';
+import QuoteForm from '../../components/QuoteForm.tsx';
 
 const { slug } = Astro.params;
 if (!slug) return Astro.redirect('/404');
@@ -9,11 +10,131 @@ const service = await getEntry('services', slug);
 if (!service) return Astro.redirect('/404');
 
 const { Content } = await service.render();
+const { weatherContext } = Astro.locals;
+const weatherMode = weatherContext?.weatherMode || 'DEFAULT';
+const city = weatherContext?.city || 'Melbourne';
+
+// Get other services for related links
+const allServices = await getCollection('services');
+const relatedServices = allServices.filter(s => s.slug !== slug);
+
+// Icon mapping
+const iconMap: Record<string, string> = {
+  droplet: '💧',
+  wrench: '🔧',
+  'shield-check': '🛡️',
+};
 ---
 <MainLayout>
-  <h1 class="text-5xl font-bold mb-4">{service.data.title}</h1>
-  <p class="text-xl text-slate-600 mb-8">{service.data.description}</p>
-  <div class="prose prose-slate max-w-none">
-    <Content />
-  </div>
+
+  {/* ── Service Hero ── */}
+  <section class="hero-section" style="padding: 4rem 0 3.5rem;">
+    <div class="hero-content">
+      <div class="hero-badge">
+        {iconMap[service.data.icon || ''] || '🏠'} {service.data.title}
+      </div>
+      <h1 class="hero-headline" style="font-size: clamp(2rem, 5vw, 3.5rem);">
+        {service.data.title}
+      </h1>
+      <p class="hero-sub" style="max-width: 42rem;">
+        {service.data.description}
+      </p>
+      <div class="hero-ctas">
+        <a href="#quote" class="cta-primary">
+          {weatherMode === 'STORM_EMERGENCY' ? '🚨 Emergency Booking' : '📋 Get a Free Quote'}
+        </a>
+        <a href="tel:0400000000" class="cta-secondary">📞 Call Us Now</a>
+      </div>
+    </div>
+  </section>
+
+  {/* ── Service Content ── */}
+  <section style="padding: 4rem 0;">
+    <div class="container" style="display: grid; grid-template-columns: 1fr 20rem; gap: 4rem; align-items: start;">
+
+      {/* Main Content */}
+      <div class="content-prose">
+        <Content />
+      </div>
+
+      {/* Sidebar CTA */}
+      <aside style="position: sticky; top: 6rem;">
+        <div class="glass-card" style="padding: 2rem; text-align: center;">
+          <div style="font-size: 2.5rem; margin-bottom: 0.75rem;">📋</div>
+          <h3 style="font-family: Outfit, sans-serif; font-weight: 800; font-size: 1.15rem; color: white; margin-bottom: 0.5rem;">
+            Free Roof Inspection
+          </h3>
+          <p style="color: rgba(255,255,255,0.45); font-size: 0.85rem; line-height: 1.5; margin-bottom: 1.25rem;">
+            No obligation quote with a detailed condition report.
+          </p>
+          <a href="#quote" class="cta-primary" style="width: 100%; font-size: 0.9rem;">
+            Get Your Quote
+          </a>
+          <div style="margin-top: 1rem; display: flex; justify-content: center; gap: 0.5rem;">
+            <span class="badge" style="font-size: 0.7rem;">✅ Free</span>
+            <span class="badge" style="font-size: 0.7rem;">✅ Same Day</span>
+          </div>
+        </div>
+
+        {/* Phone Card */}
+        <div class="glass-card" style="padding: 1.5rem; margin-top: 1rem; display: flex; align-items: center; gap: 0.75rem;">
+          <span style="font-size: 1.5rem;">📞</span>
+          <div>
+            <div style="font-size: 0.7rem; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.04em;">Call Anytime</div>
+            <a href="tel:0400000000" style="font-family: Outfit, sans-serif; font-weight: 800; font-size: 1.1rem; color: white; text-decoration: none;">0400 000 000</a>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  {/* ── Related Services ── */}
+  {relatedServices.length > 0 && (
+    <section class="section-dark" style="padding: 4rem 0;">
+      <div class="container">
+        <h2 class="section-heading" style="margin-bottom: 2rem;">Other <span class="accent-text">Services</span></h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem;">
+          {relatedServices.map(s => (
+            <a href={`/services/${s.slug}`} class="service-card">
+              <div class="service-icon">{iconMap[s.data.icon || ''] || '🏠'}</div>
+              <h3>{s.data.title}</h3>
+              <p>{s.data.description}</p>
+              <span class="card-link">Learn More →</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  {/* ── Quote Section ── */}
+  <section id="quote" class="quote-section">
+    <div class="container" style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;">
+      <div>
+        <h2 class="section-heading" style="margin-bottom: 1rem;">
+          Get a Quote for<br/><span class="accent-text">{service.data.title}</span>
+        </h2>
+        <p style="color: rgba(255,255,255,0.5); font-size: 1.05rem; line-height: 1.7; margin-bottom: 2rem;">
+          Tell us about your roof and we'll get back to you with a detailed quote within 2 hours.
+        </p>
+        <div style="display: flex; flex-wrap: wrap; gap: 0.75rem;">
+          <span class="badge">✅ Free Inspections</span>
+          <span class="badge">✅ No Obligation</span>
+        </div>
+      </div>
+      <QuoteForm client:load weatherMode={weatherMode} city={city} />
+    </div>
+  </section>
+
 </MainLayout>
+
+<style>
+  @media (max-width: 768px) {
+    .container {
+      grid-template-columns: 1fr !important;
+    }
+    aside {
+      position: static !important;
+    }
+  }
+</style>
