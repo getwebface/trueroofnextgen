@@ -1,6 +1,9 @@
 {
-  "name": "melbourne-roof-tile-restoration",
+  "name": "trueroofnextgen",
   "compatibility_date": "2024-04-03",
+  "compatibility_flags": [
+    "nodejs_compat"
+  ],
   "main": "dist/_worker.js",
   "assets": {
     "directory": "dist",

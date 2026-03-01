@@ -23,5 +23,15 @@ This is a highly modular, data-driven Astro project for Melbourne roof tile rest
 ## Analytics
 - `src/components/Analytics.astro`: Placeholder for PostHog integration.
 
-## How to Add New Content (Bricks)
-To add a new location or service, simply create a new Markdown file in the respective `src/content/` directory following the Zod schema defined in `src/content/config.ts`. The dynamic routing will automatically generate the new page.
+## Service Boundaries
+- **Strict Focus:** Melbourne Roof Tile Restoration only.
+- **Reference:** See `ai-docs/service-boundaries.md` for a list of allowed and prohibited services.
+- **Constraint:** Never mention "Roof Replacement."
+
+## Daily Generation Logic (AI Instructions)
+When generating new "bricks" (content files):
+1. **Select Suburb:** Target Melbourne suburbs (e.g., Doncaster, Wallan, Kilmore).
+2. **Verify Schema:** Adhere to `src/content/config.ts`.
+3. **Restoration Context:** Use `localStats` to justify restoration (e.g., "Doncaster's 1970s tiles need re-pointing").
+4. **Weather Mapping:** Map `weatherMode` to restoration headlines (e.g., `STORM_EMERGENCY` -> "Blocked Valleys in [Suburb]?").
+5. **Internal Linking:** Link new locations to the core services (`tiled-restoration`, `metal-flashings`).
