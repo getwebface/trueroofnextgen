@@ -41,7 +41,7 @@
             "PREVENTATIVE": {
               "type": "string"
             },
-            "ROOF_REPLACEMENT": {
+            "ROOF_RESTORATION": {
               "type": "string"
             }
           },
