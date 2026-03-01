@@ -5,11 +5,19 @@ declare namespace App {
   interface Locals {
     runtime: {
       cf: any;
+      caches?: {
+        default: Cache;
+      };
+      env?: any;
+      waitUntil?: (promise: Promise<any>) => void;
     };
     weatherContext: {
       city: string;
-      isRaining: boolean;
+      weatherMode: string;
+      windSpeed: number;
+      precipitation: number;
       temperature: number;
+      condition: string;
     };
   }
 }

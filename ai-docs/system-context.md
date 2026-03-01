@@ -1,7 +1,7 @@
 # System Context & Architecture
 
 ## Overview
-This is a highly modular, data-driven Astro project for a roofing business, designed to scale "brick-by-brick" via AI. It uses the Cloudflare SSR adapter.
+This is a highly modular, data-driven Astro project for Melbourne roof tile restoration, designed to scale "brick-by-brick" via AI. It uses the Cloudflare SSR adapter.
 
 ## Framework & Styling
 - **Framework:** Astro (latest)

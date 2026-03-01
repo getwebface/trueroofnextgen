@@ -1,0 +1,46 @@
+---
+// src/layouts/MainLayout.astro
+import Analytics from '../components/Analytics.astro';
+
+const { weatherContext } = Astro.locals;
+const weatherMode = weatherContext?.weatherMode || 'DEFAULT';
+const city = weatherContext?.city || 'Unknown';
+
+const isEmergency = weatherMode === 'STORM_EMERGENCY';
+const themeClass = isEmergency ? 'theme-emergency bg-red-50' : 'theme-default bg-slate-50';
+const buttonClass = isEmergency ? 'bg-red-600 hover:bg-red-700 text-white' : 'bg-blue-600 hover:bg-blue-700 text-white';
+---
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Melbourne Roof Tile Restoration</title>
+    <script is:inline define:vars={{ weatherMode, city }}>
+      window.__WEATHER_MODE__ = weatherMode;
+      window.__SUBURB__ = city;
+    </script>
+    <Analytics />
+  </head>
+  <body class={`text-slate-900 transition-colors duration-300 ${themeClass}`}>
+    {isEmergency && (
+      <div class="bg-red-600 text-white text-center py-3 font-bold">
+        🚨 STORM WARNING: {city} is expecting severe weather. Emergency leak repair teams are on standby!
+      </div>
+    )}
+    
+    <header class="max-w-6xl mx-auto p-6 flex justify-between items-center">
+      <div class="text-2xl font-black tracking-tighter uppercase">Melbourne Roof Tile Restoration</div>
+      <button class={`px-6 py-2 rounded-full font-semibold transition-colors ${buttonClass}`}>
+        {isEmergency ? 'Emergency Call 24/7' : 'Get a Quote'}
+      </button>
+    </header>
+
+    <main class="max-w-6xl mx-auto p-6">
+      <slot />
+    </main>
+
+    <footer class="max-w-6xl mx-auto p-6 mt-12 border-t border-slate-200 text-slate-500 text-sm">
+      &copy; {new Date().getFullYear()} True Roof. All rights reserved.
+    </footer>
+  </body>
+</html>
