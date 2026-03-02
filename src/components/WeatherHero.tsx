@@ -8,7 +8,7 @@ interface WeatherHeroProps {
 
 // Map weather event + temporal context → hero content
 function buildHeroContent(ctx: WeatherContext) {
-    const { event, urgency, city, copyHints, topService, temperature, season, timeOfDay, dayOfWeek, isWeekend } = ctx;
+    const { event, secondaryEvent, urgency, city, copyHints, topService, temperature, season, timeOfDay, dayOfWeek, isWeekend } = ctx;
     const temp = temperature != null ? `${Math.round(temperature)}°C` : null;
     const svcName = topService?.slug
         ? { 'metal-flashings': 'Metal Flashing Repairs', 'cleaning': 'Roof Cleaning', 'tiled-restoration': 'Tile Restoration' }[topService.slug] || 'Roof Restoration'
@@ -158,13 +158,50 @@ function buildHeroContent(ctx: WeatherContext) {
     }
 }
 
+// Secondary-condition badge suffixes
+const SECONDARY_BADGE_SUFFIX: Partial<Record<import('../utils/weatherProcessor').WeatherEvent, string>> = {
+    HAIL_STORM: '🚨 +HAIL',
+    THUNDERSTORM: '⛈️ +STORM',
+    HIGH_WIND: '💨 +WIND',
+    HEAVY_RAIN: '🌧️ +RAIN',
+    DRIZZLE: '🌦️ +SHOWERS',
+    CLEAR_HOT: '🌡️ +HOT',
+    FROST: '❄️ +FROST',
+    FOG: '🌫️ +FOG',
+    OVERCAST: '☁️ +OVERCAST',
+    CLEAR_MILD: '🌤️ +CLEAR',
+};
+
+// Secondary-condition sub-copy notes (roofing-relevant)
+const SECONDARY_NOTE: Partial<Record<import('../utils/weatherProcessor').WeatherEvent, string>> = {
+    HAIL_STORM: 'Hail is also a factor — an emergency inspection is recommended even if damage isn\'t yet visible.',
+    THUNDERSTORM: 'A storm is also building — valleys and gutters should be cleared urgently.',
+    HIGH_WIND: 'Wind speeds are also elevated — loose ridge caps and tiles may shift before any workday begins.',
+    HEAVY_RAIN: 'Heavy rain is also present — any existing leak will be actively worsening right now.',
+    DRIZZLE: 'Light rain is also falling — a good diagnostic test for hidden weak spots.',
+    CLEAR_HOT: 'It\'s also very hot — thermal expansion may have already cracked coatings or opened flashing seals.',
+    FROST: 'Frost is also a factor — freeze-thaw cycles can crack pointing mortar overnight.',
+    FOG: 'Foggy, damp conditions also favour moss and lichen growth.',
+    OVERCAST: 'Overcast skies keep moisture on the surface — ideal for inspection, not for curing coatings.',
+    CLEAR_MILD: 'Conditions are otherwise clear — ideal if you need work done while the weather holds.',
+};
+
+
 const WeatherHero: FC<WeatherHeroProps> = ({ ctx }) => {
     const [mounted, setMounted] = useState(false);
     useEffect(() => { setMounted(true); }, []);
 
     const content = buildHeroContent(ctx);
-    const isStormEvent = ctx.event === 'HAIL_STORM' || ctx.event === 'THUNDERSTORM' || ctx.event === 'HIGH_WIND';
-    const isRainEvent = ctx.event === 'HEAVY_RAIN' || ctx.event === 'DRIZZLE';
+    const { secondaryEvent } = ctx;
+
+    // Compound condition display
+    const secondarySuffix = secondaryEvent ? (SECONDARY_BADGE_SUFFIX[secondaryEvent] ?? null) : null;
+    const secondaryNote = secondaryEvent ? (SECONDARY_NOTE[secondaryEvent] ?? null) : null;
+
+    const isStormEvent = ctx.event === 'HAIL_STORM' || ctx.event === 'THUNDERSTORM' || ctx.event === 'HIGH_WIND'
+        || secondaryEvent === 'HAIL_STORM' || secondaryEvent === 'THUNDERSTORM' || secondaryEvent === 'HIGH_WIND';
+    const isRainEvent = ctx.event === 'HEAVY_RAIN' || ctx.event === 'DRIZZLE'
+        || secondaryEvent === 'HEAVY_RAIN' || secondaryEvent === 'DRIZZLE';
 
     return (
         <section className="hero-section">
@@ -207,7 +244,7 @@ const WeatherHero: FC<WeatherHeroProps> = ({ ctx }) => {
 
             <div className="hero-content">
                 <motion.div className="hero-badge" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-                    {content.badge}
+                    {content.badge}{secondarySuffix ? <span style={{ opacity: 0.7, marginLeft: '0.6em', fontSize: '0.85em' }}>{secondarySuffix}</span> : null}
                 </motion.div>
 
                 <motion.h1 className="hero-headline" initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.1 }}>
@@ -223,6 +260,9 @@ const WeatherHero: FC<WeatherHeroProps> = ({ ctx }) => {
 
                 <motion.p className="hero-sub" initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }}>
                     {content.sub}
+                    {secondaryNote && (
+                        <> <span style={{ opacity: 0.8 }}>{secondaryNote}</span></>
+                    )}
                 </motion.p>
 
                 <motion.div className="hero-ctas" initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.3 }}>

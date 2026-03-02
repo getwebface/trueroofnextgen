@@ -50,6 +50,9 @@ export interface WeatherContext {
 
   // Derived atmospheric classification
   event: WeatherEvent;
+  /** Second-strongest signal when two conditions are meaningfully active.
+   *  e.g. primary=HIGH_WIND, secondary=CLEAR_HOT on a hot windy day. */
+  secondaryEvent?: WeatherEvent;
 
   // Temporal context
   timeOfDay: TimeOfDay;
@@ -83,22 +86,102 @@ export interface CopyHints {
 }
 
 // ──────────────────────────────────────────────────
-// Helper: classify weather event from raw data
+// Roofing-priority event scorer
+// Evaluates ALL events independently → returns the
+// highest-scoring as primary, plus an optional secondary
+// (score ≥ 20) when two meaningful signals co-exist.
 // ──────────────────────────────────────────────────
-export function classifyWeatherEvent(data: WeatherData): WeatherEvent {
+
+/** Base priority scores — higher = more urgent for roofing */
+const EVENT_BASE_SCORES: Record<WeatherEvent, number> = {
+  HAIL_STORM: 100,
+  THUNDERSTORM: 85,
+  HIGH_WIND: 75,
+  HEAVY_RAIN: 70,
+  DRIZZLE: 50,
+  FROST: 45,
+  CLEAR_HOT: 35,
+  FOG: 25,
+  OVERCAST: 20,
+  CLEAR_MILD: 15,
+  DEFAULT: 5,
+};
+
+/** Secondary threshold — must reach this score to surface as secondary */
+const SECONDARY_MIN_SCORE = 20;
+
+export function scoreWeatherSignals(
+  data: WeatherData,
+  season: Season,
+  timeOfDay: TimeOfDay,
+  isWeekend: boolean,
+): { primary: WeatherEvent; secondary?: WeatherEvent } {
   const cond = data.condition.toLowerCase();
 
-  if (cond.includes('hail') || (data.windSpeed > 80 && data.precipitation > 10)) return 'HAIL_STORM';
-  if (cond.includes('thunder') || cond.includes('storm')) return 'THUNDERSTORM';
-  if (data.windSpeed > 60) return 'HIGH_WIND';
-  if (data.precipitation > 8 || cond.includes('heavy rain')) return 'HEAVY_RAIN';
-  if (data.precipitation > 0.5 || cond.includes('rain') || cond.includes('shower') || cond.includes('drizzle')) return 'DRIZZLE';
-  if (data.temperature <= 2) return 'FROST';
-  if (cond.includes('fog') || cond.includes('mist')) return 'FOG';
-  if (cond.includes('overcast') || cond.includes('cloud')) return 'OVERCAST';
-  if (data.temperature >= 32) return 'CLEAR_HOT';
-  if (cond.includes('clear') || cond.includes('sunny') || cond.includes('fine')) return 'CLEAR_MILD';
-  return 'DEFAULT';
+  // ── Step 1: evaluate each event's raw data threshold ──
+  const active = new Map<WeatherEvent, number>();
+
+  const setIfActive = (event: WeatherEvent, passes: boolean) => {
+    if (passes) active.set(event, EVENT_BASE_SCORES[event]);
+  };
+
+  setIfActive('HAIL_STORM', cond.includes('hail') || (data.windSpeed > 80 && data.precipitation > 10));
+  setIfActive('THUNDERSTORM', cond.includes('thunder') || cond.includes('storm'));
+  // High wind: either explicit condition string OR speed threshold
+  setIfActive('HIGH_WIND', data.windSpeed >= 60 || cond.includes('wind'));
+  setIfActive('HEAVY_RAIN', data.precipitation > 8 || cond.includes('heavy rain'));
+  setIfActive('DRIZZLE', data.precipitation > 0.5 || cond.includes('rain') || cond.includes('shower') || cond.includes('drizzle'));
+  setIfActive('FROST', data.temperature <= 2);
+  setIfActive('FOG', cond.includes('fog') || cond.includes('mist'));
+  setIfActive('OVERCAST', cond.includes('overcast') || cond.includes('cloud'));
+  // CLEAR_HOT: heat threshold OR feels-like heat
+  setIfActive('CLEAR_HOT', data.temperature >= 32 || (data.feelsLike !== undefined && data.feelsLike >= 34));
+  setIfActive('CLEAR_MILD', cond.includes('clear') || cond.includes('sunny') || cond.includes('fine'));
+
+  // Ensure at least DEFAULT is present
+  if (active.size === 0) active.set('DEFAULT', EVENT_BASE_SCORES['DEFAULT']);
+
+  // ── Step 2: apply temporal modifier to each active event ──
+  for (const [event, score] of active) {
+    let modifier = 0;
+
+    // Season modifiers
+    if (season === 'WINTER') {
+      if (['HAIL_STORM', 'THUNDERSTORM', 'HEAVY_RAIN', 'DRIZZLE', 'FROST', 'OVERCAST'].includes(event)) modifier += 10;
+    }
+    if (season === 'AUTUMN') {
+      modifier += 8; // entire pre-winter window is elevated
+    }
+    if (season === 'SUMMER' && event === 'CLEAR_HOT') modifier += 12;
+    if (season === 'SPRING' && ['CLEAR_MILD', 'OVERCAST'].includes(event)) modifier += 6;
+
+    // Time-of-day modifiers
+    if ((timeOfDay === 'MORNING' || timeOfDay === 'MIDDAY') && ['CLEAR_MILD', 'CLEAR_HOT'].includes(event)) modifier += 5;
+
+    // Weekend: homeowner is home, more likely to notice / call
+    if (isWeekend) modifier += 3;
+
+    active.set(event, score + modifier);
+  }
+
+  // ── Step 3: sort, return primary + optional secondary ──
+  const sorted = [...active.entries()].sort((a, b) => b[1] - a[1]);
+  const [primaryEvent] = sorted[0];
+
+  // Find first distinct event with sufficient score
+  const secondaryEntry = sorted.find(([evt, score]) => evt !== primaryEvent && score >= SECONDARY_MIN_SCORE);
+  const secondary = secondaryEntry?.[0];
+
+  return { primary: primaryEvent, secondary };
+}
+
+// ──────────────────────────────────────────────────
+// Backwards-compatible shim (used by callers that
+// only need a single WeatherEvent)
+// ──────────────────────────────────────────────────
+export function classifyWeatherEvent(data: WeatherData): WeatherEvent {
+  // Season/time/weekend not available here — use neutral defaults
+  return scoreWeatherSignals(data, 'SPRING', 'MIDDAY', false).primary;
 }
 
 // ──────────────────────────────────────────────────
@@ -141,7 +224,12 @@ export function getTemporalContext(now: Date) {
 // ──────────────────────────────────────────────────
 // Helper: compute urgency level
 // ──────────────────────────────────────────────────
-function computeUrgency(event: WeatherEvent, season: Season, timeOfDay: TimeOfDay): UrgencyLevel {
+function computeUrgency(
+  event: WeatherEvent,
+  season: Season,
+  timeOfDay: TimeOfDay,
+  secondary?: WeatherEvent,
+): UrgencyLevel {
   // High-urgency weather events
   if (event === 'HAIL_STORM') return 5;
   if (event === 'THUNDERSTORM' || event === 'HEAVY_RAIN') return 4;
@@ -157,6 +245,13 @@ function computeUrgency(event: WeatherEvent, season: Season, timeOfDay: TimeOfDa
   // Clear conditions — good for work, low urgency
   if (event === 'CLEAR_MILD' && (timeOfDay === 'MORNING' || timeOfDay === 'MIDDAY')) return 2;
   if (event === 'CLEAR_HOT') return 1;
+
+  // Secondary bump: if a high-damage event is the secondary signal, raise urgency by 1
+  if (secondary && (['HAIL_STORM', 'THUNDERSTORM', 'HEAVY_RAIN', 'HIGH_WIND'] as WeatherEvent[]).includes(secondary)) {
+    // Clamp to max 5
+    const base: UrgencyLevel = 1;
+    return Math.min(base + 1, 5) as UrgencyLevel;
+  }
 
   return 1;
 }
@@ -347,9 +442,17 @@ function buildCopyHints(
 // Main: build the full WeatherContext
 // ──────────────────────────────────────────────────
 export function buildWeatherContext(data: WeatherData, city: string, now: Date = new Date()): WeatherContext {
-  const event = classifyWeatherEvent(data);
   const temporal = getTemporalContext(now);
-  const urgency = computeUrgency(event, temporal.season, temporal.timeOfDay);
+
+  // Use the full scored resolver — temporal context feeds into scores
+  const { primary: event, secondary: secondaryEvent } = scoreWeatherSignals(
+    data,
+    temporal.season,
+    temporal.timeOfDay,
+    temporal.isWeekend,
+  );
+
+  const urgency = computeUrgency(event, temporal.season, temporal.timeOfDay, secondaryEvent);
   const services = rankServices(event, temporal.season, urgency);
   const copyHints = buildCopyHints(event, temporal.timeOfDay, temporal.season, urgency, temporal.monthName, temporal.isWeekend);
 
@@ -357,6 +460,7 @@ export function buildWeatherContext(data: WeatherData, city: string, now: Date =
     city,
     raw: data,
     event,
+    secondaryEvent,
     ...temporal,
     urgency,
     services,
