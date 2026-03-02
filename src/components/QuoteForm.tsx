@@ -97,13 +97,13 @@ const QuoteForm: FC<QuoteFormProps> = ({ ctx }) => {
             </p>
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
-                    <label className="form-label" htmlFor="q-name">Your Name</label>
-                    <input id="q-name" className="form-input" type="text" placeholder="e.g. John Smith" required
+                    <label className="form-label" htmlFor="q-name">Your Name <span className="text-red-500" aria-hidden="true">*</span></label>
+                    <input id="q-name" className="form-input" type="text" placeholder="e.g. John Smith" required aria-required="true"
                         value={formData.name} onChange={e => setFormData(d => ({ ...d, name: e.target.value }))} />
                 </div>
                 <div className="form-group">
-                    <label className="form-label" htmlFor="q-phone">Phone Number</label>
-                    <input id="q-phone" className="form-input" type="tel" placeholder="04XX XXX XXX" required
+                    <label className="form-label" htmlFor="q-phone">Phone Number <span className="text-red-500" aria-hidden="true">*</span></label>
+                    <input id="q-phone" className="form-input" type="tel" placeholder="04XX XXX XXX" required aria-required="true"
                         value={formData.phone} onChange={e => setFormData(d => ({ ...d, phone: e.target.value }))} />
                 </div>
                 <div className="form-group">
@@ -124,7 +124,7 @@ const QuoteForm: FC<QuoteFormProps> = ({ ctx }) => {
                     <textarea id="q-message" className="form-textarea" placeholder="Describe the issue or what you've noticed..."
                         value={formData.message} onChange={e => setFormData(d => ({ ...d, message: e.target.value }))} />
                 </div>
-                <button type="submit" className="cta-primary" disabled={sending}
+                <button type="submit" className="cta-primary" disabled={sending} aria-disabled={sending} aria-live="polite"
                     style={{ width: '100%', marginTop: '0.5rem', opacity: sending ? 0.7 : 1 }}>
                     {sending ? 'Sending...' : ctaText}
                 </button>
