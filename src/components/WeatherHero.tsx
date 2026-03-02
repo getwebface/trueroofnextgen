@@ -1,4 +1,4 @@
-import { useState, useEffect, type FC } from 'react';
+import { useState, useEffect, useMemo, type FC } from 'react';
 import { motion } from 'motion/react';
 import {
     AlertCircle,
@@ -222,6 +222,16 @@ const WeatherHero: FC<WeatherHeroProps> = ({ ctx }) => {
     const [mounted, setMounted] = useState(false);
     useEffect(() => { setMounted(true); }, []);
 
+    // Memoize static rain particle styles/delays to prevent re-renders recalculating randoms
+    // Moving this to the top level of the component fixes a React Hook rule violation
+    const rainDrops = useMemo(() => Array.from({ length: 40 }).map((_, i) => ({
+        key: i,
+        height: `${10 + Math.random() * 20}px`,
+        left: `${Math.random() * 100}%`,
+        duration: 1 + Math.random() * 0.6,
+        delay: Math.random() * 2,
+    })), []);
+
     const content = buildHeroContent(ctx);
     const { secondaryEvent } = ctx;
 
@@ -239,14 +249,7 @@ const WeatherHero: FC<WeatherHeroProps> = ({ ctx }) => {
             {/* Rain particle effect */}
             {mounted && isRainEvent && (
                 <div aria-hidden="true" style={{ position: 'absolute', inset: 0, overflow: 'hidden', pointerEvents: 'none' }}>
-                    {/* Memoize static rain particle styles/delays to prevent re-renders recalculating randoms */}
-                    {useState(() => Array.from({ length: 40 }).map((_, i) => ({
-                        key: i,
-                        height: `${10 + Math.random() * 20}px`,
-                        left: `${Math.random() * 100}%`,
-                        duration: 1 + Math.random() * 0.6,
-                        delay: Math.random() * 2,
-                    })))[0].map((drop) => (
+                    {rainDrops.map((drop) => (
                         <motion.div key={drop.key}
                             style={{
                                 position: 'absolute',
