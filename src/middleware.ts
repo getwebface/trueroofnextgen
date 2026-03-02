@@ -27,39 +27,65 @@ export const onRequest = defineMiddleware(async (context, next) => {
     weatherData = await cachedResponse.json();
   } else {
     try {
-      // ── Real-world API fetch (OpenWeatherMap or similar) ──
-      // Uncomment and configure when WEATHER_API_KEY is set in Cloudflare env:
-      //
-      // const apiKey = context.locals.runtime?.env?.WEATHER_API_KEY;
-      // if (apiKey) {
-      //   const res = await fetch(
-      //     `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(city)},AU&appid=${apiKey}&units=metric`
-      //   );
-      //   if (res.ok) {
-      //     const owm = await res.json();
-      //     weatherData = {
-      //       windSpeed: Math.round((owm.wind?.speed || 0) * 3.6), // m/s → km/h
-      //       precipitation: owm.rain?.['1h'] || owm.rain?.['3h'] || 0,
-      //       temperature: owm.main?.temp || 20,
-      //       feelsLike: owm.main?.feels_like,
-      //       humidity: owm.main?.humidity,
-      //       condition: owm.weather?.[0]?.main || 'Clear',
-      //     };
-      //   }
-      // }
+      // ── Live weather: Open-Meteo (no API key required) ──
+      // Melbourne, Australia: lat=-37.8136, lon=144.9631
+      const OPEN_METEO_URL =
+        'https://api.open-meteo.com/v1/forecast' +
+        '?latitude=-37.8136&longitude=144.9631' +
+        '&current=temperature_2m,relative_humidity_2m,apparent_temperature,' +
+        'precipitation,weather_code,wind_speed_10m' +
+        '&wind_speed_unit=kmh' +
+        '&timezone=Australia%2FMelbourne';
 
-      // ── Dev/Fallback: simulated weather mixing all conditions for testing ──
-      const roll = Math.random();
-      if (roll < 0.12) weatherData = { windSpeed: 95, precipitation: 25, temperature: 14, condition: 'Hail', humidity: 95 };
-      else if (roll < 0.22) weatherData = { windSpeed: 30, precipitation: 18, temperature: 13, condition: 'Thunderstorm', humidity: 90 };
-      else if (roll < 0.35) weatherData = { windSpeed: 20, precipitation: 8, temperature: 14, condition: 'Heavy Rain', humidity: 88 };
-      else if (roll < 0.50) weatherData = { windSpeed: 15, precipitation: 2, temperature: 16, condition: 'Drizzle', humidity: 80 };
-      else if (roll < 0.58) weatherData = { windSpeed: 72, precipitation: 0, temperature: 17, condition: 'Windy', humidity: 55 };
-      else if (roll < 0.68) weatherData = { windSpeed: 5, precipitation: 0, temperature: 34, condition: 'Clear', humidity: 30 };
-      else if (roll < 0.82) weatherData = { windSpeed: 10, precipitation: 0, temperature: 21, condition: 'Clear', humidity: 50 };
-      else if (roll < 0.88) weatherData = { windSpeed: 8, precipitation: 0, temperature: 1, condition: 'Clear', humidity: 65 };
-      else if (roll < 0.94) weatherData = { windSpeed: 5, precipitation: 0, temperature: 15, condition: 'Overcast', humidity: 70 };
-      else weatherData = { windSpeed: 8, precipitation: 0, temperature: 17, condition: 'Fog', humidity: 95 };
+      const res = await fetch(OPEN_METEO_URL);
+      if (res.ok) {
+        const om = await res.json() as {
+          current: {
+            temperature_2m: number;
+            relative_humidity_2m: number;
+            apparent_temperature: number;
+            precipitation: number;
+            weather_code: number;
+            wind_speed_10m: number;
+          };
+        };
+        const cur = om.current;
+
+        // Map WMO weather codes → condition strings recognised by weatherProcessor
+        const wmoToCondition = (code: number): string => {
+          if (code === 0 || code === 1) return 'Clear';
+          if (code === 2 || code === 3) return 'Overcast';
+          if (code >= 45 && code <= 48) return 'Fog';
+          if (code >= 51 && code <= 57) return 'Drizzle';
+          if (code >= 61 && code <= 65) return 'Rain';
+          if (code >= 66 && code <= 67) return 'Heavy Rain'; // freezing rain
+          if (code >= 71 && code <= 77) return 'Overcast';   // snow (rare for Melb)
+          if (code >= 80 && code <= 82) return 'Heavy Rain'; // rain showers
+          if (code === 83 || code === 84) return 'Heavy Rain';
+          if (code >= 85 && code <= 86) return 'Heavy Rain';
+          if (code >= 95 && code <= 99) return 'Thunderstorm';
+          return 'Clear';
+        };
+
+        // Detect hail: WMO 96 / 99 = thunderstorm with hail
+        const condition =
+          cur.weather_code === 96 || cur.weather_code === 99
+            ? 'Hail'
+            : wmoToCondition(cur.weather_code);
+
+        // Detect windy even when sky is otherwise clear
+        const finalCondition =
+          condition === 'Clear' && cur.wind_speed_10m >= 60 ? 'Windy' : condition;
+
+        weatherData = {
+          windSpeed: Math.round(cur.wind_speed_10m),
+          precipitation: cur.precipitation ?? 0,
+          temperature: cur.temperature_2m,
+          feelsLike: cur.apparent_temperature,
+          humidity: cur.relative_humidity_2m,
+          condition: finalCondition,
+        };
+      }
 
       if (cache) {
         const responseToCache = new Response(JSON.stringify(weatherData), {
