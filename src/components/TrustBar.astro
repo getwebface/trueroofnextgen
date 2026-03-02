@@ -1,26 +1,49 @@
 ---
 // src/components/TrustBar.astro
-import { ShieldCheck, Star, Construction, MapPin, CircleCheck } from 'lucide-react';
+import { ShieldCheck, Star, Construction, MapPin, CircleCheck, AlertTriangle } from 'lucide-react';
+import type { WeatherContext } from '../utils/weatherProcessor';
+
+interface Props {
+  ctx?: WeatherContext | null;
+}
+
+const { ctx } = Astro.props;
+const urgency = ctx?.urgency || 1;
+const isEmergency = urgency >= 4;
+const strokeGradient = isEmergency ? 'white' : 'url(#orange-gradient)';
+const containerStyle = isEmergency
+  ? 'background: rgba(239, 68, 68, 0.05); border-bottom: 1px solid rgba(239, 68, 68, 0.2);'
+  : '';
 ---
-<div class="trust-bar">
+<div class="trust-bar" style={containerStyle}>
+  {isEmergency && (
+    <div class="trust-item" style="color: #fca5a5; font-weight: 700;">
+      <div class="trust-icon" style="animation: pulseGlow 2s infinite;"><AlertTriangle size={20} strokeWidth={2} stroke="#fca5a5" /></div>
+      <span>Emergency Response Active</span>
+    </div>
+  )}
   <div class="trust-item">
-    <div class="trust-icon"><ShieldCheck size={20} strokeWidth={1.5} stroke="url(#orange-gradient)" /></div>
-    <span>Licensed & Insured</span>
+    <div class="trust-icon"><ShieldCheck size={20} strokeWidth={1.5} stroke={isEmergency ? '#fca5a5' : strokeGradient} /></div>
+    <span>{isEmergency ? 'Fully Insured for Storm Damage' : 'Licensed & Insured'}</span>
   </div>
   <div class="trust-item">
-    <div class="trust-icon"><Star size={20} strokeWidth={1.5} stroke="url(#orange-gradient)" /></div>
+    <div class="trust-icon"><Star size={20} strokeWidth={1.5} stroke={isEmergency ? '#fca5a5' : strokeGradient} /></div>
     <span>5-Star Google Rating</span>
   </div>
   <div class="trust-item">
-    <div class="trust-icon"><Construction size={20} strokeWidth={1.5} stroke="url(#orange-gradient)" /></div>
+    <div class="trust-icon"><Construction size={20} strokeWidth={1.5} stroke={isEmergency ? '#fca5a5' : strokeGradient} /></div>
     <span>25+ Years Experience</span>
   </div>
-  <div class="trust-item">
-    <div class="trust-icon"><MapPin size={20} strokeWidth={1.5} stroke="url(#orange-gradient)" /></div>
-    <span>100% Melbourne Owned</span>
-  </div>
-  <div class="trust-item">
-    <div class="trust-icon"><CircleCheck size={20} strokeWidth={1.5} stroke="url(#orange-gradient)" /></div>
-    <span>Free Roof Inspections</span>
-  </div>
+  {!isEmergency && (
+    <div class="trust-item">
+      <div class="trust-icon"><MapPin size={20} strokeWidth={1.5} stroke={strokeGradient} /></div>
+      <span>100% Melbourne Owned</span>
+    </div>
+  )}
+  {!isEmergency && (
+    <div class="trust-item">
+      <div class="trust-icon"><CircleCheck size={20} strokeWidth={1.5} stroke={strokeGradient} /></div>
+      <span>Free Roof Inspections</span>
+    </div>
+  )}
 </div>

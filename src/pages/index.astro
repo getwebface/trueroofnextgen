@@ -56,7 +56,7 @@ const sortedServices = [...services].sort((a, b) => {
   <WeatherHero client:load ctx={weatherContext} />
 
   <!-- Trust Bar -->
-  <TrustBar />
+  <TrustBar ctx={weatherContext} />
 
   <!-- Services Section — weather-ranked order -->
   <section id="services" style="padding: 5rem 0;">
@@ -67,6 +67,19 @@ const sortedServices = [...services].sort((a, b) => {
           {weatherContext?.copyHints?.seasonalTip || 'Specialized care for Melbourne\'s terracotta and concrete tile roofs — from cleaning to full restoration.'}
         </p>
       </div>
+
+      {weatherContext?.urgency && weatherContext.urgency <= 2 && (
+        <div style="margin-bottom: 3rem; background: rgba(245, 158, 11, 0.05); border: 1px solid rgba(245, 158, 11, 0.2); border-radius: var(--radius-card); padding: 1.5rem; display: flex; align-items: flex-start; gap: 1rem;">
+          <div style="font-size: 1.5rem; margin-top: 0.1rem;">💡</div>
+          <div>
+            <h4 style="font-family: Outfit, sans-serif; font-weight: 700; font-size: 1.1rem; color: #fbbf24; margin-bottom: 0.25rem;">Ideal Conditions for Preventative Maintenance</h4>
+            <p style="color: rgba(255,255,255,0.7); font-size: 0.9rem; line-height: 1.5; margin: 0;">
+              {weatherContext?.copyHints?.seasonalTip || 'Current weather is perfect for roof inspections and restorative work. Book now before conditions change.'}
+            </p>
+          </div>
+        </div>
+      )}
+
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
         {sortedServices.map((service, i) => {
           const hint = serviceIconLabel[service.slug]?.urgencyHint;
