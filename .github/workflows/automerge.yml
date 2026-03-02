@@ -14,6 +14,6 @@ jobs:
     
     steps:
       - name: Force Merge PR
-        run: gh pr merge ${{ github.event.pull_request.number }} --merge --admin
+        run: gh pr merge ${{ github.event.pull_request.number }} --repo "getwebface/trueroofnextgen" --merge --admin
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
