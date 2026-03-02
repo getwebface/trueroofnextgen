@@ -16,4 +16,4 @@ localStats:
   lastStormDate: "2024-02-10"
 localCommonRoofTypes: ["Terracotta Tile", "Concrete Tile"]
 ---
-Melbourne's heritage tiled roofs require specific care—pressure cleaning, re-bedding, and high-quality flexi-pointing. We specialize in the critical metal flashings that keep these tiled systems watertight.
+Melbourne's heritage tiled roofs require specific care—pressure cleaning, re-bedding, and high-quality flexi-pointing. For property managers overseeing multi-unit developments, our specialized [strata roof maintenance](/services/strata-roof-maintenance) provides dependable, long-term solutions. We also specialize in the critical metal flashings that keep these tiled systems watertight.
