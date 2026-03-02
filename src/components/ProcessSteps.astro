@@ -1,33 +1,33 @@
----
-// src/components/ProcessSteps.astro
+import { Droplets, Wrench, BrickWall, ShieldCheck } from 'lucide-react';
+
 const steps = [
   {
     number: 1,
     title: 'High-Pressure Clean',
     description: 'Remove decades of moss, lichen, and grime with specialized equipment.',
-    icon: '💧'
+    icon: Droplets
   },
   {
     number: 2,
     title: 'Structural Repairs',
     description: 'Replace cracked tiles, check valleys, and repair all flashings.',
-    icon: '🔧'
+    icon: Wrench
   },
   {
     number: 3,
     title: 'Re-bed & Flexi-Point',
     description: 'Strip old mortar. Apply modern flexible pointing that won\'t crack.',
-    icon: '🧱'
+    icon: BrickWall
   },
   {
     number: 4,
     title: 'Protective Coating',
     description: 'Multi-coat membrane system to restore colour and seal against weather.',
-    icon: '🛡️'
+    icon: ShieldCheck
   }
 ];
 ---
-<section class="process-section">
+<section class="process-section" id="process">
   <div class="container">
     <div style="text-align: center; margin-bottom: 3rem;">
       <h2 class="section-heading">Our Proven <span class="accent-text">4-Stage</span> Process</h2>
@@ -36,14 +36,19 @@ const steps = [
       </p>
     </div>
     <div class="process-grid">
-      {steps.map(step => (
-        <div class="process-step">
-          <div class="process-number">{step.number}</div>
-          <div style="font-size: 1.75rem; margin-bottom: 0.5rem;">{step.icon}</div>
-          <h4>{step.title}</h4>
-          <p>{step.description}</p>
-        </div>
-      ))}
+      {steps.map(step => {
+        const Icon = step.icon;
+        return (
+          <div class="process-step">
+            <div class="process-number">{step.number}</div>
+            <div style="margin-bottom: 1rem; display: flex; justify-content: center;">
+              <Icon size={32} strokeWidth={1.5} stroke="url(#orange-gradient)" />
+            </div>
+            <h4>{step.title}</h4>
+            <p>{step.description}</p>
+          </div>
+        )
+      })}
     </div>
   </div>
 </section>

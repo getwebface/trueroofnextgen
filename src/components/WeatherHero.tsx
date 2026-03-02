@@ -1,10 +1,32 @@
 import { useState, useEffect, type FC } from 'react';
 import { motion } from 'motion/react';
+import {
+    AlertCircle,
+    CloudLightning,
+    Wind,
+    CloudRain,
+    CloudDrizzle,
+    Snowflake,
+    Sun,
+    Leaf,
+    CloudSun,
+    Home,
+    ClipboardList,
+    Phone,
+    Thermometer,
+    Cloud,
+    CloudFog,
+    ClipboardCheck
+} from 'lucide-react';
 import type { WeatherContext } from '../utils/weatherProcessor';
 
 interface WeatherHeroProps {
     ctx: WeatherContext;
 }
+
+const BrandIcon = ({ icon: Icon, size = 20, className = "", stroke }: { icon: any, size?: number, className?: string, stroke?: string }) => (
+    <Icon size={size} strokeWidth={1.5} stroke={stroke || "url(#orange-gradient)"} className={`inline-block align-text-bottom ${className}`} />
+);
 
 // Map weather event + temporal context → hero content
 function buildHeroContent(ctx: WeatherContext) {
@@ -17,11 +39,12 @@ function buildHeroContent(ctx: WeatherContext) {
     switch (event) {
         case 'HAIL_STORM':
             return {
-                badge: `🚨 HAILSTORM — ${city.toUpperCase()} — URGENCY 5/5`,
+                badgeIcon: AlertCircle,
+                badge: `HAILSTORM — ${city.toUpperCase()} — URGENCY 5/5`,
                 headline: ['Emergency Hail', 'Damage Repairs'],
                 highlight: 'Hail',
                 sub: `A hailstorm is the fastest way to crack tiles and destroy metal flashings. Our emergency crews are in ${city} right now — call immediately for a damage assessment.`,
-                primaryCTA: { label: '📞 Emergency Call Now', href: 'tel:0400000000' },
+                primaryCTA: { label: 'Emergency Call Now', icon: Phone, href: 'tel:0400000000' },
                 secondaryCTA: { label: 'Assess Your Damage →', href: '#quote' },
                 stats: [
                     { value: '2hr', label: 'Response Time' },
@@ -32,11 +55,12 @@ function buildHeroContent(ctx: WeatherContext) {
 
         case 'THUNDERSTORM':
             return {
-                badge: `⛈️ STORM ACTIVE IN ${city.toUpperCase()}`,
+                badgeIcon: CloudLightning,
+                badge: `STORM ACTIVE IN ${city.toUpperCase()}`,
                 headline: ['Storm Damage?', "We've Got You"],
                 highlight: 'Storm',
                 sub: `Thunderstorms batter tiles, loosen flashings, and block valleys fast. Don't wait — call us now for an urgent assessment or submit your details and we'll call you back within the hour.`,
-                primaryCTA: { label: '📞 Urgent Call Now', href: 'tel:0400000000' },
+                primaryCTA: { label: 'Urgent Call Now', icon: Phone, href: 'tel:0400000000' },
                 secondaryCTA: { label: 'Submit Damage Report', href: '#quote' },
                 stats: [
                     { value: '< 2hr', label: 'Urgent Response' },
@@ -47,11 +71,12 @@ function buildHeroContent(ctx: WeatherContext) {
 
         case 'HIGH_WIND':
             return {
-                badge: `💨 HIGH WINDS — ${city.toUpperCase()} — URGENCY 4/5`,
+                badgeIcon: Wind,
+                badge: `HIGH WINDS — ${city.toUpperCase()} — URGENCY 4/5`,
                 headline: ['High Winds Can', 'Lift Your Tiles'],
                 highlight: 'Lift',
                 sub: `Strong wind events in ${city} frequently displace tiles and lift metal flashings. ${copyHints.timeGreeting}, before conditions worsen — get an urgent inspection booked.`,
-                primaryCTA: { label: '📞 Book Urgent Inspection', href: 'tel:0400000000' },
+                primaryCTA: { label: 'Book Urgent Inspection', icon: Phone, href: 'tel:0400000000' },
                 secondaryCTA: { label: 'Request Callback', href: '#quote' },
                 stats: [
                     { value: '< 4hr', label: 'Response Time' },
@@ -62,11 +87,12 @@ function buildHeroContent(ctx: WeatherContext) {
 
         case 'HEAVY_RAIN':
             return {
-                badge: `🌧️ HEAVY RAIN IN ${city.toUpperCase()} — LEAKS LIKELY`,
+                badgeIcon: CloudRain,
+                badge: `HEAVY RAIN IN ${city.toUpperCase()} — LEAKS LIKELY`,
                 headline: ['Leaking Roof?', 'Act Now.'],
                 highlight: 'Now',
                 sub: `Heavy rain reveals exactly where your roof is failing. A visible leak means water has been tracking for a while. ${copyHints.timeGreeting} — let's stop the damage before it spreads to your ceiling.`,
-                primaryCTA: { label: '🌧️ Stop My Leak Today', href: 'tel:0400000000' },
+                primaryCTA: { label: 'Stop My Leak Today', icon: CloudRain, href: 'tel:0400000000' },
                 secondaryCTA: { label: 'Book Same-Day Visit', href: '#quote' },
                 stats: [
                     { value: 'Same-Day', label: 'Often Available' },
@@ -77,11 +103,12 @@ function buildHeroContent(ctx: WeatherContext) {
 
         case 'DRIZZLE':
             return {
-                badge: `🌦️ RAIN IN ${city.toUpperCase()} TODAY`,
+                badgeIcon: CloudDrizzle,
+                badge: `RAIN IN ${city.toUpperCase()} TODAY`,
                 headline: ["Rain Revealing", "Your Roof's Weak Spots"],
                 highlight: 'Weak',
                 sub: `Light rain in ${city} ${temp ? `at ${temp}` : ''} is the best diagnostic test for your tiles. An unexpected drip, stain, or musty smell means it's time to investigate. Free inspections available.`,
-                primaryCTA: { label: '🌦️ Get a Free Inspection', href: 'tel:0400000000' },
+                primaryCTA: { label: 'Get a Free Inspection', icon: CloudDrizzle, href: 'tel:0400000000' },
                 secondaryCTA: { label: 'Request Callback', href: '#quote' },
                 stats: [
                     { value: 'Free', label: 'Inspections' },
@@ -92,12 +119,13 @@ function buildHeroContent(ctx: WeatherContext) {
 
         case 'FROST':
             return {
-                badge: `❄️ FROST WARNING — ${city.toUpperCase()}`,
+                badgeIcon: Snowflake,
+                badge: `FROST WARNING — ${city.toUpperCase()}`,
                 headline: ['Frost Cracks', 'Tile Mortar Fast'],
                 highlight: 'Cracks',
                 sub: `Frost in ${city} this ${timeOfDay?.toLowerCase()} causes rapid freeze-thaw cycles that crack pointing mortar and shift ridge caps. The damage compounds with every cold snap — get it checked now.`,
-                primaryCTA: { label: '❄️ Book Frost Inspection', href: '#quote' },
-                secondaryCTA: { label: '📞 Call Us', href: 'tel:0400000000' },
+                primaryCTA: { label: 'Book Frost Inspection', icon: Snowflake, href: '#quote' },
+                secondaryCTA: { label: 'Call Us', href: 'tel:0400000000' },
                 stats: [
                     { value: 'Free', label: 'Inspections' },
                     { value: '25+', label: 'Yrs Experience' },
@@ -107,12 +135,13 @@ function buildHeroContent(ctx: WeatherContext) {
 
         case 'CLEAR_HOT':
             return {
-                badge: `☀️ ${temp ? temp + ' AND CLEAR' : 'SUMMER SUN'} — ${city.toUpperCase()}`,
-                headline: ['Summer Is Hard', 'on${" "}Tile Roofs'],
+                badgeIcon: Sun,
+                badge: `${temp ? temp + ' AND CLEAR' : 'SUMMER SUN'} — ${city.toUpperCase()}`,
+                headline: ['Summer Is Hard', 'on Tile Roofs'],
                 highlight: 'Summer',
                 sub: `${temp ? `${temp} today in ${city}` : `Hot summer conditions in ${city}`} — UV and thermal expansion stress tiles, crack coatings, and bake moss into the surface. Lock in your restoration quote while the season is right.`,
-                primaryCTA: { label: '☀️ Get Your Quote', href: '#quote' },
-                secondaryCTA: { label: '📞 Call Us', href: 'tel:0400000000' },
+                primaryCTA: { label: 'Get Your Quote', icon: Sun, href: '#quote' },
+                secondaryCTA: { label: 'Call Us', href: 'tel:0400000000' },
                 stats: [
                     { value: '2,500+', label: 'Roofs Restored' },
                     { value: '25+', label: 'Yrs Experience' },
@@ -122,9 +151,10 @@ function buildHeroContent(ctx: WeatherContext) {
 
         case 'CLEAR_MILD':
             return {
+                badgeIcon: season === 'AUTUMN' ? Leaf : CloudSun,
                 badge: season === 'AUTUMN'
-                    ? `🍂 AUTUMN IN ${city.toUpperCase()} — BOOK BEFORE WINTER`
-                    : `🌤️ IDEAL CONDITIONS — ${city.toUpperCase()}`,
+                    ? `AUTUMN IN ${city.toUpperCase()} — BOOK BEFORE WINTER`
+                    : `IDEAL CONDITIONS — ${city.toUpperCase()}`,
                 headline: season === 'AUTUMN'
                     ? ['Book Before', 'Winter Arrives']
                     : ['Perfect Day for', 'Tile Restoration'],
@@ -132,8 +162,8 @@ function buildHeroContent(ctx: WeatherContext) {
                 sub: season === 'AUTUMN'
                     ? `${copyHints.timeGreeting} in ${city} ${temp ? `• ${temp} ` : ''}— ${copyHints.seasonalTip}`
                     : `${temp ? `${temp} and clear in ${city}` : `Clear skies over ${city}`} — optimal conditions for high-pressure cleaning, coating, and pointing. ${isWeekend ? `${dayOfWeek}s fill up fast.` : 'Lock in your week.'}`,
-                primaryCTA: { label: season === 'AUTUMN' ? '🍂 Book Before Winter' : '🌤️ Schedule My Restoration', href: '#quote' },
-                secondaryCTA: { label: '📞 Call for a Chat', href: 'tel:0400000000' },
+                primaryCTA: { label: season === 'AUTUMN' ? 'Book Before Winter' : 'Schedule My Restoration', icon: season === 'AUTUMN' ? Leaf : CloudSun, href: '#quote' },
+                secondaryCTA: { label: 'Call for a Chat', href: 'tel:0400000000' },
                 stats: [
                     { value: '2,500+', label: 'Roofs Restored' },
                     { value: '25+', label: 'Yrs Experience' },
@@ -143,12 +173,13 @@ function buildHeroContent(ctx: WeatherContext) {
 
         default:
             return {
-                badge: `🏠 MELBOURNE'S TILE RESTORATION SPECIALISTS`,
+                badgeIcon: Home,
+                badge: `MELBOURNE'S TILE RESTORATION SPECIALISTS`,
                 headline: ['Restore, Not', 'Replace.'],
                 highlight: 'Restore',
                 sub: `Melbourne's tiles tell a story. We restore terracotta and concrete tile roofs using our proven 4-stage process — extending roof life by 15-20 years at a fraction of the cost of a re-roof.`,
-                primaryCTA: { label: '📋 Get a Free Quote', href: '#quote' },
-                secondaryCTA: { label: '📞 Call Us', href: 'tel:0400000000' },
+                primaryCTA: { label: 'Get a Free Quote', icon: ClipboardList, href: '#quote' },
+                secondaryCTA: { label: 'Call Us', href: 'tel:0400000000' },
                 stats: [
                     { value: '2,500+', label: 'Roofs Restored' },
                     { value: '25+', label: 'Yrs Experience' },
@@ -159,17 +190,17 @@ function buildHeroContent(ctx: WeatherContext) {
 }
 
 // Secondary-condition badge suffixes
-const SECONDARY_BADGE_SUFFIX: Partial<Record<import('../utils/weatherProcessor').WeatherEvent, string>> = {
-    HAIL_STORM: '🚨 +HAIL',
-    THUNDERSTORM: '⛈️ +STORM',
-    HIGH_WIND: '💨 +WIND',
-    HEAVY_RAIN: '🌧️ +RAIN',
-    DRIZZLE: '🌦️ +SHOWERS',
-    CLEAR_HOT: '🌡️ +HOT',
-    FROST: '❄️ +FROST',
-    FOG: '🌫️ +FOG',
-    OVERCAST: '☁️ +OVERCAST',
-    CLEAR_MILD: '🌤️ +CLEAR',
+const SECONDARY_BADGE: Partial<Record<import('../utils/weatherProcessor').WeatherEvent, { icon: any, text: string }>> = {
+    HAIL_STORM: { icon: AlertCircle, text: '+HAIL' },
+    THUNDERSTORM: { icon: CloudLightning, text: '+STORM' },
+    HIGH_WIND: { icon: Wind, text: '+WIND' },
+    HEAVY_RAIN: { icon: CloudRain, text: '+RAIN' },
+    DRIZZLE: { icon: CloudDrizzle, text: '+SHOWERS' },
+    CLEAR_HOT: { icon: Thermometer, text: '+HOT' },
+    FROST: { icon: Snowflake, text: '+FROST' },
+    FOG: { icon: CloudFog, text: '+FOG' },
+    OVERCAST: { icon: Cloud, text: '+OVERCAST' },
+    CLEAR_MILD: { icon: CloudSun, text: '+CLEAR' },
 };
 
 // Secondary-condition sub-copy notes (roofing-relevant)
@@ -195,7 +226,7 @@ const WeatherHero: FC<WeatherHeroProps> = ({ ctx }) => {
     const { secondaryEvent } = ctx;
 
     // Compound condition display
-    const secondarySuffix = secondaryEvent ? (SECONDARY_BADGE_SUFFIX[secondaryEvent] ?? null) : null;
+    const secondaryBadge = secondaryEvent ? (SECONDARY_BADGE[secondaryEvent] ?? null) : null;
     const secondaryNote = secondaryEvent ? (SECONDARY_NOTE[secondaryEvent] ?? null) : null;
 
     const isStormEvent = ctx.event === 'HAIL_STORM' || ctx.event === 'THUNDERSTORM' || ctx.event === 'HIGH_WIND'
@@ -244,7 +275,14 @@ const WeatherHero: FC<WeatherHeroProps> = ({ ctx }) => {
 
             <div className="hero-content">
                 <motion.div className="hero-badge" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-                    {content.badge}{secondarySuffix ? <span style={{ opacity: 0.7, marginLeft: '0.6em', fontSize: '0.85em' }}>{secondarySuffix}</span> : null}
+                    <BrandIcon icon={content.badgeIcon} size={16} className="mr-1" />
+                    {content.badge}
+                    {secondaryBadge ? (
+                        <span style={{ opacity: 0.7, marginLeft: '0.6em', fontSize: '0.85em' }}>
+                            <BrandIcon icon={secondaryBadge.icon} size={14} className="mr-1" />
+                            {secondaryBadge.text}
+                        </span>
+                    ) : null}
                 </motion.div>
 
                 <motion.h1 className="hero-headline" initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.1 }}>
@@ -266,7 +304,10 @@ const WeatherHero: FC<WeatherHeroProps> = ({ ctx }) => {
                 </motion.p>
 
                 <motion.div className="hero-ctas" initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.3 }}>
-                    <a href={content.primaryCTA.href} className="cta-primary">{content.primaryCTA.label}</a>
+                    <a href={content.primaryCTA.href} className="cta-primary">
+                        {content.primaryCTA.icon && <BrandIcon icon={content.primaryCTA.icon} size={18} stroke="white" />}
+                        {content.primaryCTA.label}
+                    </a>
                     <a href={content.secondaryCTA.href} className="cta-secondary">{content.secondaryCTA.label}</a>
                 </motion.div>
 

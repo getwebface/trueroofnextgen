@@ -2,11 +2,26 @@
 // src/components/WeatherBanner.astro
 // Driven by the new rich WeatherContext — copies compose from actual atmospheric event + temporal context
 
+import { 
+  AlertCircle, 
+  CloudLightning, 
+  Wind, 
+  CloudRain, 
+  CloudSunRain, 
+  Sun, 
+  CloudSun, 
+  Leaf, 
+  Snowflake, 
+  CloudFog, 
+  Cloud, 
+  Home 
+} from 'lucide-react';
+
 const { weatherContext } = Astro.locals;
 const { event, urgency, copyHints, city, temperature, timeOfDay, season, dayOfWeek, isWeekend, topService } = weatherContext || {};
 
 // Build the banner message from actual weather context
-function buildBannerMessage(): { text: string; cssClass: string; emoji: string } {
+function buildBannerMessage(): { text: string; cssClass: string; icon: any } {
   const temp = temperature != null ? `${Math.round(temperature)}°C` : '';
   const time = copyHints?.timeGreeting || 'Right now';
   const svc = topService?.trigger || 'your roof';
@@ -16,67 +31,67 @@ function buildBannerMessage(): { text: string; cssClass: string; emoji: string }
     case 'HAIL_STORM':
       return {
         cssClass: 'storm',
-        emoji: '🚨',
+        icon: AlertCircle,
         text: `HAILSTORM ALERT in ${city} — Emergency crews available now. Hail causes immediate tile and flashing damage.`,
       };
     case 'THUNDERSTORM':
       return {
         cssClass: 'storm',
-        emoji: '⛈️',
+        icon: CloudLightning,
         text: `Storm hitting ${city} right now — Check your roof after. We're on standby for ${svc}.`,
       };
     case 'HIGH_WIND':
       return {
         cssClass: 'storm',
-        emoji: '💨',
+        icon: Wind,
         text: `Strong winds in ${city} ${temp ? `(${temp})` : ''} — High winds can lift tiles and flashings. Call us if you notice any movement.`,
       };
     case 'HEAVY_RAIN':
       return {
         cssClass: 'rain',
-        emoji: '🌧️',
+        icon: CloudRain,
         text: `Heavy rain in ${city} — If you're noticing a leak right now, every hour matters. We offer same-day urgent repairs.`,
       };
     case 'DRIZZLE':
       return {
         cssClass: 'rain',
-        emoji: '🌦️',
+        icon: CloudSunRain,
         text: `Raining in ${city} — A dripping ceiling often reveals ${svc}. Book a free inspection while it's fresh.`,
       };
     case 'CLEAR_HOT':
       return {
         cssClass: 'clear-hot',
-        emoji: '☀️',
+        icon: Sun,
         text: `${temp} and sunny in ${city} ${time ? `— ${time}` : ''} — Great drying conditions for our pointing and coating work. ${isWeekend ? 'Book before the week fills up.' : 'Lock in your quote today.'}`,
       };
     case 'CLEAR_MILD':
       return {
         cssClass: 'clear',
-        emoji: '🌤️',
+        icon: season === 'AUTUMN' ? Leaf : CloudSun,
         text: `${season === 'AUTUMN' ? '🍂 Autumn window' : '☀️ Clear skies'} in ${city} ${temp ? `• ${temp}` : ''} — ${copyHints?.seasonalTip || 'Ideal conditions for roof work. Book your free inspection.'}`,
       };
     case 'FROST':
       return {
         cssClass: 'frost',
-        emoji: '❄️',
+        icon: Snowflake,
         text: `Frost in ${city} this ${timeOfDay?.toLowerCase()} — Cold snaps crack pointing mortar and cause tile movement. Inspect your roof now.`,
       };
     case 'FOG':
       return {
         cssClass: 'overcast',
-        emoji: '🌫️',
+        icon: CloudFog,
         text: `Foggy ${day} in ${city} — Persistent moisture breeds moss and lichen that silently damage tiles. Book a ${season === 'AUTUMN' || season === 'WINTER' ? 'pre-winter' : 'seasonal'} inspection.`,
       };
     case 'OVERCAST':
       return {
         cssClass: 'overcast',
-        emoji: '☁️',
+        icon: Cloud,
         text: `${time} in ${city} — ${copyHints?.seasonalTip || 'Overcast days are perfect for our inspection team. Book your free assessment.'}`,
       };
     default:
       return {
         cssClass: 'default-mode',
-        emoji: '🏠',
+        icon: Home,
         text: `TrueRoof — Melbourne's trusted tile restoration specialists. Serving ${city} & surrounds.`,
       };
   }
@@ -84,10 +99,11 @@ function buildBannerMessage(): { text: string; cssClass: string; emoji: string }
 
 const banner = buildBannerMessage();
 const urgencyClass = urgency && urgency >= 4 ? ' urgent' : '';
+const Icon = banner.icon;
 ---
 <div class={`weather-banner ${banner.cssClass}${urgencyClass}`} role="alert" aria-live="polite">
   <span class="banner-inner">
-    <span class="banner-emoji">{banner.emoji}</span>
+    <span class="banner-emoji"><Icon size={18} strokeWidth={1.5} stroke="url(#orange-gradient)" /></span>
     <span>{banner.text}</span>
     {urgency && urgency >= 4 && (
       <a href="tel:0400000000" class="banner-cta">Call Now →</a>
