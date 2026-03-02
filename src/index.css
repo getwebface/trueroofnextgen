@@ -932,24 +932,70 @@ body.weather-default .accent-glow {
   line-height: 1.7;
 }
 
-/* ── Footer ── */
+/* ── Footer (Bedrock) ── */
 .site-footer {
-  background: var(--color-brand-deep);
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
-  padding: 4rem 0 1.5rem;
+  position: relative;
+  background: #0a0a14;
+  border-top: 1px solid rgba(249, 115, 22, 0.12);
+  padding: 7rem 0 3.5rem;
+  overflow: hidden;
+}
+
+/* Subtle orange gradient bleed at the very top edge */
+.site-footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(249, 115, 22, 0.4) 30%, rgba(249, 115, 22, 0.6) 50%, rgba(249, 115, 22, 0.4) 70%, transparent 100%);
+}
+
+/* Massive typographic watermark */
+.footer-watermark {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  user-select: none;
+  overflow: hidden;
+}
+
+.footer-watermark span {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 900;
+  font-size: clamp(6rem, 22vw, 18rem);
+  text-transform: uppercase;
+  letter-spacing: -0.04em;
+  white-space: nowrap;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.04);
+  background: linear-gradient(180deg, rgba(255,255,255,0.07) 0%, rgba(255,255,255,0.02) 60%, transparent 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  line-height: 1;
+  transform: translateY(5%);
+}
+
+.footer-content {
+  position: relative;
+  z-index: 2;
 }
 
 .footer-grid {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr 1fr;
   gap: 3rem;
-  margin-bottom: 3rem;
+  margin-bottom: 4rem;
 }
 
 .footer-brand {
   font-family: 'Outfit', sans-serif;
   font-weight: 900;
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   text-transform: uppercase;
   letter-spacing: -0.02em;
   margin-bottom: 1rem;
@@ -960,19 +1006,19 @@ body.weather-default .accent-glow {
 }
 
 .footer-desc {
-  color: rgba(255, 255, 255, 0.4);
+  color: rgba(255, 255, 255, 0.35);
   font-size: 0.85rem;
-  line-height: 1.6;
-  margin-bottom: 1.5rem;
+  line-height: 1.7;
+  margin-bottom: 1.75rem;
 }
 
 .footer-heading {
   font-family: 'Outfit', sans-serif;
   font-weight: 700;
-  font-size: 0.85rem;
+  font-size: 0.75rem;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: rgba(255, 255, 255, 0.5);
+  letter-spacing: 0.12em;
+  color: rgba(255, 255, 255, 0.35);
   margin-bottom: 1.25rem;
 }
 
@@ -987,7 +1033,7 @@ body.weather-default .accent-glow {
 }
 
 .footer-links a {
-  color: rgba(255, 255, 255, 0.4);
+  color: rgba(255, 255, 255, 0.38);
   text-decoration: none;
   font-size: 0.87rem;
   transition: color 0.2s;
@@ -998,11 +1044,12 @@ body.weather-default .accent-glow {
 }
 
 .footer-bottom {
-  padding-top: 1.5rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
   text-align: center;
-  color: rgba(255, 255, 255, 0.25);
-  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.18);
+  font-size: 0.78rem;
+  letter-spacing: 0.03em;
 }
 
 /* ── Sticky Mobile CTA ── */

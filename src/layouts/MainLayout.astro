@@ -89,48 +89,54 @@ const schemaLocalBusiness = {
 
     <!-- Footer -->
     <footer class="site-footer">
-      <div class="container">
-        <div class="footer-grid">
-          <div>
-            <div class="footer-brand">True<span>Roof</span></div>
-            <p class="footer-desc">
-              Melbourne's trusted tile restoration specialists. We restore terracotta and concrete tile roofs
-              using our proven 4-stage process — no shortcuts, just quality craftsmanship backed by 25+ years of experience.
-            </p>
-            <a href="tel:0400000000" class="cta-primary" style="padding: 0.6rem 1.25rem; font-size: 0.85rem; gap: 0.5rem; display: inline-flex; align-items: center;">
-              <Phone size={18} strokeWidth={1.5} stroke="white" /> Call Us Now
-            </a>
+      <!-- Typographic watermark: brand authority background -->
+      <div class="footer-watermark" aria-hidden="true">
+        <span>TRUE ROOF</span>
+      </div>
+      <div class="footer-content">
+        <div class="container">
+          <div class="footer-grid">
+            <div>
+              <div class="footer-brand">True<span>Roof</span></div>
+              <p class="footer-desc">
+                Melbourne's trusted tile restoration specialists. We restore terracotta and concrete tile roofs
+                using our proven 4-stage process — no shortcuts, just quality craftsmanship backed by 25+ years of experience.
+              </p>
+              <a href="tel:0400000000" class="cta-primary" style="padding: 0.6rem 1.25rem; font-size: 0.85rem; gap: 0.5rem; display: inline-flex; align-items: center;">
+                <Phone size={18} strokeWidth={1.5} stroke="white" /> Call Us Now
+              </a>
+            </div>
+            <div>
+              <div class="footer-heading">Services</div>
+              <ul class="footer-links">
+                <li><a href="/services/tiled-restoration">Tile Restoration</a></li>
+                <li><a href="/services/cleaning">Roof Cleaning</a></li>
+                <li><a href="/services/metal-flashings">Metal Flashings</a></li>
+                <li><a href="#quote">Free Inspection</a></li>
+              </ul>
+            </div>
+            <div>
+              <div class="footer-heading">Locations</div>
+              <ul class="footer-links">
+                <li><a href="/locations/melbourne">Melbourne</a></li>
+                <li><a href="/locations/wallan">Wallan</a></li>
+              </ul>
+            </div>
+            <div>
+              <div class="footer-heading">Contact</div>
+              <ul class="footer-links" style="display: flex; flex-direction: column; gap: 0.5rem;">
+                <li><a href="tel:0400000000">0400 000 000</a></li>
+                <li><a href="mailto:info@trueroof.com.au">info@trueroof.com.au</a></li>
+                <li style="display: flex; align-items: center; gap: 0.5rem;">
+                  <ShieldCheck size={16} strokeWidth={1.5} stroke="url(#orange-gradient)" />
+                  <span style="color: rgba(255,255,255,0.3); font-size: 0.8rem;">Licensed & Insured</span>
+                </li>
+              </ul>
+            </div>
           </div>
-          <div>
-            <div class="footer-heading">Services</div>
-            <ul class="footer-links">
-              <li><a href="/services/tiled-restoration">Tile Restoration</a></li>
-              <li><a href="/services/cleaning">Roof Cleaning</a></li>
-              <li><a href="/services/metal-flashings">Metal Flashings</a></li>
-              <li><a href="#quote">Free Inspection</a></li>
-            </ul>
+          <div class="footer-bottom">
+            &copy; {new Date().getFullYear()} True Roof. All rights reserved. Melbourne, Australia.
           </div>
-          <div>
-            <div class="footer-heading">Locations</div>
-            <ul class="footer-links">
-              <li><a href="/locations/melbourne">Melbourne</a></li>
-              <li><a href="/locations/wallan">Wallan</a></li>
-            </ul>
-          </div>
-          <div>
-            <div class="footer-heading">Contact</div>
-            <ul class="footer-links" style="display: flex; flex-direction: column; gap: 0.5rem;">
-              <li><a href="tel:0400000000">0400 000 000</a></li>
-              <li><a href="mailto:info@trueroof.com.au">info@trueroof.com.au</a></li>
-              <li style="display: flex; align-items: center; gap: 0.5rem;">
-                <ShieldCheck size={16} strokeWidth={1.5} stroke="url(#orange-gradient)" />
-                <span style="color: rgba(255,255,255,0.3); font-size: 0.8rem;">Licensed & Insured</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="footer-bottom">
-          &copy; {new Date().getFullYear()} True Roof. All rights reserved. Melbourne, Australia.
         </div>
       </div>
     </footer>
