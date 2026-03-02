@@ -239,17 +239,24 @@ const WeatherHero: FC<WeatherHeroProps> = ({ ctx }) => {
             {/* Rain particle effect */}
             {mounted && isRainEvent && (
                 <div aria-hidden="true" style={{ position: 'absolute', inset: 0, overflow: 'hidden', pointerEvents: 'none' }}>
-                    {Array.from({ length: 40 }).map((_, i) => (
-                        <motion.div key={i}
+                    {/* Memoize static rain particle styles/delays to prevent re-renders recalculating randoms */}
+                    {useState(() => Array.from({ length: 40 }).map((_, i) => ({
+                        key: i,
+                        height: `${10 + Math.random() * 20}px`,
+                        left: `${Math.random() * 100}%`,
+                        duration: 1 + Math.random() * 0.6,
+                        delay: Math.random() * 2,
+                    })))[0].map((drop) => (
+                        <motion.div key={drop.key}
                             style={{
                                 position: 'absolute',
                                 width: '1px',
-                                height: `${10 + Math.random() * 20}px`,
+                                height: drop.height,
                                 background: 'linear-gradient(to bottom, transparent, rgba(100, 160, 255, 0.35))',
-                                left: `${Math.random() * 100}%`,
+                                left: drop.left,
                             }}
                             animate={{ y: ['-5vh', '110vh'], opacity: [0, 0.8, 0.8, 0] }}
-                            transition={{ duration: 1 + Math.random() * 0.6, repeat: Infinity, delay: Math.random() * 2, ease: 'linear' }}
+                            transition={{ duration: drop.duration, repeat: Infinity, delay: drop.delay, ease: 'linear' }}
                         />
                     ))}
                 </div>
