@@ -41,8 +41,22 @@ const QuoteForm: FC<QuoteFormProps> = ({ ctx }) => {
         service: urgency >= 4 ? 'Emergency Leak Repair' : topServiceName,
         message: '',
     });
+    const [hasTrackedStart, setHasTrackedStart] = useState(false);
 
     const ctaText = urgencyCTAs[urgency] || urgencyCTAs[1];
+
+    const handleFocus = () => {
+        if (!hasTrackedStart) {
+            setHasTrackedStart(true);
+            if (typeof window !== 'undefined' && (window as any).trackEvent) {
+                (window as any).trackEvent('quote_form_start', {
+                    urgency,
+                    event: ctx?.event,
+                    season: ctx?.season,
+                });
+            }
+        }
+    };
 
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault();
@@ -99,21 +113,28 @@ const QuoteForm: FC<QuoteFormProps> = ({ ctx }) => {
                 <div className="form-group">
                     <label className="form-label" htmlFor="q-name">Your Name <span className="text-red-500" aria-hidden="true">*</span></label>
                     <input id="q-name" className="form-input" type="text" placeholder="e.g. John Smith" required aria-required="true"
+                        autoComplete="name"
+                        onFocus={handleFocus}
                         value={formData.name} onChange={e => setFormData(d => ({ ...d, name: e.target.value }))} />
                 </div>
                 <div className="form-group">
                     <label className="form-label" htmlFor="q-phone">Phone Number <span className="text-red-500" aria-hidden="true">*</span></label>
                     <input id="q-phone" className="form-input" type="tel" placeholder="04XX XXX XXX" required aria-required="true"
+                        autoComplete="tel"
+                        onFocus={handleFocus}
                         value={formData.phone} onChange={e => setFormData(d => ({ ...d, phone: e.target.value }))} />
                 </div>
                 <div className="form-group">
                     <label className="form-label" htmlFor="q-suburb">Suburb</label>
                     <input id="q-suburb" className="form-input" type="text" placeholder="e.g. Doncaster"
+                        autoComplete="address-level2"
+                        onFocus={handleFocus}
                         value={formData.suburb} onChange={e => setFormData(d => ({ ...d, suburb: e.target.value }))} />
                 </div>
                 <div className="form-group">
                     <label className="form-label" htmlFor="q-service">Service Needed</label>
                     <select id="q-service" className="form-select"
+                        onFocus={handleFocus}
                         value={formData.service} onChange={e => setFormData(d => ({ ...d, service: e.target.value }))}>
                         <option value="">Select a service...</option>
                         {services.map(s => <option key={s} value={s}>{s}</option>)}
@@ -122,6 +143,7 @@ const QuoteForm: FC<QuoteFormProps> = ({ ctx }) => {
                 <div className="form-group">
                     <label className="form-label" htmlFor="q-message">More Details (Optional)</label>
                     <textarea id="q-message" className="form-textarea" placeholder="Describe the issue or what you've noticed..."
+                        onFocus={handleFocus}
                         value={formData.message} onChange={e => setFormData(d => ({ ...d, message: e.target.value }))} />
                 </div>
                                 <button type="submit" className="cta-primary" disabled={sending} aria-disabled={sending} aria-live="polite"
@@ -138,6 +160,18 @@ const QuoteForm: FC<QuoteFormProps> = ({ ctx }) => {
                     }}>
                     {sending ? 'Sending...' : ctaText}
                 </button>
+                <div style={{
+                    marginTop: '0.75rem',
+                    textAlign: 'center',
+                    fontSize: '0.85rem',
+                    color: 'rgba(255, 255, 255, 0.5)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '0.375rem'
+                }}>
+                    <span>🔒</span> Your information is secure. Takes 30 seconds.
+                </div>
             </form>
         </div>
     );
