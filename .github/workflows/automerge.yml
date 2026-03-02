@@ -7,7 +7,7 @@ jobs:
   jules-override:
     runs-on: ubuntu-latest
     # Only runs if the PR is from Jules
-    if: github.actor == 'Jules-Username' 
+    if: github.actor == 'google-labs-code'
     permissions:
       pull-requests: write
       contents: write
