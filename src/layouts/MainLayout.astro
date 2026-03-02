@@ -55,6 +55,7 @@ const schemaLocalBusiness = {
     <Analytics />
   </head>
   <body class={cssMode}>
+    <a href="#main-content" class="skip-to-content">Skip to main content</a>
     <SVGGradients />
 
     <!-- Weather Banner (always visible) -->
@@ -84,7 +85,7 @@ const schemaLocalBusiness = {
     </nav>
 
     <!-- Page Content -->
-    <main>
+    <main id="main-content">
       <slot />
     </main>
 
