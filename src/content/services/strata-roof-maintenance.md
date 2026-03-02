@@ -8,10 +8,33 @@ Managing multiple properties means minimizing unexpected emergency costs. True R
 
 Our 4-Stage Restoration Process is perfectly suited for maximizing the lifespan of body corporate assets:
 
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+<div class="glass-card" style="padding: 1.5rem;">
+
 1. **High-Pressure Biological Decontamination:** We remove moss, lichen, and urban grime that degrade terracotta and concrete tiles, instantly boosting curb appeal and preventing hidden structural damage.
+
+</div>
+
+<div class="glass-card" style="padding: 1.5rem;">
+
 2. **Precision Structural Repairs:** Strata properties often suffer from neglected valleys and broken tiles. We conduct rigorous inspections and replace damaged elements, ensuring that shared walls and ceilings are protected from water ingress.
+
+</div>
+
+<div class="glass-card" style="padding: 1.5rem;">
+
 3. **Re-bedding & Flexi-Pointing:** Securing ridge caps with standard mortar is a short-term fix. We utilize advanced flexible pointing compounds that accommodate the natural movement of multi-unit developments, providing a permanent, watertight seal that won't crack.
+
+</div>
+
+<div class="glass-card" style="padding: 1.5rem;">
+
 4. **Protective Membrane System (Concrete Only):** For concrete tile roofs, our multi-coat membrane system provides a formidable weather shield, effectively resetting the lifespan of the roof and protecting the body corporate's investment for decades.
+
+</div>
+
+</div>
 
 ### Why Property Managers Choose True Roof
 

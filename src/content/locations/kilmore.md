@@ -27,11 +27,29 @@ Kilmore is Victoria's oldest inland town, boasting a unique blend of heritage ho
 
 Our focus in Kilmore is on comprehensive roof restoration. Our services include:
 
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8">
+
+<div class="glass-card" style="padding: 1.5rem;">
+
 - Deep cleaning to remove moss and lichen built up over the years.
+
+</div>
+
+<div class="glass-card" style="padding: 1.5rem;">
+
 - Precise re-pointing and re-bedding of ridge caps to ensure your home remains watertight.
+
+</div>
+
+<div class="glass-card" style="padding: 1.5rem;">
+
 - Application of high-quality protective coatings.
 
-<div class="glass-card" style="padding: 1.5rem; margin-top: 1rem;">
+</div>
+
+</div>
+
+<div class="glass-card" style="padding: 1.5rem; margin-top: 2rem;">
 
 Whether you are preserving the classic look of a heritage property or refreshing a more recent build, our restorative process ensures your tiled roof is ready to face the future without compromising the town's historic charm.
 
