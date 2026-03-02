@@ -1,13 +1,13 @@
-name: Auto-Merge Jules
+name: Auto-Merge AI Agents
 on:
   pull_request:
     types: [opened, synchronize, reopened]
 
 jobs:
-  jules-override:
+  ai-agent-automerge:
     runs-on: ubuntu-latest
-    # Only runs if the PR is from Jules
-    if: github.actor == 'google-labs-code'
+    # Only runs if the PR is from Jules or GitHub Copilot
+    if: github.actor == 'google-labs-code' || github.actor == 'github-copilot[bot]'
     permissions:
       pull-requests: write
       contents: write
