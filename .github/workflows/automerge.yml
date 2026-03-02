@@ -7,7 +7,7 @@ jobs:
   ai-agent-automerge:
     runs-on: ubuntu-latest
     # Only runs if the PR is from Jules or GitHub Copilot
-    if: github.actor == 'google-labs-jules' || github.actor == 'github-copilot[bot]'
+    if: github.actor == 'google-labs-jules[bot]' || github.actor == 'github-copilot[bot]'
     permissions:
       pull-requests: write
       contents: write
