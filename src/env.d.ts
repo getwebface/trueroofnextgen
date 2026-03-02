@@ -3,17 +3,19 @@
 
 import type { WeatherContext } from './utils/weatherProcessor';
 
-declare namespace App {
-  interface Locals {
-    runtime: {
-      cf: any;
-      caches?: {
-        default: Cache;
+declare global {
+  namespace App {
+    interface Locals {
+      runtime: {
+        cf: any;
+        caches?: {
+          default: Cache;
+        };
+        env?: any;
+        waitUntil?: (promise: Promise<any>) => void;
       };
-      env?: any;
-      waitUntil?: (promise: Promise<any>) => void;
-    };
-    weatherContext: WeatherContext;
-    weatherCSSMode: string; // e.g. 'weather-storm', 'weather-rain', 'weather-clear'
+      weatherContext: WeatherContext;
+      weatherCSSMode: string; // e.g. 'weather-storm', 'weather-rain', 'weather-clear'
+    }
   }
 }
