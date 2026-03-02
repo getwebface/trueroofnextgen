@@ -1,0 +1,38 @@
+name: Jules-Gemini Round Robin
+on:
+  # Triggered when Gemini (or any bot) finishes a status check
+  status: {}
+  # Triggered when Gemini posts a review
+  pull_request_review:
+    types: [submitted]
+
+jobs:
+  feedback-loop:
+    runs-on: ubuntu-latest
+    # Only run if Jules or GitHub Copilot is the PR author
+    if: >
+      github.event.pull_request.user.login == 'google-labs-code' ||
+      github.event.pull_request.user.login == 'github-copilot[bot]'
+    permissions:
+      pull-requests: write
+      contents: write
+
+    steps:
+      - name: Ping AI agent if Gemini found issues
+        run: |
+          # Check if Gemini's latest review is a 'CHANGES_REQUESTED'
+          REVIEW_STATE=$(gh pr view ${{ github.event.pull_request.number }} --json reviews --jq '.reviews[-1].state')
+
+          if [ "$REVIEW_STATE" == "CHANGES_REQUESTED" ]; then
+            gh pr comment ${{ github.event.pull_request.number }} \
+              --body "@${{ github.event.pull_request.user.login }}, Gemini found some nits. Please check the inline comments and push a fix! 🤖🚀"
+          fi
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Auto-Merge if Gemini Approves
+        run: |
+          # If Gemini gave the green light, merge it.
+          gh pr merge ${{ github.event.pull_request.number }} --auto --squash --admin
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
