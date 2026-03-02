@@ -11,36 +11,7 @@ const cssMode = weatherCSSMode || 'weather-default';
 const urgency = weatherContext?.urgency || 1;
 const city = weatherContext?.city || 'Melbourne';
 const isEmergency = urgency >= 4;
-<<<<<<< Updated upstream
 const ctaLabel = isEmergency ? '🚨 Emergency Call' : 'Free Quote';
-
-// SEO: Canonical URL
-const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://trueroof.com.au');
-
-// SEO: RoofingContractor Schema
-// Note: Google Guidelines specify that LocalBusiness schema must accurately reflect NAP (Name, Address, Phone).
-// Using the phone number present on the page. Address details are generalized to Melbourne area.
-const schemaLocalBusiness = {
-  "@context": "https://schema.org",
-  "@type": "RoofingContractor",
-  "name": "True Roof",
-  "url": "https://trueroof.com.au",
-  "telephone": "0400 000 000",
-  "priceRange": "$$",
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Melbourne",
-    "addressRegion": "VIC",
-    "addressCountry": "AU"
-  },
-  "areaServed": {
-    "@type": "City",
-    "name": "Melbourne"
-  }
-};
-=======
-const ctaLabel = isEmergency ? 'Emergency Call' : 'Free Quote';
->>>>>>> Stashed changes
 ---
 <html lang="en">
   <head>
