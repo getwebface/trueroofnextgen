@@ -11,7 +11,10 @@ declare global {
         caches?: {
           default: Cache;
         };
-        env?: any;
+        env?: {
+          IMAGES: R2Bucket;
+          [key: string]: unknown;
+        };
         waitUntil?: (promise: Promise<any>) => void;
       };
       weatherContext: WeatherContext;

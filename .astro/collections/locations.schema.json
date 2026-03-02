@@ -13,6 +13,9 @@
         "postcode": {
           "type": "string"
         },
+        "hero": {
+          "type": "string"
+        },
         "coordinates": {
           "type": "object",
           "properties": {

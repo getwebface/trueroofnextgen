@@ -6,6 +6,7 @@ const locationsCollection = defineCollection({
     title: z.string(),
     description: z.string(),
     postcode: z.string(),
+    hero: z.string().optional(),
     coordinates: z.object({
       lat: z.number(),
       lng: z.number()

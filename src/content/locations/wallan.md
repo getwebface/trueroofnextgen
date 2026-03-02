@@ -2,6 +2,7 @@
 title: Wallan
 description: Expert roof tile restoration services in Wallan.
 postcode: "3756"
+hero: "/cdn/loc-wallan-hero.jpg"
 coordinates:
   lat: -37.4167
   lng: 144.9833
