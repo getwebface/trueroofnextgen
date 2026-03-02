@@ -1,0 +1,19 @@
+name: Auto-Merge AI Agents
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  ai-agent-automerge:
+    runs-on: ubuntu-latest
+    # Only runs if the PR is from Jules or GitHub Copilot
+    if: github.actor == 'google-labs-code' || github.actor == 'github-copilot[bot]'
+    permissions:
+      pull-requests: write
+      contents: write
+    
+    steps:
+      - name: Force Merge PR
+        run: gh pr merge ${{ github.event.pull_request.number }} --merge --admin
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

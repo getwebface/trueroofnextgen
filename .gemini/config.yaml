@@ -1,0 +1,8 @@
+# Only alert Jules / Copilot if the issue is Medium or higher
+review:
+  minimum_severity: MEDIUM
+  # Ignore files that the AI agents don't need to worry about
+  ignore_patterns:
+    - "dist/**"
+    - "vendor/**"
+    - "*.md"
