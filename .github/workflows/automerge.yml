@@ -1,0 +1,22 @@
+name: Auto-Merge Jules
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  jules-override:
+    runs-on: ubuntu-latest
+    # Only runs if the PR is from Jules
+    if: github.actor == 'Jules-Username' 
+    permissions:
+      pull-requests: write
+      contents: write
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Force Merge PR
+        run: gh pr merge ${{ github.event.pull_request.number }} --merge --admin
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
