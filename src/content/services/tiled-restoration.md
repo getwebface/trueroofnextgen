@@ -10,3 +10,35 @@ A full restoration is the most effective way to extend the life of your tiled ro
 2. **Precision Structural Repairs:** A cracked valley iron or broken tile isn't just a drip; it's an open door to structural ceiling damage. We meticulously replace all compromised tiles and fortify all valley irons and flashings to withstand Melbourne's worst weather.
 3. **Re-bedding & Flexi-Pointing:** Unlike standard mortar that inevitably cracks with house movement, our flexible pointing compound moves with your home, locking ridge caps in tight and ensuring a permanent, watertight seal.
 4. **Protective Membrane System (Concrete Only):** This isn't just roof paint. We apply a multi-coat protective membrane system that completely seals the concrete, locking out moisture, restoring color, and providing a long-lasting weather shield for decades to come.
+
+## Recent Local Project: Kew Terracotta Restoration
+
+Recently, we completely transformed a weathered, moss-covered 1980s terracotta roof in Kew using our 4-stage process.
+
+> "We thought our roof was beyond saving, but the transformation is incredible. The meticulous attention to detail during the structural repairs and the final flexi-pointing has given us total peace of mind for winter."
+> — **Sarah T., Kew**
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Review",
+  "itemReviewed": {
+    "@type": "Service",
+    "name": "The 4-Stage Tiled Roof Restoration Process",
+    "provider": {
+      "@type": "LocalBusiness",
+      "name": "Your Tiled Roof Restoration Experts"
+    }
+  },
+  "reviewRating": {
+    "@type": "Rating",
+    "ratingValue": "5",
+    "bestRating": "5"
+  },
+  "author": {
+    "@type": "Person",
+    "name": "Sarah T."
+  },
+  "reviewBody": "We thought our roof was beyond saving, but the transformation is incredible. The meticulous attention to detail during the structural repairs and the final flexi-pointing has given us total peace of mind for winter."
+}
+</script>
