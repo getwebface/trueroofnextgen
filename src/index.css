@@ -57,6 +57,25 @@
   box-sizing: border-box;
 }
 
+.skip-to-content {
+  position: absolute;
+  top: -100px;
+  left: 0;
+  padding: 1rem;
+  background-color: var(--color-brand-orange);
+  color: white;
+  z-index: 9999;
+  font-weight: bold;
+  transition: top 0.3s;
+  text-decoration: none;
+  font-family: 'Outfit', sans-serif;
+  border-bottom-right-radius: var(--radius-card);
+}
+
+.skip-to-content:focus {
+  top: 0;
+}
+
 html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
