@@ -10,7 +10,7 @@ A full restoration is the most effective way to extend the life of your tiled ro
 
 <div class="glass-card" style="padding: 1.5rem;">
 
-1. **High-Pressure Biological Decontamination:** We remove decades of moss, lichen, and dirt using specialized high-pressure equipment, eliminating organic growth that compromises the structural integrity of your tiles.
+1. **High-Pressure Biological Decontamination:** Through professional [roof tile cleaning](/services/cleaning), we remove decades of moss, lichen, and dirt using specialized high-pressure equipment, eliminating organic growth that compromises the structural integrity of your tiles.
 
 </div>
 

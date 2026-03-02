@@ -14,4 +14,4 @@ localCommonRoofTypes:
   - Concrete Tile
 lastInspected: 2024-02-28
 ---
-Wallan is a growing suburb where many roofs are reaching the age where a full restoration is more cost-effective than a replacement. We specialize in cleaning, pointing, and coating to make your roof look new again.
+Wallan is a growing suburb where many roofs are reaching the age where a full restoration is more cost-effective than a replacement. We specialize in cleaning, pointing, and coating to make your roof look new again. For nearby homeowners in older properties, we also provide expert [roof tile restoration in Kilmore](/locations/kilmore).
