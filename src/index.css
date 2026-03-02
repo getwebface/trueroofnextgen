@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@700;800;900&display=swap');
 
 /* ═══════════════════════════════════════════════════
    TrueRoof NextGen — Premium Design System
@@ -973,7 +972,7 @@ body.weather-default .accent-glow {
   white-space: nowrap;
   color: transparent;
   -webkit-text-stroke: 1px rgba(255, 255, 255, 0.04);
-  background: linear-gradient(180deg, rgba(255,255,255,0.07) 0%, rgba(255,255,255,0.02) 60%, transparent 100%);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.07) 0%, rgba(255, 255, 255, 0.02) 60%, transparent 100%);
   -webkit-background-clip: text;
   background-clip: text;
   line-height: 1;
