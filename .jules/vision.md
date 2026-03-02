@@ -1,0 +1,1 @@
+## 2024-05-24 - Initial Review | **Learning:** The current structure lacks any formal media strategy mapping text to high-end bespoke visuals. | **Action:** Create the first media-plan.md ledger entry targeting the Hero of Wallan Location page or the Tiled Restoration process.
