@@ -6,8 +6,11 @@ on:
 jobs:
   ai-agent-automerge:
     runs-on: ubuntu-latest
-    # Only runs if the PR is from Jules or GitHub Copilot
-    if: github.actor == 'google-labs-jules[bot]' || github.actor == 'github-copilot[bot]'
+    # Added your specific actor to the condition to prevent the job from skipping
+    if: >
+      github.actor == 'google-labs-jules[bot]' || 
+      github.actor == 'github-copilot[bot]' || 
+      github.actor == 'getwebface'
     permissions:
       pull-requests: write
       contents: write
