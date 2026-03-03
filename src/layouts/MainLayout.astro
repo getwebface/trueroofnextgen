@@ -6,6 +6,12 @@ import WeatherBanner from '../components/WeatherBanner.astro';
 import SVGGradients from '../components/SVGGradients.astro';
 import { Phone, ClipboardList, ShieldCheck } from 'lucide-react';
 
+export interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title, description } = Astro.props;
 const { weatherContext, weatherCSSMode } = Astro.locals;
 const cssMode = weatherCSSMode || 'weather-default';
 const urgency = weatherContext?.urgency || 1;
@@ -42,10 +48,10 @@ const schemaLocalBusiness = {
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>True Roof — Melbourne Tile Restoration Specialists</title>
+    <title>{title || "True Roof — Melbourne Tile Restoration Specialists"}</title>
     <link rel="canonical" href={canonicalURL} />
     <script type="application/ld+json" set:html={JSON.stringify(schemaLocalBusiness)} />
-    <meta name="description" content="Melbourne's trusted tile restoration experts. Professional cleaning, re-bedding, flexi-pointing, metal flashing repairs. Free inspections. 25+ years experience." />
+    <meta name="description" content={description || "Melbourne's trusted tile restoration experts. Professional cleaning, re-bedding, flexi-pointing, metal flashing repairs. Free inspections. 25+ years experience."} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@700;800;900&display=swap" />
