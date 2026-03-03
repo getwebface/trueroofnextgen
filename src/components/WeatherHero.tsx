@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo, type FC } from 'react';
+import { useState, useEffect, useMemo, memo, type FC } from 'react';
 import { motion } from 'motion/react';
 import {
     AlertCircle,
@@ -348,4 +348,5 @@ const WeatherHero: FC<WeatherHeroProps> = ({ ctx }) => {
     );
 };
 
-export default WeatherHero;
+// ⚡ Bolt: Memoize heavy WeatherHero component to prevent re-renders unless the complex weather context changes
+export default memo(WeatherHero);
