@@ -40,8 +40,11 @@ const locationFaqs = allFaqs
 
 // Get services for cross-linking
 const services = await getCollection('services');
+
+const pageTitle = `Roof Restoration in ${location.data.title} | True Roof`;
+const pageDescription = location.data.description;
 ---
-<MainLayout>
+<MainLayout title={pageTitle} description={pageDescription}>
 
   {/* ── Location Hero ── */}
   <section class="hero-section" style={`padding: 6rem 0 5rem; position: relative; overflow: hidden; ${location.data.hero ? `background: url(${location.data.hero}) center/cover no-repeat;` : ''}`}>

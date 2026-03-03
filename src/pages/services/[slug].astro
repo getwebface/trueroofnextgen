@@ -24,8 +24,11 @@ const iconMap: Record<string, string> = {
   wrench: '🔧',
   'shield-check': '🛡️',
 };
+
+const pageTitle = `${service.data.title} | True Roof Melbourne`;
+const pageDescription = service.data.description;
 ---
-<MainLayout>
+<MainLayout title={pageTitle} description={pageDescription}>
 
   {/* ── Service Hero ── */}
   <section class="hero-section" style="padding: 4rem 0 3.5rem;">
