@@ -92,7 +92,11 @@ const QuoteForm: FC<QuoteFormProps> = ({ ctx }) => {
                         ? 'Given current conditions, we\'ll call you back within the hour. For immediate emergencies, call us now.'
                         : 'One of our team will contact you within 2 hours during business hours.'}
                 </p>
-                <a href="tel:0400000000" className="cta-primary">
+                <a href="tel:0400000000" className="cta-primary" onClick={() => {
+                    if (typeof window !== 'undefined' && (window as any).trackEvent) {
+                        (window as any).trackEvent('clicked_quote_success_call_cta', { urgency });
+                    }
+                }}>
                     📞 {urgency >= 4 ? 'Call Emergency Line' : 'Call Us Now'}
                 </a>
             </div>
