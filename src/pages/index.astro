@@ -6,6 +6,7 @@ import ProcessSteps from '../components/ProcessSteps.astro';
 import WeatherHero from '../components/WeatherHero.tsx';
 import QuoteForm from '../components/QuoteForm.tsx';
 import FAQAccordion from '../components/FAQAccordion.tsx';
+import PromoCard from '../components/PromoCard.astro';
 
 const locations = await getCollection('locations');
 const services = await getCollection('services');
@@ -169,6 +170,7 @@ const sortedServices = [...services].sort((a, b) => {
           <span class="badge">✅ No Obligation</span>
           {weatherContext?.urgency && weatherContext.urgency >= 4 && <span class="badge" style="background: rgba(239,68,68,0.15); color: #fca5a5; border-color: rgba(239,68,68,0.3);">🚨 Urgent Response</span>}
         </div>
+        <PromoCard contextType="home" />
       </div>
       <QuoteForm client:load ctx={weatherContext} />
     </div>
