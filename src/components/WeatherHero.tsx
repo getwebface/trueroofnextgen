@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo, memo, type FC } from 'react';
-import { motion } from 'motion/react';
+import { motion, useReducedMotion } from 'motion/react';
 import {
     AlertCircle,
     CloudLightning,
@@ -222,6 +222,8 @@ const WeatherHero: FC<WeatherHeroProps> = ({ ctx }) => {
     const [mounted, setMounted] = useState(false);
     useEffect(() => { setMounted(true); }, []);
 
+    const shouldReduceMotion = useReducedMotion();
+
     // Memoize static rain particle styles/delays to prevent re-renders recalculating randoms
     // Moving this to the top level of the component fixes a React Hook rule violation
     const rainDrops = useMemo(() => Array.from({ length: 40 }).map((_, i) => ({
@@ -247,7 +249,7 @@ const WeatherHero: FC<WeatherHeroProps> = ({ ctx }) => {
     return (
         <section className="hero-section">
             {/* Rain particle effect */}
-            {mounted && isRainEvent && (
+            {mounted && isRainEvent && !shouldReduceMotion && (
                 <div aria-hidden="true" style={{ position: 'absolute', inset: 0, overflow: 'hidden', pointerEvents: 'none' }}>
                     {rainDrops.map((drop) => (
                         <motion.div key={drop.key}
@@ -266,7 +268,7 @@ const WeatherHero: FC<WeatherHeroProps> = ({ ctx }) => {
             )}
 
             {/* Storm red pulse */}
-            {mounted && isStormEvent && (
+            {mounted && isStormEvent && !shouldReduceMotion && (
                 <motion.div aria-hidden="true"
                     style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at 50% 40%, rgba(220,38,38,0.07) 0%, transparent 70%)', pointerEvents: 'none' }}
                     animate={{ opacity: [0.5, 1, 0.5] }}
@@ -275,7 +277,7 @@ const WeatherHero: FC<WeatherHeroProps> = ({ ctx }) => {
             )}
 
             {/* Frost shimmer */}
-            {mounted && ctx.event === 'FROST' && (
+            {mounted && ctx.event === 'FROST' && !shouldReduceMotion && (
                 <motion.div aria-hidden="true"
                     style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at 50% 30%, rgba(147,210,255,0.05) 0%, transparent 60%)', pointerEvents: 'none' }}
                     animate={{ opacity: [0.4, 0.9, 0.4] }}
@@ -284,7 +286,10 @@ const WeatherHero: FC<WeatherHeroProps> = ({ ctx }) => {
             )}
 
             <div className="hero-content">
-                <motion.div className="hero-badge" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
+                <motion.div className="hero-badge"
+                    initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 16 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: shouldReduceMotion ? 0.2 : 0.5 }}>
                     <BrandIcon icon={content.badgeIcon} size={16} className="mr-1" />
                     {content.badge}
                     {secondaryBadge ? (
@@ -295,7 +300,10 @@ const WeatherHero: FC<WeatherHeroProps> = ({ ctx }) => {
                     ) : null}
                 </motion.div>
 
-                <motion.h1 className="hero-headline" initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.1 }}>
+                <motion.h1 className="hero-headline"
+                    initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 24 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: shouldReduceMotion ? 0.2 : 0.6, delay: shouldReduceMotion ? 0 : 0.1 }}>
                     {content.headline.map((line, i) => (
                         <span key={i}>
                             {line.includes(content.highlight)
@@ -306,14 +314,20 @@ const WeatherHero: FC<WeatherHeroProps> = ({ ctx }) => {
                     ))}
                 </motion.h1>
 
-                <motion.p className="hero-sub" initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }}>
+                <motion.p className="hero-sub"
+                    initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 24 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: shouldReduceMotion ? 0.2 : 0.6, delay: shouldReduceMotion ? 0 : 0.2 }}>
                     {content.sub}
                     {secondaryNote && (
                         <> <span style={{ opacity: 0.8 }}>{secondaryNote}</span></>
                     )}
                 </motion.p>
 
-                <motion.div className="hero-ctas" initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.3 }}>
+                <motion.div className="hero-ctas"
+                    initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 24 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: shouldReduceMotion ? 0.2 : 0.6, delay: shouldReduceMotion ? 0 : 0.3 }}>
                     <a href={content.primaryCTA.href} className="cta-primary" onClick={() => {
                         if (typeof window !== 'undefined' && (window as any).trackEvent) {
                             (window as any).trackEvent('clicked_hero_primary_cta', { label: content.primaryCTA.label, href: content.primaryCTA.href, urgency: ctx.urgency, weather_event: ctx.event });
@@ -329,7 +343,10 @@ const WeatherHero: FC<WeatherHeroProps> = ({ ctx }) => {
                     }}>{content.secondaryCTA.label}</a>
                 </motion.div>
 
-                <motion.div className="hero-stats" initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.4 }}>
+                <motion.div className="hero-stats"
+                    initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 24 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: shouldReduceMotion ? 0.2 : 0.6, delay: shouldReduceMotion ? 0 : 0.4 }}>
                     {content.stats.map((stat, i) => (
                         <div key={i}>
                             <div className="hero-stat-value">{stat.value}</div>
