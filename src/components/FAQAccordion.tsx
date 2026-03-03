@@ -1,4 +1,4 @@
-import { useState, type FC } from 'react';
+import { useState, memo, type FC } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 
 interface FAQItem {
@@ -86,4 +86,5 @@ const FAQAccordion: FC<FAQAccordionProps> = ({ items }) => {
     );
 };
 
-export default FAQAccordion;
+// ⚡ Bolt: Memoize FAQ Accordion to prevent re-renders when static FAQ content hasn't changed
+export default memo(FAQAccordion);

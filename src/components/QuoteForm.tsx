@@ -1,4 +1,4 @@
-import { useState, type FC, type FormEvent } from 'react';
+import { useState, memo, type FC, type FormEvent } from 'react';
 import type { WeatherContext } from '../utils/weatherProcessor';
 
 interface QuoteFormProps {
@@ -202,4 +202,5 @@ const QuoteForm: FC<QuoteFormProps> = ({ ctx }) => {
     );
 };
 
-export default QuoteForm;
+// ⚡ Bolt: Memoize functional component to prevent unnecessary re-renders when parent props don't change
+export default memo(QuoteForm);
