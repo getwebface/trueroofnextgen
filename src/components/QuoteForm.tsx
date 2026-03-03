@@ -16,13 +16,14 @@ const services = [
     'Free Roof Inspection',
 ];
 
+// 🧠 Convert UX: Benefit-driven CTAs outperform generic "Request a Quote" by focusing on the value to the user.
 // Map urgency to CTA labels
 const urgencyCTAs: Record<number, string> = {
     5: '🚨 Get Emergency Quote Now',
-    4: '⚡ Request Urgent Inspection',
-    3: '📋 Book Free Inspection',
-    2: '📋 Request a Quote',
-    1: '📋 Schedule My Quote',
+    4: '⚡ Get Urgent Inspection',
+    3: '📋 Get My Free Inspection',
+    2: '📋 Get My Free Quote',
+    1: '📋 Get My Free Quote',
 };
 
 const QuoteForm: FC<QuoteFormProps> = ({ ctx }) => {
@@ -164,17 +165,37 @@ const QuoteForm: FC<QuoteFormProps> = ({ ctx }) => {
                     }}>
                     {sending ? 'Sending...' : ctaText}
                 </button>
+                {/* 🧠 Convert UX: Trust signals and friction-reducing microcopy at the point of action. */}
                 <div style={{
                     marginTop: '0.75rem',
-                    textAlign: 'center',
-                    fontSize: '0.85rem',
-                    color: 'rgba(255, 255, 255, 0.5)',
                     display: 'flex',
+                    flexDirection: 'column',
                     alignItems: 'center',
-                    justifyContent: 'center',
-                    gap: '0.375rem'
+                    gap: '0.5rem'
                 }}>
-                    <span>🔒</span> Your information is secure. Takes 30 seconds.
+                    <div style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '0.25rem',
+                        color: '#f59e0b',
+                        fontSize: '0.9rem'
+                    }}>
+                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                        <span style={{ color: 'rgba(255, 255, 255, 0.6)', marginLeft: '0.25rem', fontSize: '0.85rem' }}>
+                            Based on 150+ Google Reviews
+                        </span>
+                    </div>
+                    <div style={{
+                        textAlign: 'center',
+                        fontSize: '0.85rem',
+                        color: 'rgba(255, 255, 255, 0.5)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        gap: '0.375rem'
+                    }}>
+                        <span>🔒</span> 100% Secure. No obligation. Takes 30 seconds.
+                    </div>
                 </div>
             </form>
         </div>
