@@ -9,9 +9,10 @@ import { Phone, ClipboardList, ShieldCheck } from 'lucide-react';
 export interface Props {
   title?: string;
   description?: string;
+  schema?: Record<string, any>;
 }
 
-const { title, description } = Astro.props;
+const { title, description, schema } = Astro.props;
 const { weatherContext, weatherCSSMode } = Astro.locals;
 const cssMode = weatherCSSMode || 'weather-default';
 const urgency = weatherContext?.urgency || 1;
@@ -25,9 +26,10 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://trueroof
 // SEO: RoofingContractor Schema
 // Note: Google Guidelines specify that LocalBusiness schema must accurately reflect NAP (Name, Address, Phone).
 // Using the phone number present on the page. Address details are generalized to Melbourne area.
-const schemaLocalBusiness = {
+const defaultSchemaLocalBusiness = {
   "@context": "https://schema.org",
   "@type": "RoofingContractor",
+  "@id": "https://trueroof.com.au/#business",
   "name": "True Roof",
   "url": "https://trueroof.com.au",
   "telephone": "0400 000 000",
@@ -43,6 +45,8 @@ const schemaLocalBusiness = {
     "name": "Melbourne"
   }
 };
+
+const finalSchema = schema || defaultSchemaLocalBusiness;
 ---
 <html lang="en">
   <head>
@@ -50,7 +54,7 @@ const schemaLocalBusiness = {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title || "True Roof — Melbourne Tile Restoration Specialists"}</title>
     <link rel="canonical" href={canonicalURL} />
-    <script type="application/ld+json" set:html={JSON.stringify(schemaLocalBusiness)} />
+    <script type="application/ld+json" set:html={JSON.stringify(finalSchema)} />
     <meta name="description" content={description || "Melbourne's trusted tile restoration experts. Professional cleaning, re-bedding, flexi-pointing, metal flashing repairs. Free inspections. 25+ years experience."} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

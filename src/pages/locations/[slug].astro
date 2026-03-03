@@ -43,8 +43,38 @@ const services = await getCollection('services');
 
 const pageTitle = `Roof Restoration in ${location.data.title} | True Roof`;
 const pageDescription = location.data.description;
+
+// Construct dynamic LocalBusiness schema connecting the WebPage -> LocalBusiness -> City
+const locationSchema = {
+  "@context": "https://schema.org",
+  "@type": "RoofingContractor",
+  "@id": "https://trueroof.com.au/#business",
+  "name": "True Roof",
+  "url": "https://trueroof.com.au",
+  "telephone": "0400 000 000",
+  "priceRange": "$$",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": location.data.title,
+    "postalCode": location.data.postcode,
+    "addressRegion": "VIC",
+    "addressCountry": "AU"
+  },
+  ...(location.data.coordinates ? {
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": location.data.coordinates.lat,
+      "longitude": location.data.coordinates.lng
+    }
+  } : {}),
+  "areaServed": {
+    "@type": "City",
+    "name": location.data.title
+  }
+};
+
 ---
-<MainLayout title={pageTitle} description={pageDescription}>
+<MainLayout title={pageTitle} description={pageDescription} schema={locationSchema}>
 
   {/* ── Location Hero ── */}
   <section class="hero-section" style={`padding: 6rem 0 5rem; position: relative; overflow: hidden; ${location.data.hero ? `background: url(${location.data.hero}) center/cover no-repeat;` : ''}`}>
