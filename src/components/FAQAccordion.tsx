@@ -19,7 +19,16 @@ const FAQAccordion: FC<FAQAccordionProps> = ({ items }) => {
                 <div key={i} className="faq-item">
                     <button
                         className="faq-question"
-                        onClick={() => setOpenIndex(openIndex === i ? null : i)}
+                        onClick={() => {
+                            setOpenIndex(openIndex === i ? null : i);
+                            if (typeof window !== 'undefined' && (window as any).trackEvent) {
+                                (window as any).trackEvent('toggled_faq_accordion', {
+                                    question: item.question,
+                                    index: i,
+                                    action: openIndex === i ? 'close' : 'open'
+                                });
+                            }
+                        }}
                         aria-expanded={openIndex === i}
                     >
                         <span>{item.question}</span>

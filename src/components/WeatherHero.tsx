@@ -314,11 +314,19 @@ const WeatherHero: FC<WeatherHeroProps> = ({ ctx }) => {
                 </motion.p>
 
                 <motion.div className="hero-ctas" initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.3 }}>
-                    <a href={content.primaryCTA.href} className="cta-primary">
+                    <a href={content.primaryCTA.href} className="cta-primary" onClick={() => {
+                        if (typeof window !== 'undefined' && (window as any).trackEvent) {
+                            (window as any).trackEvent('clicked_hero_primary_cta', { label: content.primaryCTA.label, href: content.primaryCTA.href, urgency: ctx.urgency, weather_event: ctx.event });
+                        }
+                    }}>
                         {content.primaryCTA.icon && <BrandIcon icon={content.primaryCTA.icon} size={18} stroke="white" />}
                         {content.primaryCTA.label}
                     </a>
-                    <a href={content.secondaryCTA.href} className="cta-secondary">{content.secondaryCTA.label}</a>
+                    <a href={content.secondaryCTA.href} className="cta-secondary" onClick={() => {
+                        if (typeof window !== 'undefined' && (window as any).trackEvent) {
+                            (window as any).trackEvent('clicked_hero_secondary_cta', { label: content.secondaryCTA.label, href: content.secondaryCTA.href, urgency: ctx.urgency, weather_event: ctx.event });
+                        }
+                    }}>{content.secondaryCTA.label}</a>
                 </motion.div>
 
                 <motion.div className="hero-stats" initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.4 }}>
