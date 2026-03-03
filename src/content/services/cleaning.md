@@ -12,6 +12,13 @@ A standard dirt wash from a general handyman with a pressure washer is a superfi
 
 We don't just wash your roof; we decontaminate it. Our specialized process is designed to permanently eliminate growth without risking the structural integrity of your home.
 
+<BeforeAfterSlider
+  client:visible
+  beforeImage="/cdn/roof-dirty.jpg"
+  afterImage="/cdn/roof-clean.jpg"
+  label="High-Pressure Decontamination"
+/>
+
 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8 mb-8">
 
 <div class="glass-card" style="padding: 1.5rem;">
