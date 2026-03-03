@@ -136,8 +136,8 @@ const schemaLocalBusiness = {
                 <li><a href="tel:0400000000">0400 000 000</a></li>
                 <li><a href="mailto:info@trueroof.com.au">info@trueroof.com.au</a></li>
                 <li style="display: flex; align-items: center; gap: 0.5rem;">
-                  <ShieldCheck size={16} strokeWidth={1.5} stroke="url(#orange-gradient)" />
-                  <span style="color: rgba(255,255,255,0.3); font-size: 0.8rem;">Licensed & Insured</span>
+                  <ShieldCheck size={16} strokeWidth={1.5} stroke={isEmergency ? "#fca5a5" : "url(#orange-gradient)"} />
+                  <span style="color: rgba(255,255,255,0.3); font-size: 0.8rem;">{isEmergency ? 'Fully Insured for Storm Damage' : 'Licensed & Insured'}</span>
                 </li>
               </ul>
             </div>
