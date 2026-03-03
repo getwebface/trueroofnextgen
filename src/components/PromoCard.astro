@@ -1,0 +1,44 @@
+---
+import currentCampaign from '../data/active-campaign.json';
+
+interface Props {
+  contextType?: 'home' | 'location' | 'service';
+  locationName?: string;
+  serviceName?: string;
+}
+
+const { contextType = 'home', locationName, serviceName } = Astro.props;
+
+let contextDescription = currentCampaign.description;
+
+if (contextType === 'location' && locationName) {
+  contextDescription = `Since our crews are working in the ${locationName} corridor this month, use code ${currentCampaign.code} for a ${currentCampaign.value} with any quote accepted.`;
+} else if (contextType === 'service' && serviceName) {
+  contextDescription = `Adding a ${currentCampaign.value} to your ${serviceName} ensures comprehensive protection before winter hits. Valid until ${currentCampaign.expiryDate}.`;
+}
+
+---
+
+{currentCampaign.isActive && (
+  <div class="glass-card promo-card" style="padding: 1.5rem; margin-top: 1rem; margin-bottom: 2rem; border-left: 4px solid #3b82f6; background: rgba(59, 130, 246, 0.05);">
+    <div style="display: flex; align-items: flex-start; gap: 1rem;">
+      <div style="font-size: 1.5rem;">🎁</div>
+      <div>
+        <h4 style="font-family: Outfit, sans-serif; font-weight: 700; font-size: 1.1rem; color: #60a5fa; margin-bottom: 0.25rem;">
+          {currentCampaign.title}
+        </h4>
+        <p style="color: rgba(255,255,255,0.8); font-size: 0.95rem; line-height: 1.5; margin-bottom: 0.5rem;">
+          {contextDescription}
+        </p>
+        <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
+          <span class="badge" style="background: rgba(59, 130, 246, 0.1); color: #93c5fd; border-color: rgba(59, 130, 246, 0.3);">
+            Code: <strong>{currentCampaign.code}</strong>
+          </span>
+          <span style="font-size: 0.8rem; color: rgba(255,255,255,0.5);">
+            Expires: {currentCampaign.expiryDate}
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+)}

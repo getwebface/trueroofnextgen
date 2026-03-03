@@ -2,6 +2,7 @@
 import { getEntry, getCollection } from 'astro:content';
 import MainLayout from '../../layouts/MainLayout.astro';
 import QuoteForm from '../../components/QuoteForm.tsx';
+import PromoCard from '../../components/PromoCard.astro';
 
 const { slug } = Astro.params;
 if (!slug) return Astro.redirect('/404');
@@ -129,6 +130,7 @@ const pageDescription = service.data.description;
           <span class="badge">✅ No Obligation</span>
           {urgency >= 4 && <span class="badge" style="background: rgba(239,68,68,0.15); color: #fca5a5; border-color: rgba(239,68,68,0.3);">🚨 Urgent Response</span>}
         </div>
+        <PromoCard contextType="service" serviceName={service.data.title} />
       </div>
       <QuoteForm client:load ctx={weatherContext} />
     </div>

@@ -150,6 +150,9 @@ const QuoteForm: FC<QuoteFormProps> = ({ ctx }) => {
                     <textarea id="q-message" className="form-textarea" placeholder="Describe the issue or what you've noticed..."
                         onFocus={handleFocus}
                         value={formData.message} onChange={e => setFormData(d => ({ ...d, message: e.target.value }))} />
+                    <p style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.4)', marginTop: '0.5rem' }}>
+                        Have a promo code? Let us know when we call.
+                    </p>
                 </div>
                                 <button type="submit" className="cta-primary" disabled={sending} aria-disabled={sending} aria-live="polite"
                     style={{

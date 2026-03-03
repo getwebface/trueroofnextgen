@@ -3,6 +3,7 @@ import { getEntry, getCollection } from 'astro:content';
 import MainLayout from '../../layouts/MainLayout.astro';
 import QuoteForm from '../../components/QuoteForm.tsx';
 import FAQAccordion from '../../components/FAQAccordion.tsx';
+import PromoCard from '../../components/PromoCard.astro';
 
 const { slug } = Astro.params;
 if (!slug) return Astro.redirect('/404');
@@ -209,6 +210,7 @@ const locationSchema = {
           <span class="badge">✅ Serving {location.data.postcode}</span>
           <span class="badge">✅ Free Inspection</span>
         </div>
+        <PromoCard contextType="location" locationName={location.data.title} />
       </div>
       <QuoteForm client:load ctx={weatherContext} />
     </div>
