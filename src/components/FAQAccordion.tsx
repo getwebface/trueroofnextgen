@@ -19,6 +19,7 @@ const FAQAccordion: FC<FAQAccordionProps> = ({ items }) => {
                 <div key={i} className="faq-item">
                     <button
                         className="faq-question"
+                        id={`faq-question-${i}`}
                         onClick={() => {
                             setOpenIndex(openIndex === i ? null : i);
                             if (typeof window !== 'undefined' && (window as any).trackEvent) {
@@ -30,6 +31,7 @@ const FAQAccordion: FC<FAQAccordionProps> = ({ items }) => {
                             }
                         }}
                         aria-expanded={openIndex === i}
+                        aria-controls={`faq-answer-${i}`}
                     >
                         <span>{item.question}</span>
                         <svg
@@ -49,6 +51,9 @@ const FAQAccordion: FC<FAQAccordionProps> = ({ items }) => {
                     <AnimatePresence initial={false}>
                         {openIndex === i && (
                             <motion.div
+                                id={`faq-answer-${i}`}
+                                role="region"
+                                aria-labelledby={`faq-question-${i}`}
                                 className="faq-answer"
                                 initial={{ height: 0, opacity: 0 }}
                                 animate={{ height: 'auto', opacity: 1 }}
