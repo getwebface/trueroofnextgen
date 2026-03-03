@@ -143,8 +143,9 @@ const sortedServices = [...services].sort((a, b) => {
   </section>
 
   <!-- Quote Section -->
+  <!-- 📐 Pixel: Enforcing Z-Pattern flow towards the lead capture form on desktop -->
   <section id="quote" class="quote-section">
-    <div class="container" style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;">
+    <div class="container grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center">
       <div>
         <h2 class="section-heading" style="margin-bottom: 1rem;">
           Ready to Restore<br/><span class="accent-text">Your Roof?</span>
@@ -188,11 +189,5 @@ const sortedServices = [...services].sort((a, b) => {
     background: rgba(255,255,255,0.03);
     border-radius: 0.5rem;
     border-left: 2px solid rgba(249, 115, 22, 0.4);
-  }
-  @media (max-width: 768px) {
-    #quote .container {
-      grid-template-columns: 1fr !important;
-      gap: 2rem !important;
-    }
   }
 </style>

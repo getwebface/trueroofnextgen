@@ -97,8 +97,9 @@ const pageDescription = location.data.description;
   )}
 
   {/* ── Location Content ── */}
+  {/* 📐 Pixel: Enforcing F-Pattern reading mode alongside a sticky Z-Pattern CTA aside */}
   <section style="padding: 4rem 0;">
-    <div class="container" style="display: grid; grid-template-columns: 1fr 20rem; gap: 4rem; align-items: start;">
+    <div class="container grid grid-cols-1 md:grid-cols-[1fr_20rem] gap-8 md:gap-16 items-start">
       <div class="content-prose">
         <Content />
 
@@ -128,7 +129,7 @@ const pageDescription = location.data.description;
       </div>
 
       {/* Sidebar */}
-      <aside style="position: sticky; top: 6rem;">
+      <aside class="md:sticky md:top-24">
         <div class="glass-card" style="padding: 2rem; text-align: center;">
           <div style="font-size: 2.5rem; margin-bottom: 0.75rem;">📋</div>
           <h3 style="font-family: Outfit, sans-serif; font-weight: 800; font-size: 1.15rem; color: white; margin-bottom: 0.5rem;">
@@ -164,8 +165,9 @@ const pageDescription = location.data.description;
   )}
 
   {/* ── Quote Section ── */}
+  {/* 📐 Pixel: Enforcing Z-Pattern flow towards the lead capture form on desktop */}
   <section id="quote" class="quote-section">
-    <div class="container" style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;">
+    <div class="container grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center">
       <div>
         <h2 class="section-heading" style="margin-bottom: 1rem;">
           Roof Restoration in<br/><span class="accent-text">{location.data.title}</span>
@@ -183,14 +185,3 @@ const pageDescription = location.data.description;
   </section>
 
 </MainLayout>
-
-<style>
-  @media (max-width: 768px) {
-    .container {
-      grid-template-columns: 1fr !important;
-    }
-    aside {
-      position: static !important;
-    }
-  }
-</style>
