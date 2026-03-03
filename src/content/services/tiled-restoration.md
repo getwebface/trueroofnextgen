@@ -4,7 +4,7 @@ description: "Our comprehensive 4-stage process restores your terracotta or conc
 icon: "shield-check"
 conversionGoal: "restoration_quote"
 ---
-A full restoration is the most effective way to extend the life of your tiled roof without the massive expense of a replacement. Our proven 4-stage process includes:
+A full restoration is the most effective way to extend the life of your tiled roof without the massive expense of a replacement. Depending on property size, the [restoration time](/faqs/restoration-time) is typically 3-5 days. Our proven 4-stage process includes:
 
 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8 mb-8">
 
