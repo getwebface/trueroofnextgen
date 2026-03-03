@@ -3,6 +3,8 @@ import { getEntry, getCollection } from 'astro:content';
 import MainLayout from '../../layouts/MainLayout.astro';
 import QuoteForm from '../../components/QuoteForm.tsx';
 import PromoCard from '../../components/PromoCard.astro';
+import BeforeAfterSlider from '../../components/BeforeAfterSlider.tsx';
+import PricingTierCards from '../../components/PricingTierCards.astro';
 
 const { slug } = Astro.params;
 if (!slug) return Astro.redirect('/404');
@@ -59,7 +61,7 @@ const pageDescription = service.data.description;
 
       {/* Main Content */}
       <div class="content-prose">
-        <Content />
+        <Content components={{ BeforeAfterSlider, PricingTierCards }} />
       </div>
 
       {/* Sidebar CTA */}
