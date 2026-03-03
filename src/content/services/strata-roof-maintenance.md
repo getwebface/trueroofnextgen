@@ -41,3 +41,35 @@ Our 4-Stage Restoration Process is perfectly suited for maximizing the lifespan 
 *   **Detailed Condition Reports:** Clear, photographic evidence of roof conditions before and after work, making it easy to justify restoration expenditures to owners corporations.
 *   **Targeted Metal Flashing Repairs:** We expertly repair and replace the components that fail most often on tiled roofs, including valley irons, box gutters, and lead chimney flashings.
 *   **Cost-Effective Alternatives:** We specialize in restoring Melbourne's heritage. We never suggest that a roof is "beyond repair" when a comprehensive restoration can achieve the same watertight result at a fraction of the cost.
+
+## Recent Local Project: Richmond Townhouse Complex
+
+Recently, we partnered with a local body corporate to resolve chronic valley iron leaks across a block of 12 townhouses in Richmond.
+
+> "The team at True Roof provided a clear, cost-effective maintenance plan that saved our owners corporation from a complete roof replacement. Their detailed condition reports and targeted valley repairs stopped the leaks immediately. Professional, transparent, and highly recommended for strata management."
+> — **M. Davies, Body Corporate Manager, Richmond**
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Review",
+  "itemReviewed": {
+    "@type": "Service",
+    "name": "Real Estate & Strata Roof Maintenance",
+    "provider": {
+      "@type": "LocalBusiness",
+      "name": "True Roof"
+    }
+  },
+  "reviewRating": {
+    "@type": "Rating",
+    "ratingValue": "5",
+    "bestRating": "5"
+  },
+  "author": {
+    "@type": "Person",
+    "name": "M. Davies"
+  },
+  "reviewBody": "The team at True Roof provided a clear, cost-effective maintenance plan that saved our owners corporation from a complete roof replacement. Their detailed condition reports and targeted valley repairs stopped the leaks immediately. Professional, transparent, and highly recommended for strata management."
+}
+</script>
