@@ -41,13 +41,17 @@ const allFaqs = [...baseFaqs, ...defaultFaqs.filter(d => !baseFaqs.some(f => f.q
 
 // Weather-informed service ordering
 const serviceOrder = weatherContext?.services.map(s => s.slug) || [];
+// Pre-calculate Map of indices for O(1) lookups instead of repeated indexOf calls inside sort
+const serviceOrderMap = new Map();
+serviceOrder.forEach((slug, i) => serviceOrderMap.set(slug, i));
+
 const sortedServices = [...services].sort((a, b) => {
-  const ai = serviceOrder.indexOf(a.slug);
-  const bi = serviceOrder.indexOf(b.slug);
-  if (ai === -1 && bi === -1) return 0;
-  if (ai === -1) return 1;
-  if (bi === -1) return -1;
-  return ai - bi;
+  const ai = serviceOrderMap.get(a.slug) ?? -1;
+  const bi = serviceOrderMap.get(b.slug) ?? -1;
+  if (ai === -1 && bi === -1) return 0; // neither in order list
+  if (ai === -1) return 1; // a not in list, put b first
+  if (bi === -1) return -1; // b not in list, put a first
+  return ai - bi; // both in list, sort by order
 });
 ---
 <MainLayout title="True Roof — Melbourne Tile Restoration Specialists" description="Melbourne's trusted tile restoration experts. Professional cleaning, re-bedding, flexi-pointing, metal flashing repairs. Free inspections. 25+ years experience.">
