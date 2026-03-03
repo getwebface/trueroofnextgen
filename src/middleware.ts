@@ -2,8 +2,21 @@ import { defineMiddleware } from 'astro:middleware';
 import { buildWeatherContext, eventToCSSMode, type WeatherData } from './utils/weatherProcessor';
 
 export const onRequest = defineMiddleware(async (context, next) => {
+  // ── Short-circuit for static assets and CDN proxy ──
+  // Do not execute weather API checks or context building for static requests
+  const url = new URL(context.request.url);
+  if (
+    url.pathname.startsWith('/_astro/') ||
+    url.pathname.startsWith('/cdn/') ||
+    url.pathname.match(/\.(js|css|webp|png|jpg|jpeg|svg|ico|avif|woff2?)$/i)
+  ) {
+    return next();
+  }
+
   const cf = context.locals.runtime?.cf;
-  const city = cf?.city || 'Melbourne';
+  // Normalize city to increase edge cache hit ratio (lowercase, trimmed)
+  const rawCity = (cf?.city as string) || 'Melbourne';
+  const city = rawCity.trim().toLowerCase();
 
   let weatherData: WeatherData = {
     windSpeed: 10,
@@ -91,7 +104,8 @@ export const onRequest = defineMiddleware(async (context, next) => {
         const responseToCache = new Response(JSON.stringify(weatherData), {
           headers: {
             'Content-Type': 'application/json',
-            'Cache-Control': 's-maxage=900', // 15-min cache in production
+            // 15-min cache in production, but allow stale data while revalidating for an hour
+            'Cache-Control': 'public, s-maxage=900, stale-while-revalidate=3600',
           },
         });
         context.locals.runtime.waitUntil?.(cache.put(cacheKey, responseToCache));

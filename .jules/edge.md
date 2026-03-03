@@ -1,0 +1,3 @@
+## 2025-02-24 - Optimizing Middleware Execution on Static Assets
+**Learning:** Cloudflare edge caching for static assets (like `/cdn/` or `/_astro/`) is inefficient when global middleware intercepts every request to compute context (like fetching weather data), causing unnecessary CPU time and rate-limiting issues for external APIs.
+**Action:** When implementing SSR middleware on Cloudflare, always early-return / short-circuit requests matching static asset paths or known proxy extensions to preserve external API quotas, minimize R2 hits, and reduce overall worker execution time.
