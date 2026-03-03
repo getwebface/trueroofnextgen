@@ -1,0 +1,3 @@
+## 2024-05-24 - Dynamic Entity Linking
+**Learning:** Hardcoded JSON-LD schema blocks in Astro layouts lead to orphaned data across dynamic routes (e.g. Area Served defaulting to Melbourne on Wallan's page).
+**Action:** Always accept an optional schema prop on base layouts, construct the JSON-LD payload as a standard JS object on the route-level using `Astro.props`/Collections, and safely inject via `set:html={JSON.stringify(schema)}`. Leverage `@id` to establish connections without duplicating DOM structure.
