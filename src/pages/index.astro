@@ -43,7 +43,9 @@ const defaultFaqs = [
   { question: 'How long does a roof restoration take?', answer: 'A typical restoration takes 3–5 days depending on roof size and conditions. We plan around the weather forecast to ensure pointing and coating cure correctly.' },
   { question: 'How do I know if my roof needs restoration vs. just a clean?', answer: 'If your ridge caps are cracked, mortar is flaking, or tiles are visibly broken, you need a restoration. If the roof is structurally sound but just dirty, a clean and inspection will suffice. Our free inspection will tell you exactly what\'s needed — no upselling.' },
 ];
-const allFaqs = [...baseFaqs, ...defaultFaqs.filter(d => !baseFaqs.some(f => f.question === d.question))];
+// ⚡ Bolt: Replace O(N²) nested loop with O(N) Set lookup for FAQ deduplication
+const baseFaqQuestions = new Set(baseFaqs.map(f => f.question));
+const allFaqs = [...baseFaqs, ...defaultFaqs.filter(d => !baseFaqQuestions.has(d.question))];
 
 // Weather-informed service ordering
 const serviceOrder = weatherContext?.services.map(s => s.slug) || [];
