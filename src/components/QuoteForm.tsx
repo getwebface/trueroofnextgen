@@ -22,8 +22,8 @@ const urgencyCTAs: Record<number, string> = {
     5: '🚨 Get Emergency Quote Now',
     4: '⚡ Get Urgent Inspection',
     3: '📋 Get My Free Inspection',
-    2: '📋 Get My Free Quote',
-    1: '📋 Get My Free Quote',
+    2: 'Get a Fair Quote 👍',
+    1: 'Get a Fair Quote 👍',
 };
 
 const QuoteForm: FC<QuoteFormProps> = ({ ctx }) => {
@@ -124,7 +124,7 @@ const QuoteForm: FC<QuoteFormProps> = ({ ctx }) => {
                 </div>
                 <div className="form-group">
                     <label className="form-label" htmlFor="q-phone">Phone Number <span className="text-red-500" aria-hidden="true">*</span></label>
-                    <input id="q-phone" className="form-input" type="tel" placeholder="04XX XXX XXX" required aria-required="true"
+                    <input id="q-phone" className="form-input" type="tel" placeholder="Your best contact number" required aria-required="true"
                         autoComplete="tel"
                         onFocus={handleFocus}
                         value={formData.phone} onChange={e => setFormData(d => ({ ...d, phone: e.target.value }))} />
@@ -171,7 +171,7 @@ const QuoteForm: FC<QuoteFormProps> = ({ ctx }) => {
                         animation: urgency >= 4 ? 'pulseGlow 2s infinite' : undefined,
                         border: urgency >= 4 ? '1px solid rgba(252, 165, 165, 0.5)' : undefined
                     }}>
-                    {sending ? 'Sending...' : <>{ctaText} &rarr;</>}
+                    {sending ? 'Hold on a sec...' : <>{ctaText} &rarr;</>}
                 </button>
                 {/* 🧠 Convert UX: Trust signals and friction-reducing microcopy at the point of action. */}
                 <div style={{

@@ -1,0 +1,1 @@
+## 2024-05-20 - Quote Form Micro-copy **Learning:** Replaced robotic form copy (e.g., 'Sending...') with authentic Aussie tradie language to build trust. **Action:** Continue scanning for generic tech terms and replacing them with conversational local phrasing.
