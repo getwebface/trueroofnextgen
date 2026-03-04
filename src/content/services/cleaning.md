@@ -52,3 +52,25 @@ We don't just wash your roof; we decontaminate it. Our specialized process is de
 Whether you're preparing to sell and need an immediate curb-appeal transformation, or you're protecting your family's biggest asset from insidious water ingress, our biological decontamination process is the critical first step.
 
 Don't let an inexpensive wash cost you thousands in water damage. Get your roof decontaminated by Melbourne's tiled roof specialists.
+
+---
+
+## 🛑 The "Cheap Wash" Trap: Are You Destroying Your Own Roof?
+
+**The Problem:** Most homeowners think moss is just an ugly nuisance. So, they hire a general handyman to blast it off with a high-powered pressure washer.
+
+> "It's just dirt, right? A quick spray will fix it."
+
+**The Agitation:** ❌ **Wrong.** A standard pressure wash is the fastest way to permanently damage your home.
+
+Inexperienced operators blast water *upwards* under your delicate flashings, flooding your ceiling cavity. Worse, they only shear off the surface moss, leaving the destructive root systems deeply embedded in the porous tiles. As these hidden roots expand with winter moisture, they silently crack your tiles from the inside out, turning a cheap wash into a massive structural nightmare.
+
+**The Solution:** ✅ **Biological Decontamination.**
+
+We don't "wash" your roof. Our 25-year experienced technicians use precisely calibrated, directional pressure systems to strip away decades of buildup *without* scouring the tile face. We eliminate the embedded root systems completely, protecting your home's structural integrity for years to come.
+
+### 🛡️ Don't Risk Your Biggest Asset
+Stop the degradation before it breaches your ceiling.
+
+[**Claim Your Custom Audit**](/contact)
+*Spots limited this month. No obligation.*
