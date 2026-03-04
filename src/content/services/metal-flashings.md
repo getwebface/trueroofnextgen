@@ -33,3 +33,35 @@ The most common source of leaks in a tiled roof isn't the tiles themselves, but 
 </div>
 
 </div>
+
+## Recent Local Project: Valley Iron Replacement in Brunswick
+
+Recently, we replaced severely rusted valley irons and repaired the surrounding flashings on a heritage home in Brunswick.
+
+> "After struggling with recurring leaks during heavy Melbourne downpours, True Roof identified our rusted valley irons as the culprit. They replaced the old valleys with new high-sided Colorbond and fixed the cracked lead flashing around our chimney. The leaks stopped completely, and the quality of their work was exceptional."
+> — **L. Peterson, Brunswick**
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Review",
+  "itemReviewed": {
+    "@type": "Service",
+    "name": "Metal Flashing & Valley Repairs",
+    "provider": {
+      "@type": "LocalBusiness",
+      "name": "True Roof"
+    }
+  },
+  "reviewRating": {
+    "@type": "Rating",
+    "ratingValue": "5",
+    "bestRating": "5"
+  },
+  "author": {
+    "@type": "Person",
+    "name": "L. Peterson"
+  },
+  "reviewBody": "After struggling with recurring leaks during heavy Melbourne downpours, True Roof identified our rusted valley irons as the culprit. They replaced the old valleys with new high-sided Colorbond and fixed the cracked lead flashing around our chimney. The leaks stopped completely, and the quality of their work was exceptional."
+}
+</script>
