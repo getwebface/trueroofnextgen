@@ -7,6 +7,7 @@ import WeatherHero from '../components/WeatherHero.tsx';
 import QuoteForm from '../components/QuoteForm.tsx';
 import FAQAccordion from '../components/FAQAccordion.tsx';
 import PromoCard from '../components/PromoCard.astro';
+import TextureTechnology from '../components/TextureTechnology.astro';
 
 const locations = await getCollection('locations');
 const services = await getCollection('services');
@@ -106,6 +107,9 @@ const sortedServices = [...services].sort((a, b) => {
   <div id="process" class="section-dark">
     <ProcessSteps />
   </div>
+
+  <!-- Texture Technology: hydrophobic coating video showcase -->
+  <TextureTechnology />
 
   <!-- Locations Section -->
   <section id="locations" style="padding: 5rem 0;">

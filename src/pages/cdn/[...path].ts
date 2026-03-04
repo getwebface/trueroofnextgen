@@ -31,6 +31,11 @@ const MIME_TYPES: Record<string, string> = {
     css: 'text/css',
     js: 'application/javascript',
     woff2: 'font/woff2',
+    // Video formats
+    mp4: 'video/mp4',
+    webm: 'video/webm',
+    ogg: 'video/ogg',
+    mov: 'video/quicktime',
 };
 
 // One year in seconds — used for the immutable Cache-Control header.
