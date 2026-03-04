@@ -1,0 +1,10 @@
+Requesting review for the plan: I will act as "Vision" and implement a coded SVG timeline visualization in `src/components/ProcessSteps.astro`.
+
+1. **Modify `src/components/ProcessSteps.astro`:**
+   - I will use the `replace_with_git_merge_diff` tool to inject the glowing SVG timeline directly into the `ProcessSteps.astro` component between the heading block and the `process-grid`. The code matches the example output for coded visuals.
+
+2. **Complete Pre-Commit Steps:**
+   - Run `pre_commit_instructions` and follow the steps before creating the PR.
+
+3. **Submit the PR:**
+   - I will submit the PR as '🎨 Vision: Injected Glowing SVG Process Timeline'.
