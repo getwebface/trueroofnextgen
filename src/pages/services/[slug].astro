@@ -5,6 +5,7 @@ import QuoteForm from '../../components/QuoteForm.tsx';
 import PromoCard from '../../components/PromoCard.astro';
 import BeforeAfterSlider from '../../components/BeforeAfterSlider.tsx';
 import PricingTierCards from '../../components/PricingTierCards.astro';
+import ComparisonChecklist from '../../components/ComparisonChecklist.tsx';
 import SmartMedia from '../../components/SmartMedia.astro';
 
 const { slug } = Astro.params;
@@ -105,7 +106,7 @@ const serviceSchema = {
 
       {/* Main Content */}
       <div class="content-prose">
-        <Content components={{ BeforeAfterSlider, PricingTierCards }} />
+        <Content components={{ BeforeAfterSlider, PricingTierCards, ComparisonChecklist }} />
       </div>
 
       {/* Sidebar CTA */}
