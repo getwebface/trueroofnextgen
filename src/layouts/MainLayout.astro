@@ -22,12 +22,57 @@ const ctaLabel = isEmergency ? '🚨 Emergency Call' : 'Free Quote';
 
 // SEO: Canonical URL
 const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://trueroof.com.au');
+const canonicalUrlStr = canonicalURL.toString().replace(/\/$/, '');
 
-// SEO: RoofingContractor Schema
-// Note: Google Guidelines specify that LocalBusiness schema must accurately reflect NAP (Name, Address, Phone).
-// Using the phone number present on the page. Address details are generalized to Melbourne area.
-const defaultSchemaLocalBusiness = {
-  "@context": "https://schema.org",
+// Build BreadcrumbList based on Astro routing
+const pathname = Astro.url.pathname;
+const segments = pathname.split('/').filter(Boolean);
+const breadcrumbItems = [
+  {
+    "@type": "ListItem",
+    "position": 1,
+    "name": "Home",
+    "item": "https://trueroof.com.au/"
+  }
+];
+
+let currentPath = "";
+segments.forEach((segment, index) => {
+  currentPath += `/${segment}`;
+  breadcrumbItems.push({
+    "@type": "ListItem",
+    "position": index + 2,
+    "name": segment.charAt(0).toUpperCase() + segment.slice(1).replace(/-/g, ' '),
+    "item": `https://trueroof.com.au${currentPath}`
+  });
+});
+
+const breadcrumbListEntity = {
+  "@type": "BreadcrumbList",
+  "@id": `${canonicalUrlStr}#breadcrumb`,
+  "itemListElement": breadcrumbItems
+};
+
+// Map weatherContext services to an OfferCatalog to dynamically signal priorities
+let offerCatalogEntity: Record<string, any> | undefined = undefined;
+if (weatherContext && weatherContext.services && Array.isArray(weatherContext.services)) {
+  offerCatalogEntity = {
+    "@type": "OfferCatalog",
+    "name": "Available Services",
+    "itemListElement": weatherContext.services.map((sig: any, index: number) => ({
+      "@type": "ListItem",
+      "position": index + 1,
+      "item": {
+        "@type": "Service",
+        "@id": `https://trueroof.com.au/services/${sig.slug}#service`,
+        "name": sig.slug.split('-').map((w: string) => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')
+      }
+    }))
+  };
+}
+
+// SEO: Base LocalBusiness Schema
+const defaultLocalBusiness: Record<string, any> = {
   "@type": "RoofingContractor",
   "@id": "https://trueroof.com.au/#business",
   "name": "True Roof",
@@ -46,7 +91,45 @@ const defaultSchemaLocalBusiness = {
   }
 };
 
-const finalSchema = schema || defaultSchemaLocalBusiness;
+// Check if page provided its own LocalBusiness (like location pages)
+const isCustomLocalBusiness = schema && (schema["@type"] === "RoofingContractor" || schema["@type"] === "LocalBusiness");
+const localBusinessEntity = isCustomLocalBusiness ? schema : defaultLocalBusiness;
+
+if (offerCatalogEntity) {
+  localBusinessEntity.hasOfferCatalog = offerCatalogEntity;
+}
+
+// Define the WebPage entity and connect it to LocalBusiness and Breadcrumb
+const webPageEntity = {
+  "@type": "WebPage",
+  "@id": canonicalUrlStr,
+  "url": canonicalUrlStr,
+  "name": title || "True Roof — Melbourne Tile Restoration Specialists",
+  "description": description || "Melbourne's trusted tile restoration experts. Professional cleaning, re-bedding, flexi-pointing, metal flashing repairs. Free inspections. 25+ years experience.",
+  "about": { "@id": "https://trueroof.com.au/#business" },
+  "breadcrumb": { "@id": `${canonicalUrlStr}#breadcrumb` }
+};
+
+// Construct the @graph array
+const graph: Record<string, any>[] = [
+  localBusinessEntity,
+  webPageEntity,
+  breadcrumbListEntity
+];
+
+// If a schema was passed that IS NOT a LocalBusiness override (like a Service),
+// add it to the graph and connect it to the WebPage.
+if (schema && !isCustomLocalBusiness) {
+  const pageSpecificSchema = { ...schema };
+  delete pageSpecificSchema["@context"];
+  pageSpecificSchema.mainEntityOfPage = { "@id": canonicalUrlStr };
+  graph.push(pageSpecificSchema);
+}
+
+const finalSchema = {
+  "@context": "https://schema.org",
+  "@graph": graph
+};
 ---
 <html lang="en">
   <head>

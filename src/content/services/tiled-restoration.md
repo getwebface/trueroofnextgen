@@ -48,12 +48,7 @@ Recently, we completely transformed a weathered, moss-covered 1980s terracotta r
   "@context": "https://schema.org",
   "@type": "Review",
   "itemReviewed": {
-    "@type": "Service",
-    "name": "The 4-Stage Tiled Roof Restoration Process",
-    "provider": {
-      "@type": "LocalBusiness",
-      "name": "Your Tiled Roof Restoration Experts"
-    }
+    "@id": "https://trueroof.com.au/services/tiled-restoration#service"
   },
   "reviewRating": {
     "@type": "Rating",

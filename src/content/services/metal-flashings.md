@@ -46,12 +46,7 @@ Recently, we replaced severely rusted valley irons and repaired the surrounding 
   "@context": "https://schema.org",
   "@type": "Review",
   "itemReviewed": {
-    "@type": "Service",
-    "name": "Metal Flashing & Valley Repairs",
-    "provider": {
-      "@type": "LocalBusiness",
-      "name": "True Roof"
-    }
+    "@id": "https://trueroof.com.au/services/metal-flashings#service"
   },
   "reviewRating": {
     "@type": "Rating",
