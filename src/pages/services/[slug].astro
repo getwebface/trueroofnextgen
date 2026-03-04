@@ -13,7 +13,7 @@ const service = await getEntry('services', slug);
 if (!service) return Astro.redirect('/404');
 
 const { Content } = await service.render();
-const { weatherContext } = Astro.locals;
+const { weatherContext } = Astro.locals as { weatherContext?: any } || {};
 const urgency = weatherContext?.urgency || 1;
 const city = weatherContext?.city || 'Melbourne';
 
@@ -30,8 +30,26 @@ const iconMap: Record<string, string> = {
 
 const pageTitle = `${service.data.title} | True Roof Melbourne`;
 const pageDescription = service.data.description;
+
+// Construct dynamic Service schema connecting the WebPage -> Service -> LocalBusiness
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "@id": `https://trueroof.com.au/services/${slug}#service`,
+  "name": service.data.title,
+  "description": service.data.description,
+  "provider": {
+    "@type": "RoofingContractor",
+    "@id": "https://trueroof.com.au/#business",
+    "name": "True Roof"
+  },
+  "areaServed": {
+    "@type": "City",
+    "name": city
+  }
+};
 ---
-<MainLayout title={pageTitle} description={pageDescription}>
+<MainLayout title={pageTitle} description={pageDescription} schema={serviceSchema}>
 
   {/* ── Service Hero ── */}
   <section class="hero-section" style="padding: 4rem 0 3.5rem;">
