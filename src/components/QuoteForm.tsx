@@ -128,6 +128,10 @@ const QuoteForm: FC<QuoteFormProps> = ({ ctx }) => {
                         autoComplete="tel"
                         onFocus={handleFocus}
                         value={formData.phone} onChange={e => setFormData(d => ({ ...d, phone: e.target.value }))} />
+                    {/* 🧠 Convert UX: Explaining why a phone number is needed reduces anxiety and fear of spam, increasing form completion rates. */}
+                    <p style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.4)', marginTop: '0.375rem' }}>
+                        We'll only call to discuss your roof. No spam.
+                    </p>
                 </div>
                 <div className="form-group">
                     <label className="form-label" htmlFor="q-suburb">Suburb</label>
@@ -154,7 +158,8 @@ const QuoteForm: FC<QuoteFormProps> = ({ ctx }) => {
                         Have a promo code? Let us know when we call.
                     </p>
                 </div>
-                                <button type="submit" className="cta-primary" disabled={sending} aria-disabled={sending} aria-live="polite"
+                {/* 🧠 Convert UX: Adding a directional arrow to the CTA implies forward momentum and increases click-through. */}
+                <button type="submit" className="cta-primary" disabled={sending} aria-disabled={sending} aria-live="polite"
                     style={{
                         width: '100%',
                         marginTop: '0.5rem',
@@ -166,7 +171,7 @@ const QuoteForm: FC<QuoteFormProps> = ({ ctx }) => {
                         animation: urgency >= 4 ? 'pulseGlow 2s infinite' : undefined,
                         border: urgency >= 4 ? '1px solid rgba(252, 165, 165, 0.5)' : undefined
                     }}>
-                    {sending ? 'Sending...' : ctaText}
+                    {sending ? 'Sending...' : <>{ctaText} &rarr;</>}
                 </button>
                 {/* 🧠 Convert UX: Trust signals and friction-reducing microcopy at the point of action. */}
                 <div style={{
