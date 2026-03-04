@@ -55,15 +55,15 @@ Don't let an inexpensive wash cost you thousands in water damage. Get your roof 
 
 ---
 
-## 🛑 The "Cheap Wash" Trap: Are You Destroying Your Own Roof?
+## 🛑 The "Superficial Spray" Liability: Are You Destroying Your Own Roof?
 
-**The Problem:** Most homeowners think moss is just an ugly nuisance. So, they hire a general handyman to blast it off with a high-powered pressure washer.
+**The Problem:** Most homeowners underestimate biological growth, treating it as an ugly nuisance. So, they hire a general handyman to blast it off with a standard pressure washer.
 
-> "It's just dirt, right? A quick spray will fix it."
+> "It's just moss, right? A quick surface spray is all it needs."
 
-**The Agitation:** ❌ **Wrong.** A standard pressure wash is the fastest way to permanently damage your home.
+**The Agitation:** ❌ **Wrong.** A superficial surface wash is the fastest way to permanently compromise your home's structural integrity.
 
-Inexperienced operators blast water *upwards* under your delicate flashings, flooding your ceiling cavity. Worse, they only shear off the surface moss, leaving the destructive root systems deeply embedded in the porous tiles. As these hidden roots expand with winter moisture, they silently crack your tiles from the inside out, turning a cheap wash into a massive structural nightmare.
+Inexperienced operators blast water *upwards* under your delicate flashings, directly flooding your ceiling cavity. Worse, they only shear off the surface moss, leaving the destructive root systems deeply embedded in the porous tiles. As these hidden roots expand with winter moisture, they silently fracture your tiles from the inside out, turning a seemingly inexpensive service into a massive structural liability.
 
 **The Solution:** ✅ **Biological Decontamination.**
 
