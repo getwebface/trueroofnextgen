@@ -49,6 +49,16 @@ Our focus in Kilmore is on comprehensive roof restoration. Our services include:
 
 </div>
 
+<div class="glass-card" style="border-left: 4px solid #f97316; padding: 1.5rem; margin-top: 2rem; margin-bottom: 2rem;">
+
+**The True Roof Workmanship Guarantee**
+
+Working on heritage roofs in Victoria's oldest inland town requires serious expertise. We’ve been handling delicate terracotta and aged concrete tiles for over 25 years. We aren't fly-by-night contractors; we're a local family business.
+
+Our fully insured crews carry over $20M in public liability, ensuring your historic property is completely protected. Every full restoration we complete is backed by our absolute **10-Year Workmanship Guarantee**. If there’s an issue, we come back and fix it. And we always, always clean up our mess.
+
+</div>
+
 <div class="glass-card" style="padding: 1.5rem; margin-top: 2rem;">
 
 Whether you are preserving the classic look of a heritage property or refreshing a more recent build, our restorative process ensures your tiled roof is ready to face the future without compromising the town's historic charm.

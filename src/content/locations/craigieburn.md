@@ -51,6 +51,16 @@ Our comprehensive restoration includes:
 
 </div>
 
+<div class="glass-card" style="border-left: 4px solid #f97316; padding: 1.5rem; margin-top: 2rem; margin-bottom: 2rem;">
+
+**The True Roof Workmanship Guarantee**
+
+We’ve been restoring concrete and terracotta tiles across the Northern growth corridor for over 25 years. Craigieburn's position on the open plains means your roof takes a beating from sweeping winds, and you need local tradies who understand how to lock it down right.
+
+Our fully insured crews carry over $20M in public liability. When we finish a restoration, it’s backed by our ironclad **10-Year Workmanship Guarantee**. If there’s a problem, we come back and make it right. Plain and simple. Oh, and we always clean up our mess.
+
+</div>
+
 <div class="glass-card" style="padding: 1.5rem; margin-top: 2rem;">
 
 Protecting your property from water ingress now is far more cost-effective than dealing with structural ceiling damage later. We exclusively focus on breathing new life into tiled roofs through tailored, high-quality restoration. For homeowners further up the Hume corridor, we also offer expert [tiled roof restoration in Wallan](/locations/wallan).

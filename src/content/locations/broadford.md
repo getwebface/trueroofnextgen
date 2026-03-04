@@ -50,6 +50,16 @@ Our hyper-local restoration process includes:
 
 </div>
 
+<div class="glass-card" style="border-left: 4px solid #f97316; padding: 1.5rem; margin-top: 2rem; margin-bottom: 2rem;">
+
+**The True Roof Workmanship Guarantee**
+
+Regional properties face unique weather challenges, from harsh seasonal winds to severe frost. We’ve been restoring tiled roofs across the Green Zone corridor for over 25 years. You need a local crew that understands how to build resilience into your roof.
+
+Our fully insured crews carry over $20M in public liability, meaning your property is completely protected while we work. Every full restoration is backed by our rock-solid **10-Year Workmanship Guarantee**. If there’s a problem, we come back and sort it out. And we always clean up our mess before we leave.
+
+</div>
+
 <div class="glass-card" style="padding: 1.5rem; margin-top: 2rem;">
 
 Whether you own a property in a mature, tree-lined street or a newer estate, our dedicated tiled roof restoration ensures your home remains structurally sound and visually appealing. For properties further south in the corridor, we also offer expert [tiled roof restoration in Kilmore](/locations/kilmore).
