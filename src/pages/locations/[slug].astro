@@ -190,7 +190,7 @@ const locationSchema = {
         <h2 class="section-heading" style="text-align: center; margin-bottom: 2rem;">
           FAQs for <span class="accent-text">{location.data.title}</span>
         </h2>
-        <FAQAccordion client:load items={locationFaqs} />
+        <FAQAccordion client:visible items={locationFaqs} />
       </div>
     </section>
   )}
@@ -212,7 +212,7 @@ const locationSchema = {
         </div>
         <PromoCard contextType="location" locationName={location.data.title} />
       </div>
-      <QuoteForm client:load ctx={weatherContext} />
+      <QuoteForm client:visible ctx={weatherContext} />
     </div>
   </section>
 
