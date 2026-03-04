@@ -264,16 +264,25 @@ function rankServices(event: WeatherEvent, season: Season, urgency: UrgencyLevel
     'metal-flashings': { slug: 'metal-flashings', weight: 0, trigger: 'flashing failures' },
     'cleaning': { slug: 'cleaning', weight: 0, trigger: 'annual maintenance' },
     'tiled-restoration': { slug: 'tiled-restoration', weight: 0, trigger: 'full restoration' },
+    'insurance-roof-repairs': { slug: 'insurance-roof-repairs', weight: 0, trigger: 'storm damage assessment' },
+    'ridge-cap-rebedding-pointing': { slug: 'ridge-cap-rebedding-pointing', weight: 0, trigger: 'ridge cap integrity' },
+    'strata-roof-maintenance': { slug: 'strata-roof-maintenance', weight: 0, trigger: 'property maintenance' },
   };
 
-  // Hail or heavy storm → flashings and structural are #1
+  // Hail or heavy storm → insurance + flashings are #1
   if (event === 'HAIL_STORM' || event === 'THUNDERSTORM') {
-    serviceMap['metal-flashings'].weight = 10;
+    serviceMap['insurance-roof-repairs'].weight = 10;
+    serviceMap['insurance-roof-repairs'].trigger = 'storm damage — insurance make-safe response';
+    serviceMap['metal-flashings'].weight = 9;
     serviceMap['metal-flashings'].trigger = 'storm-damaged flashings and valleys';
-    serviceMap['tiled-restoration'].weight = 8;
+    serviceMap['tiled-restoration'].weight = 7;
     serviceMap['tiled-restoration'].trigger = 'cracked or displaced tiles';
+    serviceMap['ridge-cap-rebedding-pointing'].weight = 6;
+    serviceMap['ridge-cap-rebedding-pointing'].trigger = 'storm-dislodged ridge caps';
     serviceMap['cleaning'].weight = 2;
     serviceMap['cleaning'].trigger = 'post-storm debris clearance';
+    serviceMap['strata-roof-maintenance'].weight = 3;
+    serviceMap['strata-roof-maintenance'].trigger = 'strata properties affected by storm';
   }
   // Heavy rain / drizzle → active leaks → flashings first
   else if (event === 'HEAVY_RAIN' || event === 'DRIZZLE') {
@@ -281,26 +290,44 @@ function rankServices(event: WeatherEvent, season: Season, urgency: UrgencyLevel
     serviceMap['metal-flashings'].trigger = 'flashing leaks showing in rain';
     serviceMap['tiled-restoration'].weight = 6;
     serviceMap['tiled-restoration'].trigger = 'cracked pointing letting in water';
+    serviceMap['ridge-cap-rebedding-pointing'].weight = 5;
+    serviceMap['ridge-cap-rebedding-pointing'].trigger = 'rain entering through loose ridge caps';
     serviceMap['cleaning'].weight = 4;
     serviceMap['cleaning'].trigger = 'blocked valleys causing overflow';
+    serviceMap['insurance-roof-repairs'].weight = 3;
+    serviceMap['insurance-roof-repairs'].trigger = 'assess rain damage for insurance';
+    serviceMap['strata-roof-maintenance'].weight = 2;
+    serviceMap['strata-roof-maintenance'].trigger = 'proactive strata inspection after rain';
   }
   // High wind → loose ridges and tiles
   else if (event === 'HIGH_WIND') {
-    serviceMap['tiled-restoration'].weight = 9;
+    serviceMap['ridge-cap-rebedding-pointing'].weight = 10;
+    serviceMap['ridge-cap-rebedding-pointing'].trigger = 'wind-dislodged ridge caps — urgent';
+    serviceMap['tiled-restoration'].weight = 8;
     serviceMap['tiled-restoration'].trigger = 'wind-lifted or displaced tiles';
     serviceMap['metal-flashings'].weight = 7;
     serviceMap['metal-flashings'].trigger = 'wind-lifted flashings';
+    serviceMap['insurance-roof-repairs'].weight = 5;
+    serviceMap['insurance-roof-repairs'].trigger = 'wind damage insurance assessment';
     serviceMap['cleaning'].weight = 3;
     serviceMap['cleaning'].trigger = 'debris cleared from gutters';
+    serviceMap['strata-roof-maintenance'].weight = 2;
+    serviceMap['strata-roof-maintenance'].trigger = 'wind damage across multi-unit properties';
   }
   // Frost → mortar cracking
   else if (event === 'FROST') {
+    serviceMap['ridge-cap-rebedding-pointing'].weight = 9;
+    serviceMap['ridge-cap-rebedding-pointing'].trigger = 'frost-cracked pointing mortar — freeze-thaw damage';
     serviceMap['tiled-restoration'].weight = 8;
-    serviceMap['tiled-restoration'].trigger = 'frost-cracked pointing mortar';
+    serviceMap['tiled-restoration'].trigger = 'frost-cracked tiles and coatings';
     serviceMap['metal-flashings'].weight = 6;
     serviceMap['metal-flashings'].trigger = 'metal contraction causing seal gaps';
     serviceMap['cleaning'].weight = 4;
     serviceMap['cleaning'].trigger = 'moss growth in cool/damp conditions';
+    serviceMap['strata-roof-maintenance'].weight = 3;
+    serviceMap['strata-roof-maintenance'].trigger = 'frost damage across strata properties';
+    serviceMap['insurance-roof-repairs'].weight = 2;
+    serviceMap['insurance-roof-repairs'].trigger = 'frost damage insurance documentation';
   }
   // Autumn → pre-winter preventative window
   else if (season === 'AUTUMN') {
@@ -308,8 +335,14 @@ function rankServices(event: WeatherEvent, season: Season, urgency: UrgencyLevel
     serviceMap['tiled-restoration'].trigger = 'pre-winter full restoration before the cold sets in';
     serviceMap['cleaning'].weight = 7;
     serviceMap['cleaning'].trigger = 'autumn leaf and moss clean before winter';
+    serviceMap['ridge-cap-rebedding-pointing'].weight = 7;
+    serviceMap['ridge-cap-rebedding-pointing'].trigger = 'secure ridge caps before winter storms';
     serviceMap['metal-flashings'].weight = 6;
     serviceMap['metal-flashings'].trigger = 'flashing inspection before winter rain';
+    serviceMap['strata-roof-maintenance'].weight = 5;
+    serviceMap['strata-roof-maintenance'].trigger = 'pre-winter strata roof inspection';
+    serviceMap['insurance-roof-repairs'].weight = 2;
+    serviceMap['insurance-roof-repairs'].trigger = 'assess any existing storm damage before winter';
   }
   // Winter → damage assessment
   else if (season === 'WINTER') {
@@ -317,8 +350,14 @@ function rankServices(event: WeatherEvent, season: Season, urgency: UrgencyLevel
     serviceMap['metal-flashings'].trigger = 'winter leak diagnosis';
     serviceMap['tiled-restoration'].weight = 7;
     serviceMap['tiled-restoration'].trigger = 'winter damage assessment';
+    serviceMap['ridge-cap-rebedding-pointing'].weight = 7;
+    serviceMap['ridge-cap-rebedding-pointing'].trigger = 'check mortar integrity in cold wet conditions';
+    serviceMap['insurance-roof-repairs'].weight = 5;
+    serviceMap['insurance-roof-repairs'].trigger = 'winter storm damage — insurance claims';
     serviceMap['cleaning'].weight = 5;
     serviceMap['cleaning'].trigger = 'moss thriving in winter damp';
+    serviceMap['strata-roof-maintenance'].weight = 4;
+    serviceMap['strata-roof-maintenance'].trigger = 'winter maintenance for strata properties';
   }
   // Clear mild → ideal work conditions
   else if (event === 'CLEAR_MILD') {
@@ -326,8 +365,14 @@ function rankServices(event: WeatherEvent, season: Season, urgency: UrgencyLevel
     serviceMap['tiled-restoration'].trigger = 'perfect weather for coating application';
     serviceMap['cleaning'].weight = 8;
     serviceMap['cleaning'].trigger = 'ideal conditions for high-pressure clean';
+    serviceMap['ridge-cap-rebedding-pointing'].weight = 7;
+    serviceMap['ridge-cap-rebedding-pointing'].trigger = 'great conditions for mortar curing';
     serviceMap['metal-flashings'].weight = 5;
     serviceMap['metal-flashings'].trigger = 'easy access in good conditions';
+    serviceMap['strata-roof-maintenance'].weight = 4;
+    serviceMap['strata-roof-maintenance'].trigger = 'ideal time for scheduled property inspections';
+    serviceMap['insurance-roof-repairs'].weight = 2;
+    serviceMap['insurance-roof-repairs'].trigger = 'document existing damage while weather allows';
   }
   // Clear hot → cleaning / shade timing considerations
   else if (event === 'CLEAR_HOT') {
@@ -337,6 +382,12 @@ function rankServices(event: WeatherEvent, season: Season, urgency: UrgencyLevel
     serviceMap['tiled-restoration'].trigger = 'coating works best in mild weather — book now before the next heatwave';
     serviceMap['metal-flashings'].weight = 5;
     serviceMap['metal-flashings'].trigger = 'thermal expansion checking all seals';
+    serviceMap['strata-roof-maintenance'].weight = 4;
+    serviceMap['strata-roof-maintenance'].trigger = 'summer maintenance schedule for strata';
+    serviceMap['ridge-cap-rebedding-pointing'].weight = 3;
+    serviceMap['ridge-cap-rebedding-pointing'].trigger = 'heat stress on existing mortar';
+    serviceMap['insurance-roof-repairs'].weight = 1;
+    serviceMap['insurance-roof-repairs'].trigger = 'document UV and heat damage';
   }
   // Spring → post-winter assessment
   else if (season === 'SPRING') {
@@ -344,14 +395,23 @@ function rankServices(event: WeatherEvent, season: Season, urgency: UrgencyLevel
     serviceMap['cleaning'].trigger = 'spring clean — remove winter moss and grime';
     serviceMap['tiled-restoration'].weight = 8;
     serviceMap['tiled-restoration'].trigger = 'post-winter restoration before summer heat';
+    serviceMap['ridge-cap-rebedding-pointing'].weight = 7;
+    serviceMap['ridge-cap-rebedding-pointing'].trigger = 'repair winter mortar damage before summer';
     serviceMap['metal-flashings'].weight = 6;
     serviceMap['metal-flashings'].trigger = 'post-winter flashing inspection';
+    serviceMap['strata-roof-maintenance'].weight = 5;
+    serviceMap['strata-roof-maintenance'].trigger = 'post-winter strata property assessment';
+    serviceMap['insurance-roof-repairs'].weight = 3;
+    serviceMap['insurance-roof-repairs'].trigger = 'document winter storm damage for insurance';
   }
   // Default
   else {
     serviceMap['tiled-restoration'].weight = 7;
     serviceMap['cleaning'].weight = 6;
     serviceMap['metal-flashings'].weight = 5;
+    serviceMap['ridge-cap-rebedding-pointing'].weight = 4;
+    serviceMap['strata-roof-maintenance'].weight = 3;
+    serviceMap['insurance-roof-repairs'].weight = 2;
   }
 
   return Object.values(serviceMap).sort((a, b) => b.weight - a.weight);

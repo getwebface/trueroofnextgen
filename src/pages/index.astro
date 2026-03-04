@@ -15,18 +15,22 @@ const faqs = await getCollection('faqs');
 
 const { weatherContext } = Astro.locals;
 
-// Icon mapping for services
-const iconMap: Record<string, string> = {
-  droplet: '💧',
-  wrench: '🔧',
-  'shield-check': '🛡️',
+// SVG icon map — inline SVG paths keyed by content icon field value
+// Using a subset of Lucide icons, stroke="currentColor" strokeWidth="1.5"
+const svgIcons: Record<string, string> = {
+  droplet: `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="url(#orange-gradient)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>`,
+  wrench: `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="url(#orange-gradient)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>`,
+  'shield-check': `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="url(#orange-gradient)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>`,
+  'shield-exclamation': `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="url(#orange-gradient)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>`,
+  'building-office-2': `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="url(#orange-gradient)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="1"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>`,
 };
+const defaultIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="url(#orange-gradient)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>`;
 
-// Build service → icon label
-const serviceIconLabel: Record<string, { icon: string; urgencyHint?: string }> = {};
+// Build service → urgency hint
+const serviceUrgencyMap: Record<string, string> = {};
 if (weatherContext) {
   for (const sig of weatherContext.services) {
-    serviceIconLabel[sig.slug] = { icon: '', urgencyHint: sig.trigger };
+    serviceUrgencyMap[sig.slug] = sig.trigger;
   }
 }
 
@@ -86,12 +90,14 @@ const sortedServices = [...services].sort((a, b) => {
         </div>
       )}
 
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
-        {sortedServices.map((service, i) => {
-          const hint = serviceIconLabel[service.slug]?.urgencyHint;
+      <!-- Tier 1: Top 3 weather-ranked services as full feature cards -->
+      <div class="services-featured-grid">
+        {sortedServices.slice(0, 3).map((service, i) => {
+          const hint = serviceUrgencyMap[service.slug];
+          const icon = svgIcons[service.data.icon || ''] || defaultIcon;
           return (
             <a href={`/services/${service.slug}`} class={`service-card ${i === 0 ? 'featured' : ''}`}>
-              <div class="service-icon">{iconMap[service.data.icon || ''] || '🏠'}</div>
+              <div class="service-icon" set:html={icon} />
               <h3>{service.data.title}</h3>
               <p>{service.data.description}</p>
               {hint && <div class="service-hint">📍 {hint}</div>}
@@ -100,6 +106,28 @@ const sortedServices = [...services].sort((a, b) => {
           );
         })}
       </div>
+
+      <!-- Tier 2: Remaining services as compact horizontal tiles -->
+      {sortedServices.length > 3 && (
+        <div class="services-compact-row">
+          <div class="services-compact-label">Also Available</div>
+          <div class="services-compact-list">
+            {sortedServices.slice(3).map((service) => {
+              const icon = svgIcons[service.data.icon || ''] || defaultIcon;
+              return (
+                <a href={`/services/${service.slug}`} class="service-compact-tile">
+                  <span class="service-compact-icon" set:html={icon} />
+                  <div class="service-compact-body">
+                    <div class="service-compact-title">{service.data.title}</div>
+                    <div class="service-compact-desc">{service.data.description.slice(0, 72)}…</div>
+                  </div>
+                  <span class="service-compact-arrow">→</span>
+                </a>
+              );
+            })}
+          </div>
+        </div>
+      )}
     </div>
   </section>
 
@@ -183,9 +211,15 @@ const sortedServices = [...services].sort((a, b) => {
 </MainLayout>
 
 <style>
+  /* ── Services: SVG icon in card ── */
+  .service-icon svg {
+    display: block;
+  }
+
   .service-card.featured {
     border-top: 2px solid var(--color-brand-orange);
   }
+
   .service-hint {
     font-size: 0.78rem;
     color: rgba(255,255,255,0.45);
@@ -195,5 +229,107 @@ const sortedServices = [...services].sort((a, b) => {
     background: rgba(255,255,255,0.03);
     border-radius: 0.5rem;
     border-left: 2px solid rgba(249, 115, 22, 0.4);
+  }
+
+  /* ── Tier 1: Featured grid (top 3 cards) ── */
+  .services-featured-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  /* ── Tier 2: Compact "Also Available" row ── */
+  .services-compact-row {
+    margin-top: 0.5rem;
+  }
+
+  .services-compact-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: rgba(255,255,255,0.3);
+    margin-bottom: 0.75rem;
+  }
+
+  .services-compact-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .service-compact-tile {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.875rem 1.25rem;
+    border-radius: var(--radius-card);
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.05);
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .service-compact-tile:hover {
+    background: rgba(255,255,255,0.05);
+    border-color: rgba(249, 115, 22, 0.25);
+    transform: translateX(4px);
+  }
+
+  .service-compact-icon {
+    width: 2.25rem;
+    height: 2.25rem;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(249, 115, 22, 0.08);
+    border-radius: 0.625rem;
+  }
+
+  .service-compact-icon svg {
+    display: block;
+  }
+
+  .service-compact-body {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .service-compact-title {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: white;
+    margin-bottom: 0.15rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .service-compact-desc {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.4);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .service-compact-arrow {
+    color: var(--color-brand-orange);
+    font-weight: 700;
+    flex-shrink: 0;
+    transition: transform 0.2s;
+  }
+
+  .service-compact-tile:hover .service-compact-arrow {
+    transform: translateX(4px);
+  }
+
+  @media (max-width: 640px) {
+    .service-compact-desc { display: none; }
+    .service-compact-tile { padding: 0.75rem 1rem; }
   }
 </style>
