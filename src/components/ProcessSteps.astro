@@ -1,30 +1,35 @@
 ---
 import { Droplets, Wrench, BrickWall, ShieldCheck } from 'lucide-react';
+import SmartMedia from './SmartMedia.astro';
 
 const steps = [
   {
     number: 1,
     title: 'High-Pressure Clean',
     description: 'Remove decades of moss, lichen, and grime with specialized equipment.',
-    icon: Droplets
+    icon: Droplets,
+    keywords: ['cleaning', 'pressure', 'moss', 'roof'],
   },
   {
     number: 2,
     title: 'Structural Repairs',
     description: 'Replace cracked tiles, check valleys, and repair all flashings.',
-    icon: Wrench
+    icon: Wrench,
+    keywords: ['repair', 'tile', 'flashings', 'structural'],
   },
   {
     number: 3,
     title: 'Re-bed & Flexi-Point',
     description: 'Strip old mortar. Apply modern flexible pointing that won\'t crack.',
-    icon: BrickWall
+    icon: BrickWall,
+    keywords: ['rebedding', 'pointing', 'ridge', 'mortar'],
   },
   {
     number: 4,
     title: 'Protective Coating',
     description: 'Multi-coat membrane system to restore colour and seal against weather.',
-    icon: ShieldCheck
+    icon: ShieldCheck,
+    keywords: ['coating', 'membrane', 'restoration', 'colour'],
   }
 ];
 ---
@@ -49,6 +54,17 @@ const steps = [
         const Icon = step.icon;
         return (
           <div class="process-step">
+            {/* SmartMedia thumbnail — adds visual context to each step */}
+            <div class="process-step-media" aria-hidden="true">
+              <SmartMedia
+                contextKeywords={step.keywords}
+                alt=""
+                cssClass="process-step-img"
+                preferredType="image"
+              />
+              <div class="process-step-media-overlay" aria-hidden="true"></div>
+            </div>
+
             <div class="process-number">{step.number}</div>
             <div style="margin-bottom: 1rem; display: flex; justify-content: center;">
               <Icon size={32} strokeWidth={1.5} stroke="url(#orange-gradient)" />
@@ -61,3 +77,80 @@ const steps = [
     </div>
   </div>
 </section>
+
+<style>
+  /* Each step gets a contextual image panel at the top */
+  .process-step {
+    position: relative;
+    border-radius: 1.25rem;
+    overflow: hidden;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.06);
+    padding: 0;
+    transition: border-color 0.3s, transform 0.3s;
+  }
+
+  .process-step:hover {
+    border-color: rgba(249, 115, 22, 0.25);
+    transform: translateY(-4px);
+  }
+
+  /* Media thumbnail at the top of each card */
+  .process-step-media {
+    position: relative;
+    width: 100%;
+    height: 140px;
+    overflow: hidden;
+    border-radius: 1.25rem 1.25rem 0 0;
+    background: linear-gradient(135deg, rgba(249,115,22,0.05), rgba(15,15,35,0.8));
+  }
+
+  .process-step-media .process-step-img,
+  .process-step-media .smart-media-picture,
+  .process-step-media .smart-media-img,
+  .process-step-media .smart-media-placeholder {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0;
+    min-height: 140px;
+  }
+
+  /* Gradient fades image into card body below */
+  .process-step-media-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      transparent 30%,
+      rgba(10, 10, 20, 0.65) 70%,
+      rgba(10, 10, 20, 0.98) 100%
+    );
+    pointer-events: none;
+  }
+
+  /* Card body content sits below the image */
+  .process-step .process-number,
+  .process-step > div:not(.process-step-media),
+  .process-step h4,
+  .process-step p {
+    position: relative;
+    z-index: 1;
+  }
+
+  .process-step h4,
+  .process-step p,
+  .process-step > div:not(.process-step-media):not(:first-child) {
+    padding: 0 1.5rem;
+  }
+
+  .process-step .process-number {
+    margin: -1.75rem auto 0.75rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  .process-step > div:last-of-type {
+    padding-bottom: 1.75rem;
+  }
+</style>

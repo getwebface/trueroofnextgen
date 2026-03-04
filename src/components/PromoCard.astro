@@ -1,13 +1,21 @@
 ---
 import currentCampaign from '../data/active-campaign.json';
+import SmartMedia from './SmartMedia.astro';
 
 interface Props {
   contextType?: 'home' | 'location' | 'service';
   locationName?: string;
   serviceName?: string;
+  /** Optional extra keywords to pass through to SmartMedia */
+  contextKeywords?: string[];
 }
 
-const { contextType = 'home', locationName, serviceName } = Astro.props;
+const {
+  contextType = 'home',
+  locationName,
+  serviceName,
+  contextKeywords = [],
+} = Astro.props;
 
 let contextDescription = currentCampaign.description;
 
@@ -17,24 +25,44 @@ if (contextType === 'location' && locationName) {
   contextDescription = `Adding a ${currentCampaign.value} to your ${serviceName} ensures comprehensive protection before winter hits. Valid until ${currentCampaign.expiryDate}.`;
 }
 
+// Build scoring keywords for SmartMedia
+const mediaKeywords: string[] = [
+  'promo',
+  contextType,
+  ...(locationName ? [locationName.toLowerCase().replace(/\s+/g, '-')] : []),
+  ...(serviceName
+    ? serviceName.toLowerCase().split(/\s+/).filter(Boolean)
+    : []),
+  ...contextKeywords,
+];
 ---
 
 {currentCampaign.isActive && (
-  <div class="glass-card promo-card" style="padding: 1.5rem; margin-top: 1rem; margin-bottom: 2rem; border-left: 4px solid #3b82f6; background: rgba(59, 130, 246, 0.05);">
-    <div style="display: flex; align-items: flex-start; gap: 1rem;">
-      <div style="font-size: 1.5rem;">🎁</div>
-      <div>
-        <h4 style="font-family: Outfit, sans-serif; font-weight: 700; font-size: 1.1rem; color: #60a5fa; margin-bottom: 0.25rem;">
+  <div class="glass-card promo-card-wrap">
+    {/* SmartMedia accent image strip — adds visual weight to the promo card */}
+    <div class="promo-media-strip" aria-hidden="true">
+      <SmartMedia
+        contextKeywords={mediaKeywords}
+        alt=""
+        cssClass="promo-media"
+        preferredType="image"
+      />
+    </div>
+
+    <div class="promo-card-body">
+      <div class="promo-icon-col">🎁</div>
+      <div class="promo-text-col">
+        <h4 class="promo-title">
           {currentCampaign.title}
         </h4>
-        <p style="color: rgba(255,255,255,0.8); font-size: 0.95rem; line-height: 1.5; margin-bottom: 0.5rem;">
+        <p class="promo-desc">
           {contextDescription}
         </p>
-        <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
-          <span class="badge" style="background: rgba(59, 130, 246, 0.1); color: #93c5fd; border-color: rgba(59, 130, 246, 0.3);">
+        <div class="promo-meta">
+          <span class="badge promo-badge">
             Code: <strong>{currentCampaign.code}</strong>
           </span>
-          <span style="font-size: 0.8rem; color: rgba(255,255,255,0.5);">
+          <span class="promo-expiry">
             Expires: {currentCampaign.expiryDate}
           </span>
         </div>
@@ -42,3 +70,95 @@ if (contextType === 'location' && locationName) {
     </div>
   </div>
 )}
+
+<style>
+  .promo-card-wrap {
+    position: relative;
+    overflow: hidden;
+    padding: 0;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    border-left: 4px solid #3b82f6;
+    background: rgba(59, 130, 246, 0.05);
+  }
+
+  /* Narrow image strip along the right edge (decorative) */
+  .promo-media-strip {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 120px;
+    overflow: hidden;
+    border-radius: 0;
+    opacity: 0.18;
+    pointer-events: none;
+  }
+
+  .promo-media-strip .promo-media,
+  .promo-media-strip .smart-media-picture,
+  .promo-media-strip .smart-media-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0;
+  }
+
+  .promo-card-body {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.5rem;
+    padding-right: calc(120px + 1.5rem); /* make room for strip */
+  }
+
+  .promo-icon-col {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+  }
+
+  .promo-text-col {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .promo-title {
+    font-family: Outfit, sans-serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: #60a5fa;
+    margin-bottom: 0.25rem;
+  }
+
+  .promo-desc {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 0.5rem;
+  }
+
+  .promo-meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .promo-badge {
+    background: rgba(59, 130, 246, 0.1);
+    color: #93c5fd;
+    border-color: rgba(59, 130, 246, 0.3);
+  }
+
+  .promo-expiry {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  @media (max-width: 640px) {
+    .promo-media-strip { display: none; }
+    .promo-card-body { padding-right: 1.5rem; }
+  }
+</style>

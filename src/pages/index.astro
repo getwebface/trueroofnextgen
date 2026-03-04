@@ -8,6 +8,7 @@ import QuoteForm from '../components/QuoteForm.tsx';
 import SmartFAQAccordion from '../components/SmartFAQAccordion.tsx';
 import PromoCard from '../components/PromoCard.astro';
 import TextureTechnology from '../components/TextureTechnology.astro';
+import SmartMedia from '../components/SmartMedia.astro';
 import { rankFAQs } from '../utils/faqRanker';
 
 const locations = await getCollection('locations');
@@ -69,8 +70,24 @@ const sortedServices = [...services].sort((a, b) => {
 ---
 <MainLayout title="True Roof — Melbourne Tile Restoration Specialists" description="Melbourne's trusted tile restoration experts. Professional cleaning, re-bedding, flexi-pointing, metal flashing repairs. Free inspections. 25+ years experience.">
 
-  <!-- Hero Section (React, weather-reactive) -->
-  <WeatherHero client:load ctx={weatherContext} />
+  <!-- Hero Section — SmartMedia full-bleed background + React weather overlay -->
+  <div class="hero-smart-wrapper">
+    {/* SmartMedia background: prefer video, fallback to weather/location image */}
+    <div class="hero-smart-bg" aria-hidden="true">
+      <SmartMedia
+        contextKeywords={[
+          'hero',
+          'roof',
+          weatherContext?.event?.toLowerCase().replace('_', '-') ?? 'clear',
+          weatherContext?.city?.toLowerCase() ?? 'melbourne',
+        ]}
+        alt=""
+        cssClass="hero-smart-media"
+        preferredType="any"
+      />
+    </div>
+    <WeatherHero client:load ctx={weatherContext} />
+  </div>
 
   <!-- Trust Bar -->
   <TrustBar ctx={weatherContext} />
@@ -104,11 +121,23 @@ const sortedServices = [...services].sort((a, b) => {
           const icon = svgIcons[service.data.icon || ''] || defaultIcon;
           return (
             <a href={`/services/${service.slug}`} class={`service-card ${i === 0 ? 'featured' : ''}`}>
-              <div class="service-icon" set:html={icon} />
-              <h3>{service.data.title}</h3>
-              <p>{service.data.description}</p>
-              {hint && <div class="service-hint">📍 {hint}</div>}
-              <span class="card-link">Learn More →</span>
+              {/* Contextual SmartMedia Thumbnail */}
+              <div class="service-card-media" aria-hidden="true">
+                <SmartMedia
+                  contextKeywords={['service', ...service.slug.split('-')]}
+                  alt=""
+                  cssClass="service-media-img"
+                  preferredType="image"
+                />
+                <div class="service-card-media-overlay"></div>
+              </div>
+              <div class="service-card-content">
+                <div class="service-icon" set:html={icon} />
+                <h3>{service.data.title}</h3>
+                <p>{service.data.description}</p>
+                {hint && <div class="service-hint">📍 {hint}</div>}
+                <span class="card-link">Learn More →</span>
+              </div>
             </a>
           );
         })}
@@ -156,13 +185,25 @@ const sortedServices = [...services].sort((a, b) => {
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem;">
         {locations.map(location => (
           <a href={`/locations/${location.slug}`} class="location-card">
-            <h3>{location.data.title}</h3>
-            <p>{location.data.description}</p>
-            {location.data.localStats?.avgRoofAge && (
-              <div style="margin-top: 0.75rem;">
-                <span class="badge">Avg Roof Age: {location.data.localStats.avgRoofAge}</span>
-              </div>
-            )}
+            {/* Contextual SmartMedia Location Thumbnail */}
+            <div class="location-card-media" aria-hidden="true">
+              <SmartMedia
+                contextKeywords={['location', location.slug, ...location.data.title.toLowerCase().split(/\s+/)]}
+                alt=""
+                cssClass="location-media-img"
+                preferredType="image"
+              />
+              <div class="location-card-media-overlay"></div>
+            </div>
+            <div class="location-card-content">
+              <h3>{location.data.title}</h3>
+              <p>{location.data.description}</p>
+              {location.data.localStats?.avgRoofAge && (
+                <div style="margin-top: 0.75rem;">
+                  <span class="badge">Avg Roof Age: {location.data.localStats.avgRoofAge}</span>
+                </div>
+              )}
+            </div>
           </a>
         ))}
       </div>
@@ -224,13 +265,94 @@ const sortedServices = [...services].sort((a, b) => {
 </MainLayout>
 
 <style>
+  /* ── Hero SmartMedia background wrapper ── */
+  .hero-smart-wrapper {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-smart-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .hero-smart-bg .hero-smart-media,
+  .hero-smart-bg .smart-video-wrapper,
+  .hero-smart-bg .smart-media-picture,
+  .hero-smart-bg .smart-media-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0;
+  }
+
+  /* Ensure the React WeatherHero sits on top */
+  .hero-smart-wrapper > :not(.hero-smart-bg) {
+    position: relative;
+    z-index: 1;
+  }
+
+
   /* ── Services: SVG icon in card ── */
   .service-icon svg {
     display: block;
   }
 
+  /* ── Tier 1: Featured grid (top 3 cards) ── */
+  .services-featured-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .service-card {
+    padding: 0;
+  }
+
+  /* Thumbnail for service cards */
+  .service-card-media {
+    position: relative;
+    width: 100%;
+    height: 140px;
+    overflow: hidden;
+    background: linear-gradient(135deg, rgba(249,115,22,0.05), rgba(15,15,35,0.8));
+  }
+
+  .service-card-media .service-media-img,
+  .service-card-media .smart-media-picture,
+  .service-card-media .smart-media-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+
+  .service-card:hover .service-card-media .service-media-img,
+  .service-card:hover .service-card-media .smart-media-picture,
+  .service-card:hover .service-card-media .smart-media-img {
+    transform: scale(1.05);
+  }
+
+  .service-card-media-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, transparent 40%, rgba(26,26,46,1) 100%);
+    pointer-events: none;
+  }
+
+  .service-card-content {
+    padding: 1.5rem 2rem 2rem;
+    position: relative;
+    z-index: 1;
+    margin-top: -1.5rem;
+  }
+
   .service-card.featured {
-    border-top: 2px solid var(--color-brand-orange);
+    border-top: none;
+    box-shadow: 0 0 0 2px var(--color-brand-orange);
   }
 
   .service-hint {
@@ -339,6 +461,48 @@ const sortedServices = [...services].sort((a, b) => {
 
   .service-compact-tile:hover .service-compact-arrow {
     transform: translateX(4px);
+  }
+
+  /* ── Location Cards ── */
+  .location-card {
+    padding: 0;
+  }
+
+  .location-card-media {
+    position: relative;
+    width: 100%;
+    height: 120px;
+    overflow: hidden;
+    background: linear-gradient(135deg, rgba(59,130,246,0.05), rgba(15,15,35,0.8));
+  }
+  
+  .location-card-media .location-media-img,
+  .location-card-media .smart-media-picture,
+  .location-card-media .smart-media-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+
+  .location-card:hover .location-card-media .location-media-img,
+  .location-card:hover .location-card-media .smart-media-picture,
+  .location-card:hover .location-card-media .smart-media-img {
+    transform: scale(1.05);
+  }
+
+  .location-card-media-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, transparent 30%, rgba(26,26,46,1) 100%);
+    pointer-events: none;
+  }
+
+  .location-card-content {
+    padding: 1.25rem 1.75rem 1.75rem;
+    position: relative;
+    z-index: 1;
+    margin-top: -1.25rem;
   }
 
   @media (max-width: 640px) {

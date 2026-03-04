@@ -5,14 +5,29 @@
  * Full-bleed cinematic section showcasing the "Texture Psychology" video.
  * Placed between the Process Steps and Locations sections on the homepage.
  *
+ * The section background now uses SmartMedia to pull a contextually relevant
+ * ambient image (texture, membrane, coating keywords) behind the existing
+ * video showcase — adding visual depth without changing the structure.
+ *
  * Video URL: /cdn/Texture_Psychology_Tile_Transformation_Video.mp4
  * Auto-plays, muted, looped — demonstrating the hydrophobic coating science.
  */
+import SmartMedia from './SmartMedia.astro';
 ---
 
 <section id="technology" class="texture-section">
   <!-- Background ambient glow -->
   <div class="texture-bg-glow" aria-hidden="true"></div>
+
+  <!-- SmartMedia ambient background image (texture/membrane/coating context) -->
+  <div class="texture-smart-bg" aria-hidden="true">
+    <SmartMedia
+      contextKeywords={['texture', 'membrane', 'coating', 'tile', 'restoration']}
+      alt=""
+      cssClass="texture-smart-media"
+      preferredType="image"
+    />
+  </div>
 
   <div class="container">
     <!-- Section label -->
@@ -177,6 +192,26 @@
 </section>
 
 <style>
+  /* ── SmartMedia ambient background ── */
+  .texture-smart-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .texture-smart-bg .texture-smart-media,
+  .texture-smart-bg .smart-media-picture,
+  .texture-smart-bg .smart-media-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0;
+    opacity: 0.08;
+    filter: saturate(0.4) brightness(0.6);
+  }
+
   /* ── Section wrapper ── */
   .texture-section {
     position: relative;

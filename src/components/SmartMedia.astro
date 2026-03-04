@@ -1,0 +1,308 @@
+---
+/**
+ * SmartMedia.astro
+ *
+ * Context-Aware Digital Asset Manager — TrueRoof NextGen
+ *
+ * Replaces all static <img> and video-background tags. Reads the media
+ * manifest at build-time, scores every asset against the current weather
+ * event and caller-supplied context keywords, then renders the best-scoring
+ * asset for today's date (deterministic daily rotation from the top-3 picks).
+ *
+ * Props
+ * ─────
+ *   contextKeywords  string[]              — descriptive words for this call-site
+ *   alt              string               — alt text for images (required for a11y)
+ *   cssClass         string               — forwarded to the wrapper element
+ *   preferredType?   'image'|'video'|'any' — filter manifest by media type
+ *
+ * Scoring Algorithm
+ * ─────────────────
+ *   +2  exact weather_affinity match (or affinity === "all")
+ *   +1  per contextKeyword found in asset's keywords array
+ *   ×   base_score multiplier (default 1.0, manually tunable)
+ *
+ * Deterministic Daily Rotation
+ * ────────────────────────────
+ *   After scoring, the top-3 candidates are captured.  A date-based hash
+ *   (YYYYMMDD + contextKeywords.join) is used to pick a stable winner that
+ *   changes exactly once per day — no layout thrashing on refresh.
+ *
+ * Rendering
+ * ─────────
+ *   image → <picture> → <img> using the /cdn/ proxy (immutable cache headers)
+ *   video → <div class="smart-video-wrapper"> wrapping <video autoplay loop
+ *           muted playsinline> with a scan-line + gradient CSS overlay so any
+ *           overlaid text stays readable.
+ *
+ * Fallback
+ * ────────
+ *   When the manifest is empty or no asset scores above 0, a styled
+ *   placeholder div with a subtle gradient is rendered instead.
+ */
+
+import type { WeatherContext } from '../utils/weatherProcessor';
+import manifest from '../data/media-manifest.json';
+
+export interface Props {
+  /** Descriptive keywords for this placement (used for scoring) */
+  contextKeywords: string[];
+  /** Alt text for image rendering */
+  alt: string;
+  /** CSS class(es) forwarded to the outermost wrapper element */
+  cssClass?: string;
+  /** Limit results to a specific media type. Default: 'any' */
+  preferredType?: 'image' | 'video' | 'any';
+}
+
+// ── Types ─────────────────────────────────────────────────────────────────────
+interface ManifestEntry {
+  url: string;
+  type: 'image' | 'video';
+  keywords: string[];
+  weather_affinity: string;
+  base_score: number;
+}
+
+// ── Props ─────────────────────────────────────────────────────────────────────
+const {
+  contextKeywords,
+  alt,
+  cssClass = '',
+  preferredType = 'any',
+} = Astro.props;
+
+// ── Weather ───────────────────────────────────────────────────────────────────
+// WeatherContext is injected into Astro.locals by middleware
+const weatherCtx = (Astro.locals as { weatherContext?: WeatherContext }).weatherContext;
+
+/**
+ * Map a WeatherEvent string to the weather_affinity tokens used in filenames.
+ * 'all' always matches every asset.
+ */
+const WEATHER_EVENT_TO_AFFINITY: Record<string, string[]> = {
+  HAIL_STORM:  ['storm', 'rain', 'all'],
+  THUNDERSTORM: ['storm', 'rain', 'all'],
+  HIGH_WIND:   ['wind', 'storm', 'all'],
+  HEAVY_RAIN:  ['rain', 'all'],
+  DRIZZLE:     ['rain', 'all'],
+  FROST:       ['frost', 'all'],
+  CLEAR_HOT:   ['hot', 'sunny', 'clear', 'all'],
+  CLEAR_MILD:  ['sunny', 'clear', 'all'],
+  OVERCAST:    ['overcast', 'all'],
+  FOG:         ['overcast', 'all'],
+  DEFAULT:     ['all'],
+};
+
+const activeAffinities: Set<string> = new Set(
+  weatherCtx
+    ? (WEATHER_EVENT_TO_AFFINITY[weatherCtx.event] ?? ['all'])
+    : ['all'],
+);
+
+// ── Scoring ───────────────────────────────────────────────────────────────────
+function scoreAsset(
+  entry: ManifestEntry,
+  affinities: Set<string>,
+  keywords: string[],
+): number {
+  let score = 0;
+
+  // +2 for weather match
+  if (affinities.has(entry.weather_affinity)) score += 2;
+  // 'all' always matches
+  if (entry.weather_affinity === 'all' && score === 0) score += 2;
+
+  // +1 per contextKeyword match
+  const entryKeywordsLower = entry.keywords.map(k => k.toLowerCase());
+  for (const kw of keywords) {
+    if (entryKeywordsLower.includes(kw.toLowerCase())) score += 1;
+  }
+
+  // Multiply by base_score weight (allows manual tuning)
+  return score * entry.base_score;
+}
+
+// ── Filter + score + sort ─────────────────────────────────────────────────────
+const allEntries = manifest as ManifestEntry[];
+
+const candidates = allEntries
+  .filter(e => preferredType === 'any' || e.type === preferredType)
+  .map(e => ({ entry: e, score: scoreAsset(e, activeAffinities, contextKeywords) }))
+  .filter(({ score }) => score > 0)
+  .sort((a, b) => b.score - a.score);
+
+// ── Deterministic daily rotation from top-3 ──────────────────────────────────
+function dailyHash(contextKeywords: string[]): number {
+  const now = new Date();
+  // YYYYMMDD ensures the "seed" changes once per UTC day
+  const dateStr = `${now.getUTCFullYear()}${String(now.getUTCMonth() + 1).padStart(2, '0')}${String(now.getUTCDate()).padStart(2, '0')}`;
+  const seed = `${dateStr}-${contextKeywords.join('-')}`;
+  // Simple deterministic hash (djb2-like)
+  let hash = 5381;
+  for (let i = 0; i < seed.length; i++) {
+    hash = (hash * 33) ^ seed.charCodeAt(i);
+  }
+  return Math.abs(hash);
+}
+
+const top3 = candidates.slice(0, 3);
+let winner: ManifestEntry | null = null;
+
+if (top3.length > 0) {
+  const idx = top3.length > 1
+    ? dailyHash(contextKeywords) % top3.length
+    : 0;
+  winner = top3[idx].entry;
+}
+
+const isVideo = winner?.type === 'video';
+const isImage = winner?.type === 'image';
+---
+
+{/* ── No manifest / no match — render styled placeholder ── */}
+{!winner && (
+  <div
+    class={`smart-media-placeholder ${cssClass}`}
+    aria-label={alt}
+    role="img"
+  >
+    <div class="smart-media-placeholder-inner">
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none"
+        stroke="rgba(255,255,255,0.15)" stroke-width="1.5"
+        stroke-linecap="round" stroke-linejoin="round"
+        aria-hidden="true">
+        <rect x="2" y="2" width="20" height="20" rx="3"/>
+        <circle cx="8.5" cy="8.5" r="1.5"/>
+        <path d="M21 15l-5-5L5 21"/>
+      </svg>
+      <span>Media loading…</span>
+    </div>
+  </div>
+)}
+
+{/* ── Image: <picture> with CDN proxy ── */}
+{isImage && winner && (
+  <picture class={`smart-media-picture ${cssClass}`}>
+    {/* Modern WebP hint (browser falls back if original is already WebP) */}
+    <source
+      srcset={`${winner.url}?format=webp`}
+      type="image/webp"
+    />
+    <img
+      src={winner.url}
+      alt={alt}
+      loading="lazy"
+      decoding="async"
+      class="smart-media-img"
+    />
+  </picture>
+)}
+
+{/* ── Video: full-bleed cinematic with scan-line overlay ── */}
+{isVideo && winner && (
+  <div class={`smart-video-wrapper ${cssClass}`} aria-label={alt} role="img">
+    {/* Gradient overlay — ensures text over video stays readable */}
+    <div class="smart-video-overlay" aria-hidden="true"></div>
+    {/* Scan-line texture — cinematic feel */}
+    <div class="smart-video-scanlines" aria-hidden="true"></div>
+    <video
+      class="smart-video"
+      src={winner.url}
+      autoplay
+      loop
+      muted
+      playsinline
+      preload="metadata"
+      aria-hidden="true"
+    >
+      <p>Your browser does not support HTML5 video.</p>
+    </video>
+  </div>
+)}
+
+<style>
+  /* ── Placeholder ───────────────────────────────────────────────────────── */
+  .smart-media-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.02) 0%,
+      rgba(249, 115, 22, 0.04) 100%
+    );
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 1rem;
+    min-height: 240px;
+  }
+
+  .smart-media-placeholder-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    color: rgba(255, 255, 255, 0.2);
+    font-size: 0.8rem;
+    font-family: 'Outfit', sans-serif;
+    letter-spacing: 0.04em;
+  }
+
+  /* ── Image ─────────────────────────────────────────────────────────────── */
+  .smart-media-picture {
+    display: block;
+  }
+
+  .smart-media-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: inherit;
+  }
+
+  /* ── Video wrapper ──────────────────────────────────────────────────────── */
+  .smart-video-wrapper {
+    position: relative;
+    overflow: hidden;
+    border-radius: inherit;
+    background: #0a0a0a;
+  }
+
+  .smart-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* Gradient: dark at the very top/bottom for text legibility */
+  .smart-video-overlay {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(to bottom,
+        rgba(10, 10, 20, 0.55) 0%,
+        transparent 30%,
+        transparent 65%,
+        rgba(10, 10, 20, 0.70) 100%
+      );
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  /* Subtle CRT-style scan-lines — cinematic texture */
+  .smart-video-scanlines {
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 3px,
+      rgba(0, 0, 0, 0.04) 3px,
+      rgba(0, 0, 0, 0.04) 4px
+    );
+    pointer-events: none;
+    z-index: 3;
+  }
+</style>

@@ -5,6 +5,7 @@ import QuoteForm from '../../components/QuoteForm.tsx';
 import PromoCard from '../../components/PromoCard.astro';
 import BeforeAfterSlider from '../../components/BeforeAfterSlider.tsx';
 import PricingTierCards from '../../components/PricingTierCards.astro';
+import SmartMedia from '../../components/SmartMedia.astro';
 
 const { slug } = Astro.params;
 if (!slug) return Astro.redirect('/404');
@@ -16,6 +17,17 @@ const { Content } = await service.render();
 const { weatherContext } = Astro.locals as { weatherContext?: any } || {};
 const urgency = weatherContext?.urgency || 1;
 const city = weatherContext?.city || 'Melbourne';
+
+// Derive SmartMedia keywords from slug and service title words
+const slugKeywords = slug.split('-').filter(Boolean);
+const titleKeywords = service.data.title
+  .toLowerCase()
+  .replace(/[^a-z0-9\s-]/g, '')
+  .split(/[\s-]+/)
+  .filter(Boolean);
+const serviceKeywords: string[] = [
+  ...new Set(['service', ...slugKeywords, ...titleKeywords]),
+];
 
 // Get other services for related links
 const allServices = await getCollection('services');
@@ -54,8 +66,19 @@ const serviceSchema = {
 <MainLayout title={pageTitle} description={pageDescription} schema={serviceSchema}>
 
   {/* ── Service Hero ── */}
-  <section class="hero-section" style="padding: 4rem 0 3.5rem;">
-    <div class="hero-content">
+  <section class="hero-section service-hero-section" style="padding: 4rem 0 3.5rem; position: relative; overflow: hidden;">
+    {/* SmartMedia: full-bleed contextual background for this service */}
+    <div class="service-hero-smart-bg" aria-hidden="true">
+      <SmartMedia
+        contextKeywords={serviceKeywords}
+        alt=""
+        cssClass="service-hero-media"
+        preferredType="any"
+      />
+    </div>
+    {/* Dark gradient overlay over media for text readability */}
+    <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(10,10,20,0.85) 0%,rgba(10,10,20,0.55) 60%,transparent 100%);z-index:1;pointer-events:none;" aria-hidden="true"></div>
+    <div class="hero-content" style="position:relative;z-index:2;">
       <div class="hero-badge" style="display: inline-flex; align-items: center; gap: 0.5rem;">
         <span set:html={svgIcons[service.data.icon || ''] || defaultIcon} />
         {service.data.title}
@@ -153,10 +176,31 @@ const serviceSchema = {
           <span class="badge">✅ No Obligation</span>
           {urgency >= 4 && <span class="badge" style="background: rgba(239,68,68,0.15); color: #fca5a5; border-color: rgba(239,68,68,0.3);">🚨 Urgent Response</span>}
         </div>
-        <PromoCard contextType="service" serviceName={service.data.title} />
+        <PromoCard contextType="service" serviceName={service.data.title} contextKeywords={serviceKeywords} />
       </div>
       <QuoteForm client:visible ctx={weatherContext} />
     </div>
   </section>
 
 </MainLayout>
+
+<style>
+  /* ── Service hero SmartMedia ── */
+  .service-hero-smart-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .service-hero-smart-bg .service-hero-media,
+  .service-hero-smart-bg .smart-video-wrapper,
+  .service-hero-smart-bg .smart-media-picture,
+  .service-hero-smart-bg .smart-media-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0;
+  }
+</style>
