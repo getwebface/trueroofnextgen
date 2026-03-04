@@ -110,7 +110,10 @@ body.weather-storm {
 }
 
 body.weather-storm .hero-section {
-  background: linear-gradient(140deg, #0d0000 0%, var(--color-storm-surface) 40%, #200808 100%);
+  background: linear-gradient(140deg, rgba(13, 0, 0, 0.95) 0%, rgba(45, 17, 17, 0.85) 40%, rgba(32, 8, 8, 0.95) 100%),
+              url('/cdn/hero-tiles-rain.jpg');
+  background-size: cover;
+  background-position: center;
 }
 
 body.weather-storm .cta-primary {
@@ -149,7 +152,10 @@ body.weather-rain {
 }
 
 body.weather-rain .hero-section {
-  background: linear-gradient(140deg, #060f1e 0%, var(--color-rain-surface) 50%, #0a1830 100%);
+  background: linear-gradient(140deg, rgba(6, 15, 30, 0.95) 0%, rgba(30, 41, 59, 0.85) 50%, rgba(10, 24, 48, 0.95) 100%),
+              url('/cdn/hero-tiles-rain.jpg');
+  background-size: cover;
+  background-position: center;
 }
 
 body.weather-rain .cta-primary {
@@ -188,7 +194,10 @@ body.weather-clear-hot {
 }
 
 body.weather-clear-hot .hero-section {
-  background: linear-gradient(140deg, #1a1200 0%, #221800 50%, #1a1100 100%);
+  background: linear-gradient(140deg, rgba(26, 18, 0, 0.92) 0%, rgba(34, 24, 0, 0.82) 50%, rgba(26, 17, 0, 0.92) 100%),
+              url('/cdn/hero-tiles-rain.jpg');
+  background-size: cover;
+  background-position: center;
 }
 
 body.weather-clear-hot .cta-primary {
@@ -214,7 +223,10 @@ body.weather-clear {
 }
 
 body.weather-clear .hero-section {
-  background: linear-gradient(140deg, var(--color-brand-deep) 0%, var(--color-brand-charcoal) 50%, var(--color-brand-slate) 100%);
+  background: linear-gradient(140deg, rgba(15, 15, 35, 0.92) 0%, rgba(26, 26, 46, 0.82) 50%, rgba(22, 33, 62, 0.92) 100%),
+              url('/cdn/hero-tiles-rain.jpg');
+  background-size: cover;
+  background-position: center;
 }
 
 body.weather-clear .cta-primary {
@@ -240,7 +252,10 @@ body.weather-overcast {
 }
 
 body.weather-overcast .hero-section {
-  background: linear-gradient(140deg, #0d0f14 0%, #141720 50%, #111318 100%);
+  background: linear-gradient(140deg, rgba(13, 15, 20, 0.95) 0%, rgba(20, 23, 32, 0.85) 50%, rgba(17, 19, 24, 0.95) 100%),
+              url('/cdn/hero-tiles-rain.jpg');
+  background-size: cover;
+  background-position: center;
 }
 
 body.weather-overcast .cta-primary {
@@ -266,7 +281,10 @@ body.weather-frost {
 }
 
 body.weather-frost .hero-section {
-  background: linear-gradient(140deg, #060c16 0%, #0d1525 50%, #0a1020 100%);
+  background: linear-gradient(140deg, rgba(6, 12, 22, 0.95) 0%, rgba(13, 21, 37, 0.85) 50%, rgba(10, 16, 32, 0.95) 100%),
+              url('/cdn/hero-tiles-rain.jpg');
+  background-size: cover;
+  background-position: center;
 }
 
 body.weather-frost .cta-primary {
@@ -523,7 +541,10 @@ body.weather-default .accent-glow {
 /* ── Hero Section ── */
 .hero-section {
   position: relative;
-  background: linear-gradient(135deg, var(--color-brand-deep) 0%, var(--color-brand-charcoal) 50%, var(--color-brand-slate) 100%);
+  background: linear-gradient(135deg, rgba(15, 15, 35, 0.9) 0%, rgba(26, 26, 46, 0.8) 50%, rgba(22, 33, 62, 0.9) 100%),
+              url('/cdn/hero-tiles-rain.jpg');
+  background-size: cover;
+  background-position: center;
   overflow: hidden;
   padding: 5rem 0 6rem;
 }
