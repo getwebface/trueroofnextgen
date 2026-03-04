@@ -20,9 +20,9 @@ const {
 let contextDescription = currentCampaign.description;
 
 if (contextType === 'location' && locationName) {
-  contextDescription = `Since our crews are working in the ${locationName} corridor this month, use code ${currentCampaign.code} for a ${currentCampaign.value} with any quote accepted.`;
+  contextDescription = `Since our crews are working in the ${locationName} area this autumn, use code ${currentCampaign.code} to claim a ${currentCampaign.value} with any accepted restoration quote.`;
 } else if (contextType === 'service' && serviceName) {
-  contextDescription = `Adding a ${currentCampaign.value} to your ${serviceName} ensures comprehensive protection before winter hits. Valid until ${currentCampaign.expiryDate}.`;
+  contextDescription = `Book your ${serviceName} before ${currentCampaign.expiryDate} and we'll include a ${currentCampaign.value} (Code: ${currentCampaign.code}) to protect your property.`;
 }
 
 // Build scoring keywords for SmartMedia
