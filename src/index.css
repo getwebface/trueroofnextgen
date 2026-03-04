@@ -1325,3 +1325,15 @@ body.weather-default .accent-glow {
     scroll-behavior: auto !important;
   }
 }
+
+/* ── Accessibility: Keyboard Focus ── */
+*:focus-visible {
+  outline: 2px solid var(--color-brand-orange);
+  outline-offset: 2px;
+}
+
+.cta-primary:focus-visible,
+.cta-secondary:focus-visible {
+  outline: 2px solid white;
+  outline-offset: 4px;
+}
