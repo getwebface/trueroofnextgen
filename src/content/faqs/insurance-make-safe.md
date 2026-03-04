@@ -1,6 +1,11 @@
 ---
 question: "Do you handle insurance storm damage and emergency make-safe repairs?"
 answer: "Yes. When severe Melbourne storms cause immediate damage to your tiled roof, our priority is securing the property. We provide professional make-safe services, including immediate tarping, and detailed condition reports for your insurer. Once approved, we move from emergency make-safe to permanent, structural restoration. Learn more about our [Insurance Roof Repairs & Make-Safe services](/services/insurance-roof-repairs)."
+category: "insurance"
+services: ["insurance-roof-repairs", "tiled-restoration"]
+weatherEvents: ["HAIL_STORM", "THUNDERSTORM", "HIGH_WIND", "HEAVY_RAIN"]
+tags: ["insurance", "storm", "emergency", "make-safe", "tarping"]
+basePriority: 8
 locationSlug: "melbourne"
 ---
 

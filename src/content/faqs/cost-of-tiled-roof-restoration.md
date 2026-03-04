@@ -1,6 +1,11 @@
 ---
 question: "How much does a tiled roof restoration cost in Melbourne?"
 answer: "A complete tiled roof restoration in Melbourne typically costs between $2,500 and $5,500. This includes high-pressure cleaning, tile repairs, re-bedding, flexi-pointing, and a protective membrane coating. For a precise quote based on your roof's condition, we recommend our [4-stage tiled restoration process](/services/tiled-restoration)."
+category: "cost"
+services: ["tiled-restoration"]
+weatherEvents: []
+tags: ["price", "quote", "restoration", "cost"]
+basePriority: 9
 locationSlug: "melbourne"
 ---
 

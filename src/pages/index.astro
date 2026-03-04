@@ -5,9 +5,10 @@ import TrustBar from '../components/TrustBar.astro';
 import ProcessSteps from '../components/ProcessSteps.astro';
 import WeatherHero from '../components/WeatherHero.tsx';
 import QuoteForm from '../components/QuoteForm.tsx';
-import FAQAccordion from '../components/FAQAccordion.tsx';
+import SmartFAQAccordion from '../components/SmartFAQAccordion.tsx';
 import PromoCard from '../components/PromoCard.astro';
 import TextureTechnology from '../components/TextureTechnology.astro';
+import { rankFAQs } from '../utils/faqRanker';
 
 const locations = await getCollection('locations');
 const services = await getCollection('services');
@@ -34,18 +35,22 @@ if (weatherContext) {
   }
 }
 
-// FAQ content
-const baseFaqs = faqs.map(f => ({ question: f.data.question, answer: f.data.answer }));
-const defaultFaqs = [
-  { question: 'How much does a tile roof restoration cost?', answer: 'A typical restoration ranges from $3,500 to $8,000 depending on roof size, condition, and the services required. We provide free, no-obligation inspections with detailed written quotes.' },
-  { question: 'Do you offer emergency repairs?', answer: 'Yes — we have emergency crews available for storm damage, active leaks, and urgent flashing repairs. Call us 24/7 for genuine emergencies.' },
-  { question: 'What\'s the difference between cleaning, pointing, and restoration?', answer: 'Cleaning removes moss, lichen and grime. Re-bedding and flexi-pointing secures ridge caps with modern flexible compound. A full restoration combines all stages plus a protective coating — it\'s the most cost-effective way to extend your roof\'s life by 15–20 years.' },
-  { question: 'How long does a roof restoration take?', answer: 'A typical restoration takes 3–5 days depending on roof size and conditions. We plan around the weather forecast to ensure pointing and coating cure correctly.' },
-  { question: 'How do I know if my roof needs restoration vs. just a clean?', answer: 'If your ridge caps are cracked, mortar is flaking, or tiles are visibly broken, you need a restoration. If the roof is structurally sound but just dirty, a clean and inspection will suffice. Our free inspection will tell you exactly what\'s needed — no upselling.' },
-];
-// ⚡ Bolt: Replace O(N²) nested loop with O(N) Set lookup for FAQ deduplication
-const baseFaqQuestions = new Set(baseFaqs.map(f => f.question));
-const allFaqs = [...baseFaqs, ...defaultFaqs.filter(d => !baseFaqQuestions.has(d.question))];
+// ── Smart FAQ ranking ─────────────────────────────────────────────────────────
+// Map content collection entries into RankableFAQ shape and run the ranker.
+// The ranker handles all ordering — no manual sort, no hardcoded lists.
+const rankableFaqs = faqs.map(f => ({
+  slug: f.slug,
+  question: f.data.question,
+  answer: f.data.answer,
+  category: f.data.category ?? 'general',
+  services: f.data.services ?? [],
+  weatherEvents: f.data.weatherEvents ?? [],
+  tags: f.data.tags ?? [],
+  basePriority: f.data.basePriority ?? 5,
+}));
+
+const rankedFaqs = rankFAQs(rankableFaqs, weatherContext);
+
 
 // Weather-informed service ordering
 const serviceOrder = weatherContext?.services.map(s => s.slug) || [];
@@ -166,14 +171,20 @@ const sortedServices = [...services].sort((a, b) => {
 
   <!-- FAQ Section -->
   <section class="section-dark" style="padding: 5rem 0;">
-    <div class="container" style="max-width: 48rem;">
+    <div class="container" style="max-width: 52rem;">
       <div style="text-align: center; margin-bottom: 2.5rem;">
         <h2 class="section-heading">Common <span class="accent-text">Questions</span></h2>
         <p class="section-subheading" style="margin-left: auto; margin-right: auto;">
-          Everything you need to know about tile roof restoration in Melbourne.
+          {weatherContext?.copyHints?.weatherDescription
+            ? `Questions most relevant during ${weatherContext.copyHints.weatherDescription} — sorted by what matters right now.`
+            : 'Everything you need to know about tile roof restoration in Melbourne.'}
         </p>
       </div>
-      <FAQAccordion client:visible items={allFaqs} />
+      <SmartFAQAccordion
+        client:visible
+        items={rankedFaqs}
+        weatherEvent={weatherContext?.event}
+      />
     </div>
   </section>
 

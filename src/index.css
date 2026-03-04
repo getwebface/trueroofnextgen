@@ -111,7 +111,7 @@ body.weather-storm {
 
 body.weather-storm .hero-section {
   background: linear-gradient(140deg, rgba(13, 0, 0, 0.95) 0%, rgba(45, 17, 17, 0.85) 40%, rgba(32, 8, 8, 0.95) 100%),
-              url('/cdn/hero-tiles-rain.jpg');
+    url('/cdn/hero-tiles-rain.jpg');
   background-size: cover;
   background-position: center;
 }
@@ -153,7 +153,7 @@ body.weather-rain {
 
 body.weather-rain .hero-section {
   background: linear-gradient(140deg, rgba(6, 15, 30, 0.95) 0%, rgba(30, 41, 59, 0.85) 50%, rgba(10, 24, 48, 0.95) 100%),
-              url('/cdn/hero-tiles-rain.jpg');
+    url('/cdn/hero-tiles-rain.jpg');
   background-size: cover;
   background-position: center;
 }
@@ -195,7 +195,7 @@ body.weather-clear-hot {
 
 body.weather-clear-hot .hero-section {
   background: linear-gradient(140deg, rgba(26, 18, 0, 0.92) 0%, rgba(34, 24, 0, 0.82) 50%, rgba(26, 17, 0, 0.92) 100%),
-              url('/cdn/hero-tiles-rain.jpg');
+    url('/cdn/hero-tiles-rain.jpg');
   background-size: cover;
   background-position: center;
 }
@@ -224,7 +224,7 @@ body.weather-clear {
 
 body.weather-clear .hero-section {
   background: linear-gradient(140deg, rgba(15, 15, 35, 0.92) 0%, rgba(26, 26, 46, 0.82) 50%, rgba(22, 33, 62, 0.92) 100%),
-              url('/cdn/hero-tiles-rain.jpg');
+    url('/cdn/hero-tiles-rain.jpg');
   background-size: cover;
   background-position: center;
 }
@@ -253,7 +253,7 @@ body.weather-overcast {
 
 body.weather-overcast .hero-section {
   background: linear-gradient(140deg, rgba(13, 15, 20, 0.95) 0%, rgba(20, 23, 32, 0.85) 50%, rgba(17, 19, 24, 0.95) 100%),
-              url('/cdn/hero-tiles-rain.jpg');
+    url('/cdn/hero-tiles-rain.jpg');
   background-size: cover;
   background-position: center;
 }
@@ -282,7 +282,7 @@ body.weather-frost {
 
 body.weather-frost .hero-section {
   background: linear-gradient(140deg, rgba(6, 12, 22, 0.95) 0%, rgba(13, 21, 37, 0.85) 50%, rgba(10, 16, 32, 0.95) 100%),
-              url('/cdn/hero-tiles-rain.jpg');
+    url('/cdn/hero-tiles-rain.jpg');
   background-size: cover;
   background-position: center;
 }
@@ -542,7 +542,7 @@ body.weather-default .accent-glow {
 .hero-section {
   position: relative;
   background: linear-gradient(135deg, rgba(15, 15, 35, 0.9) 0%, rgba(26, 26, 46, 0.8) 50%, rgba(22, 33, 62, 0.9) 100%),
-              url('/cdn/hero-tiles-rain.jpg');
+    url('/cdn/hero-tiles-rain.jpg');
   background-size: cover;
   background-position: center;
   overflow: hidden;
@@ -1337,6 +1337,7 @@ body.weather-default .accent-glow {
    Reduced Motion
    ═══════════════════════════════════════════════════ */
 @media (prefers-reduced-motion: reduce) {
+
   *,
   ::before,
   ::after {
@@ -1357,4 +1358,246 @@ body.weather-default .accent-glow {
 .cta-secondary:focus-visible {
   outline: 2px solid white;
   outline-offset: 4px;
+}
+
+/* ═══════════════════════════════════════════════════
+   SmartFAQAccordion — Compact, Ranked, Weather-Aware
+   ═══════════════════════════════════════════════════ */
+
+/* ── Wrapper ── */
+.smart-faq {
+  width: 100%;
+}
+
+/* ── Category Filter Tabs ── */
+.faq-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.75rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.faq-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.45rem 1rem;
+  border-radius: 9999px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  white-space: nowrap;
+}
+
+.faq-tab:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.85);
+  border-color: rgba(255, 255, 255, 0.18);
+}
+
+.faq-tab.active {
+  background: rgba(249, 115, 22, 0.12);
+  border-color: rgba(249, 115, 22, 0.35);
+  color: var(--color-brand-orange);
+}
+
+.faq-tab-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.35rem;
+  height: 1.35rem;
+  padding: 0 0.3rem;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.06);
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.4);
+  transition: background 0.2s, color 0.2s;
+}
+
+.faq-tab.active .faq-tab-count {
+  background: rgba(249, 115, 22, 0.2);
+  color: var(--color-brand-orange);
+}
+
+/* ── FAQ List ── */
+.faq-list {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Individual FAQ Row ── */
+.faq-row {
+  position: relative;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  transition: background 0.2s;
+}
+
+.faq-row:first-child {
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Weather-boosted rows get a subtle left accent */
+.faq-row.weather-boosted {
+  border-left: 2px solid rgba(249, 115, 22, 0.5);
+  padding-left: 0.75rem;
+}
+
+/* ── Weather Boost Badge ── */
+.faq-boost-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.2rem 0.6rem;
+  margin-top: 0.75rem;
+  margin-bottom: -0.25rem;
+  border-radius: 9999px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  background: rgba(249, 115, 22, 0.1);
+  border: 1px solid rgba(249, 115, 22, 0.25);
+  color: rgba(249, 115, 22, 0.9);
+  animation: fadePillIn 0.4s ease-out both;
+  width: fit-content;
+}
+
+@keyframes fadePillIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── Row Trigger (Question Button) ── */
+.faq-row-trigger {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.1rem 0;
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.85);
+  font-family: 'Outfit', sans-serif;
+  font-weight: 600;
+  font-size: 0.975rem;
+  text-align: left;
+  cursor: pointer;
+  transition: color 0.2s;
+  line-height: 1.4;
+}
+
+.faq-row-trigger:hover {
+  color: white;
+}
+
+.faq-row.open .faq-row-trigger {
+  color: white;
+}
+
+.faq-row-q {
+  flex: 1;
+}
+
+/* ── Chevron icon ── */
+.faq-row-chevron {
+  flex-shrink: 0;
+  color: rgba(255, 255, 255, 0.3);
+  transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1), color 0.2s;
+}
+
+.faq-row-trigger:hover .faq-row-chevron {
+  color: rgba(249, 115, 22, 0.7);
+}
+
+.faq-row.open .faq-row-chevron {
+  color: var(--color-brand-orange);
+}
+
+.faq-row-chevron.rotated {
+  transform: rotate(180deg);
+}
+
+/* ── Answer Panel ── */
+.faq-row-answer {
+  overflow: hidden;
+}
+
+.faq-row-answer-inner {
+  padding-bottom: 1.1rem;
+  color: rgba(255, 255, 255, 0.52);
+  font-size: 0.9rem;
+  line-height: 1.75;
+}
+
+.faq-row-answer-inner a {
+  color: var(--color-brand-orange);
+  text-decoration: underline;
+  text-decoration-color: rgba(249, 115, 22, 0.35);
+  text-underline-offset: 2px;
+  transition: text-decoration-color 0.2s;
+}
+
+.faq-row-answer-inner a:hover {
+  text-decoration-color: var(--color-brand-orange);
+}
+
+/* ── Show More / Less button ── */
+.faq-show-more {
+  width: 100%;
+  margin-top: 1.25rem;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-card);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  color: rgba(255, 255, 255, 0.45);
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  letter-spacing: 0.02em;
+  text-align: center;
+}
+
+.faq-show-more:hover {
+  background: rgba(249, 115, 22, 0.07);
+  border-color: rgba(249, 115, 22, 0.2);
+  color: rgba(249, 115, 22, 0.8);
+}
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+  .faq-tabs {
+    gap: 0.375rem;
+  }
+
+  .faq-tab {
+    font-size: 0.75rem;
+    padding: 0.4rem 0.75rem;
+  }
+
+  .faq-row-trigger {
+    font-size: 0.9rem;
+    padding: 1rem 0;
+  }
+
+  .faq-row.weather-boosted {
+    padding-left: 0.5rem;
+  }
 }

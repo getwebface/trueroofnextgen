@@ -1,6 +1,11 @@
 ---
 question: "How long does a tiled roof restoration last in Melbourne?"
 answer: "A professional tiled roof restoration in Melbourne will last between 15 to 20 years. This lifespan depends on the quality of materials used, proper high-pressure cleaning, flexible pointing application, and the impact of Melbourne's harsh UV and storm weather conditions."
+category: "maintenance"
+services: ["tiled-restoration"]
+weatherEvents: ["CLEAR_HOT", "CLEAR_MILD"]
+tags: ["lifespan", "durability", "restoration", "warranty", "years"]
+basePriority: 8
 locationSlug: "craigieburn"
 ---
 

@@ -1,6 +1,11 @@
 ---
 question: "How often should a tiled roof be repointed in Melbourne?"
 answer: "In Melbourne, a tiled roof should be repointed every 10 to 15 years. Harsh weather, including intense sun and heavy rain, causes the mortar to crack and degrade. Regular repointing using modern flexible pointing prevents water leaks and secures loose ridge capping."
+category: "maintenance"
+services: ["ridge-cap-rebedding-pointing", "tiled-restoration"]
+weatherEvents: ["FROST", "HEAVY_RAIN", "DRIZZLE"]
+tags: ["repointing", "ridge-cap", "mortar", "maintenance", "frequency"]
+basePriority: 7
 locationSlug: "broadford"
 ---
 

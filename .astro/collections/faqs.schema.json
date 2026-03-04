@@ -10,6 +10,47 @@
         "answer": {
           "type": "string"
         },
+        "category": {
+          "type": "string",
+          "enum": [
+            "cost",
+            "process",
+            "emergency",
+            "maintenance",
+            "insurance",
+            "strata",
+            "diagnosis",
+            "general"
+          ],
+          "default": "general"
+        },
+        "services": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "weatherEvents": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "basePriority": {
+          "type": "number",
+          "minimum": 1,
+          "maximum": 10,
+          "default": 5
+        },
         "locationSlug": {
           "type": "string"
         },

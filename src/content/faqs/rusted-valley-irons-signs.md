@@ -1,6 +1,11 @@
 ---
 question: "How do I know if my valley irons are rusted?"
 answer: "Look for visible orange rust lines along the roof valleys, flaking metal, or water pooling after heavy rain. Inside, check for brown water stains on your ceiling directly below a roof intersection."
+category: "diagnosis"
+services: ["metal-flashings", "tiled-restoration"]
+weatherEvents: ["HEAVY_RAIN", "DRIZZLE", "THUNDERSTORM"]
+tags: ["valley-irons", "rust", "diagnosis", "leak", "flashing"]
+basePriority: 7
 locationSlug: "kilmore"
 ---
 
