@@ -54,12 +54,7 @@ Recently, we partnered with a local body corporate to resolve chronic valley iro
   "@context": "https://schema.org",
   "@type": "Review",
   "itemReviewed": {
-    "@type": "Service",
-    "name": "Real Estate & Strata Roof Maintenance",
-    "provider": {
-      "@type": "LocalBusiness",
-      "name": "True Roof"
-    }
+    "@id": "https://trueroof.com.au/services/strata-roof-maintenance#service"
   },
   "reviewRating": {
     "@type": "Rating",
