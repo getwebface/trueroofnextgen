@@ -171,7 +171,7 @@ const sortedServices = [...services].sort((a, b) => {
           Everything you need to know about tile roof restoration in Melbourne.
         </p>
       </div>
-      <FAQAccordion client:load items={allFaqs} />
+      <FAQAccordion client:visible items={allFaqs} />
     </div>
   </section>
 
@@ -204,7 +204,7 @@ const sortedServices = [...services].sort((a, b) => {
         </div>
         <PromoCard contextType="home" />
       </div>
-      <QuoteForm client:load ctx={weatherContext} />
+      <QuoteForm client:visible ctx={weatherContext} />
     </div>
   </section>
 
