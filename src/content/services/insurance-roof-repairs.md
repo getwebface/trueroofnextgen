@@ -44,4 +44,6 @@ Our approach ensures your property is protected immediately while laying the gro
 
 Many storm damage assessments hastily suggest a full roof replacement. At True Roof, we know that Melbourne's heritage tiled roofs are incredibly resilient. Often, what looks like catastrophic damage can be completely resolved through our targeted structural repairs and 4-Stage Restoration Process.
 
+<ComparisonChecklist client:visible />
+
 We work efficiently to secure your home, provide the necessary documentation for your insurer, and execute a flawless restoration that returns your roof to a watertight, pristine condition. Don't let storm damage lead to an unnecessary replacement—trust the restoration experts.
