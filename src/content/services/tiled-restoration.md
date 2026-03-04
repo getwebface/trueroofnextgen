@@ -24,7 +24,7 @@ A full restoration is the most effective way to extend the life of your tiled ro
 
 <div class="glass-card" style="padding: 1.5rem;">
 
-3. **Re-bedding & Flexi-Pointing:** Unlike standard mortar that inevitably cracks with house movement, our flexible pointing compound moves with your home, locking ridge caps in tight and ensuring a permanent, watertight seal.
+3. **Re-bedding & Flexi-Pointing:** Unlike standard mortar that inevitably cracks with house movement, our [flexible pointing compound](/services/ridge-cap-rebedding-pointing) moves with your home, locking ridge caps in tight and ensuring a permanent, watertight seal.
 
 </div>
 

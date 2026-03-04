@@ -39,7 +39,7 @@ Our comprehensive restoration includes:
 
 <div class="glass-card" style="padding: 1.5rem;">
 
-- Precision re-bedding and advanced flexi-pointing designed to move with your home and withstand the Northern corridor's blustering winds.
+- Precision re-bedding and [advanced flexi-pointing](/services/ridge-cap-rebedding-pointing) designed to move with your home and withstand the Northern corridor's blustering winds.
 
 </div>
 

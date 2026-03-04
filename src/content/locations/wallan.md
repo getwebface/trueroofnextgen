@@ -29,7 +29,7 @@ We don't deal in temporary superficial solutions. Our specialized process is eng
 
 <div class="glass-card p-6">
 
-- **advanced flexi-pointing** that moves with your home to lock ridge caps tight
+- **[advanced flexi-pointing](/services/ridge-cap-rebedding-pointing)** that moves with your home to lock ridge caps tight
 
 </div>
 

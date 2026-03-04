@@ -20,7 +20,7 @@ Melbourne's heritage tiled roofs require specific care to withstand the local cl
 
 - **High-Pressure Cleaning**
 - **Precision Re-bedding**
-- **High-Quality Flexi-Pointing**
+- **[High-Quality Flexi-Pointing](/services/ridge-cap-rebedding-pointing)**
 
 <div class="glass-card" style="border-left: 4px solid #f97316; padding: 1.5rem; margin-top: 2rem; margin-bottom: 2rem;">
 
