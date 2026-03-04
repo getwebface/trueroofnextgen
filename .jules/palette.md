@@ -1,3 +1,3 @@
-## 2024-03-01 - Skip To Content Navigation Added
-**Learning:** Found that keyboard accessibility was hampered by the lack of a skip-to-content link bypassing the sticky navigation. Such a link provides massive UX/a11y improvement for minimal code.
-**Action:** Always verify a layout's structural HTML has a skip link target (`id="main-content"`) and a skip-link anchor hidden-by-default at the top of the body.
+## 2024-05-24 - Missing Focus Indicators on Interactive Elements
+**Learning:** Custom interactive elements (like `.cta-primary` and `.cta-secondary` links) lack visible focus states (`:focus-visible`), making keyboard navigation difficult for screen reader and keyboard-only users.
+**Action:** Added global and component-specific `:focus-visible` outlines using brand colors and offsets to ensure WCAG compliant focus indicators.
