@@ -264,11 +264,14 @@ function rankServices(event: WeatherEvent, season: Season, urgency: UrgencyLevel
     'metal-flashings': { slug: 'metal-flashings', weight: 0, trigger: 'flashing failures' },
     'cleaning': { slug: 'cleaning', weight: 0, trigger: 'annual maintenance' },
     'tiled-restoration': { slug: 'tiled-restoration', weight: 0, trigger: 'full restoration' },
+    'insurance-roof-repairs': { slug: 'insurance-roof-repairs', weight: 0, trigger: 'make-safe and assessment' },
   };
 
   // Hail or heavy storm → flashings and structural are #1
   if (event === 'HAIL_STORM' || event === 'THUNDERSTORM') {
-    serviceMap['metal-flashings'].weight = 10;
+    serviceMap['insurance-roof-repairs'].weight = 10;
+    serviceMap['insurance-roof-repairs'].trigger = 'urgent storm make-safe and insurance assessment';
+    serviceMap['metal-flashings'].weight = 9;
     serviceMap['metal-flashings'].trigger = 'storm-damaged flashings and valleys';
     serviceMap['tiled-restoration'].weight = 8;
     serviceMap['tiled-restoration'].trigger = 'cracked or displaced tiles';
@@ -277,7 +280,9 @@ function rankServices(event: WeatherEvent, season: Season, urgency: UrgencyLevel
   }
   // Heavy rain / drizzle → active leaks → flashings first
   else if (event === 'HEAVY_RAIN' || event === 'DRIZZLE') {
-    serviceMap['metal-flashings'].weight = 9;
+    serviceMap['insurance-roof-repairs'].weight = 9;
+    serviceMap['insurance-roof-repairs'].trigger = 'urgent leak make-safe and assessment';
+    serviceMap['metal-flashings'].weight = 8;
     serviceMap['metal-flashings'].trigger = 'flashing leaks showing in rain';
     serviceMap['tiled-restoration'].weight = 6;
     serviceMap['tiled-restoration'].trigger = 'cracked pointing letting in water';
@@ -286,7 +291,9 @@ function rankServices(event: WeatherEvent, season: Season, urgency: UrgencyLevel
   }
   // High wind → loose ridges and tiles
   else if (event === 'HIGH_WIND') {
-    serviceMap['tiled-restoration'].weight = 9;
+    serviceMap['insurance-roof-repairs'].weight = 9;
+    serviceMap['insurance-roof-repairs'].trigger = 'emergency make-safe for wind damage';
+    serviceMap['tiled-restoration'].weight = 8;
     serviceMap['tiled-restoration'].trigger = 'wind-lifted or displaced tiles';
     serviceMap['metal-flashings'].weight = 7;
     serviceMap['metal-flashings'].trigger = 'wind-lifted flashings';
@@ -313,9 +320,11 @@ function rankServices(event: WeatherEvent, season: Season, urgency: UrgencyLevel
   }
   // Winter → damage assessment
   else if (season === 'WINTER') {
-    serviceMap['metal-flashings'].weight = 8;
+    serviceMap['insurance-roof-repairs'].weight = 8;
+    serviceMap['insurance-roof-repairs'].trigger = 'winter storm damage assessment';
+    serviceMap['metal-flashings'].weight = 7;
     serviceMap['metal-flashings'].trigger = 'winter leak diagnosis';
-    serviceMap['tiled-restoration'].weight = 7;
+    serviceMap['tiled-restoration'].weight = 6;
     serviceMap['tiled-restoration'].trigger = 'winter damage assessment';
     serviceMap['cleaning'].weight = 5;
     serviceMap['cleaning'].trigger = 'moss thriving in winter damp';
@@ -352,6 +361,7 @@ function rankServices(event: WeatherEvent, season: Season, urgency: UrgencyLevel
     serviceMap['tiled-restoration'].weight = 7;
     serviceMap['cleaning'].weight = 6;
     serviceMap['metal-flashings'].weight = 5;
+    serviceMap['insurance-roof-repairs'].weight = 4;
   }
 
   return Object.values(serviceMap).sort((a, b) => b.weight - a.weight);
