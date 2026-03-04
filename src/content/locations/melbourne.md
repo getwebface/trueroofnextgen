@@ -26,7 +26,13 @@ Melbourne's heritage tiled roofs require specific care to withstand the local cl
 
 **The True Roof Workmanship Guarantee**
 
-We’ve been restoring terracotta and concrete tiled roofs locally around Melbourne for over 25 years. We aren’t a faceless corporation—we are a real local business with a reputation to protect. Our fully insured crews carry over $20M in public liability, which means your property is completely protected while we work. When we finish a restoration, we don't just walk away—every single job we do is backed by our rock-solid **10-Year Workmanship Guarantee**. If there’s an issue, we come back and fix it. Plain and simple. Oh, and we always clean up our mess.
+We’ve been restoring terracotta and concrete tiled roofs locally around Melbourne for over 25 years. We aren’t a faceless corporation—we are a real local business with a reputation to protect.
+
+Our fully insured crews carry over $20M in public liability, which means your property is completely protected while we work.
+
+When we finish a restoration, we don't just walk away—every single job we do is backed by our rock-solid **10-Year Workmanship Guarantee**.
+
+If there’s an issue, we come back and fix it. Plain and simple. Oh, and we always clean up our mess.
 
 </div>
 
