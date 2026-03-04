@@ -1,6 +1,6 @@
 ---
 // src/components/TrustBar.astro
-import { ShieldCheck, Star, Construction, MapPin, CircleCheck, AlertTriangle } from 'lucide-react';
+import { ShieldCheck, Star, Construction, MapPin, CircleCheck, AlertTriangle, CloudRain, Leaf, Snowflake, Sun } from 'lucide-react';
 import type { WeatherContext } from '../utils/weatherProcessor';
 
 interface Props {
@@ -8,12 +8,33 @@ interface Props {
 }
 
 const { ctx } = Astro.props;
+const event = ctx?.event;
+const season = ctx?.season;
 const urgency = ctx?.urgency || 1;
 const isEmergency = urgency >= 4;
 const strokeGradient = isEmergency ? 'white' : 'url(#orange-gradient)';
 const containerStyle = isEmergency
   ? 'background: rgba(239, 68, 68, 0.05); border-bottom: 1px solid rgba(239, 68, 68, 0.2);'
   : '';
+
+let ContextIcon = null;
+let contextText = '';
+
+if (!isEmergency) {
+  if (event === 'HEAVY_RAIN' || event === 'DRIZZLE') {
+    ContextIcon = CloudRain;
+    contextText = 'Same-Day Leak Diagnosis';
+  } else if (season === 'AUTUMN') {
+    ContextIcon = Leaf;
+    contextText = 'Pre-Winter Inspections';
+  } else if (event === 'FROST') {
+    ContextIcon = Snowflake;
+    contextText = 'Winter Damage Assessment';
+  } else if (event === 'CLEAR_HOT') {
+    ContextIcon = Sun;
+    contextText = 'Heat-Resistant Coatings';
+  }
+}
 ---
 <div class="trust-bar" style={containerStyle}>
   {isEmergency && (
@@ -34,13 +55,19 @@ const containerStyle = isEmergency
     <div class="trust-icon"><Construction size={20} strokeWidth={1.5} stroke={isEmergency ? '#fca5a5' : strokeGradient} /></div>
     <span>25+ Years Experience</span>
   </div>
+  {!isEmergency && ContextIcon && (
+    <div class="trust-item" style="color: var(--color-brand-orange); font-weight: 700;">
+      <div class="trust-icon" style="background: rgba(249, 115, 22, 0.15);"><ContextIcon size={20} strokeWidth={2} stroke={strokeGradient} /></div>
+      <span>{contextText}</span>
+    </div>
+  )}
   {!isEmergency && (
     <div class="trust-item">
       <div class="trust-icon"><MapPin size={20} strokeWidth={1.5} stroke={strokeGradient} /></div>
       <span>100% Melbourne Owned</span>
     </div>
   )}
-  {!isEmergency && (
+  {!isEmergency && !ContextIcon && (
     <div class="trust-item">
       <div class="trust-icon"><CircleCheck size={20} strokeWidth={1.5} stroke={strokeGradient} /></div>
       <span>Free Roof Inspections</span>
