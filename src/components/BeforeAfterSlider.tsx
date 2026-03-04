@@ -49,22 +49,22 @@ const BeforeAfterSlider: FC<BeforeAfterSliderProps> = ({
             >
                 {/* Background Image (After) */}
                 <div className="absolute inset-0">
-                <img src={afterImage} alt="After restoration" className="w-full h-full object-cover pointer-events-none" />
-                <div className="absolute bottom-4 right-4 bg-black/60 backdrop-blur-sm text-white px-3 py-1 rounded-full text-sm font-semibold border border-white/10 z-10">
-                    {afterLabel}
+                    <img src={afterImage} alt="After restoration" loading="lazy" width="1280" height="720" className="w-full h-full object-cover pointer-events-none" />
+                    <div className="absolute bottom-4 right-4 bg-black/60 backdrop-blur-sm text-white px-3 py-1 rounded-full text-sm font-semibold border border-white/10 z-10">
+                        {afterLabel}
+                    </div>
                 </div>
-            </div>
 
-            {/* Foreground Image (Before) clipped by slider */}
-            <div
-                className="absolute inset-0 border-r-2 border-white shadow-[0_0_20px_rgba(0,0,0,0.5)]"
-                style={{ clipPath: `polygon(0 0, ${sliderPos}% 0, ${sliderPos}% 100%, 0 100%)` }}
-            >
-                <img src={beforeImage} alt="Before restoration" className="w-full h-full object-cover pointer-events-none" />
-                <div className="absolute bottom-4 left-4 bg-black/60 backdrop-blur-sm text-white px-3 py-1 rounded-full text-sm font-semibold border border-white/10 z-10">
-                    {beforeLabel}
+                {/* Foreground Image (Before) clipped by slider */}
+                <div
+                    className="absolute inset-0 border-r-2 border-white shadow-[0_0_20px_rgba(0,0,0,0.5)]"
+                    style={{ clipPath: `polygon(0 0, ${sliderPos}% 0, ${sliderPos}% 100%, 0 100%)` }}
+                >
+                    <img src={beforeImage} alt="Before restoration" loading="lazy" width="1280" height="720" className="w-full h-full object-cover pointer-events-none" />
+                    <div className="absolute bottom-4 left-4 bg-black/60 backdrop-blur-sm text-white px-3 py-1 rounded-full text-sm font-semibold border border-white/10 z-10">
+                        {beforeLabel}
+                    </div>
                 </div>
-            </div>
 
                 {/* Draggable Handle */}
                 <motion.div

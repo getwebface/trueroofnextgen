@@ -104,8 +104,9 @@ export const onRequest = defineMiddleware(async (context, next) => {
         const responseToCache = new Response(JSON.stringify(weatherData), {
           headers: {
             'Content-Type': 'application/json',
-            // 15-min cache in production, but allow stale data while revalidating for an hour
-            'Cache-Control': 'public, s-maxage=900, stale-while-revalidate=3600',
+            // 15-min fresh cache; serve stale (background revalidate) for 2h;
+            // serve stale-if-error for 24h so origin failures don't cause TTFB spikes.
+            'Cache-Control': 'public, s-maxage=900, stale-while-revalidate=7200, stale-if-error=86400',
           },
         });
         context.locals.runtime.waitUntil?.(cache.put(cacheKey, responseToCache));
