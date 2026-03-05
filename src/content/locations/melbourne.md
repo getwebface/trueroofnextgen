@@ -18,9 +18,27 @@ localCommonRoofTypes: ["Terracotta Tile", "Concrete Tile"]
 ---
 Melbourne's heritage tiled roofs require specific care to withstand the local climate. Our comprehensive approach includes:
 
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8 mb-8">
+
+<div class="glass-card p-6">
+
 - **High-Pressure Cleaning**
+
+</div>
+
+<div class="glass-card p-6">
+
 - **Precision Re-bedding**
+
+</div>
+
+<div class="glass-card p-6">
+
 - **[High-Quality Flexi-Pointing](/services/ridge-cap-rebedding-pointing)**
+
+</div>
+
+</div>
 
 <div class="glass-card" style="border-left: 4px solid #f97316; padding: 1.5rem; margin-top: 2rem; margin-bottom: 2rem;">
 
