@@ -23,7 +23,8 @@ import SmartMedia from './SmartMedia.astro';
         <li class="text-white/30">❌ Structural Repairs</li>
         <li class="text-white/30">❌ Re-bedding &amp; Pointing</li>
       </ul>
-      <a href="#quote" class="cta-secondary block w-full text-center">Select</a>
+      {/* 🧠 UX Principle: Benefit-driven CTA reduces friction and explicitly states value. Tracking intent adds data for CRO. */}
+      <a href="#quote" class="cta-secondary block w-full text-center" onclick="window.trackEvent && window.trackEvent('clicked_pricing_tier', { tier: 'Clean' })">Get a Free Quote &rarr;</a>
     </div>
   </div>
 
@@ -48,7 +49,8 @@ import SmartMedia from './SmartMedia.astro';
         <li>✅ Structural Repairs</li>
         <li>✅ Re-bedding &amp; Pointing</li>
       </ul>
-      <a href="#quote" class="cta-primary block w-full text-center">Select</a>
+      {/* 🧠 UX Principle: Benefit-driven CTA reduces friction and explicitly states value. Tracking intent adds data for CRO. */}
+      <a href="#quote" class="cta-primary block w-full text-center" onclick="window.trackEvent && window.trackEvent('clicked_pricing_tier', { tier: 'Point' })">Get a Free Quote &rarr;</a>
     </div>
   </div>
 
@@ -72,7 +74,8 @@ import SmartMedia from './SmartMedia.astro';
         <li>✅ Custom Color Coating</li>
         <li>✅ 10-Year Warranty</li>
       </ul>
-      <a href="#quote" class="cta-secondary block w-full text-center">Select</a>
+      {/* 🧠 UX Principle: Benefit-driven CTA reduces friction and explicitly states value. Tracking intent adds data for CRO. */}
+      <a href="#quote" class="cta-secondary block w-full text-center" onclick="window.trackEvent && window.trackEvent('clicked_pricing_tier', { tier: 'Full Restoration' })">Get a Free Quote &rarr;</a>
     </div>
   </div>
 
