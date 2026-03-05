@@ -1,9 +1,9 @@
 {
   "isActive": true,
-  "title": "Autumn Gutter Clear-Out",
-  "code": "AUTUMNLEAVES",
-  "value": "Free Gutter Clearing",
-  "expiryDate": "April 30th",
-  "targetService": "Any Full Roof Restoration",
-  "description": "Get a free complete gutter clearing with any full roof restoration quote accepted before April 30th. Keep your home safe from autumn leaves before the winter rain starts."
+  "title": "Pre-Winter Prep",
+  "code": "PREWINTER",
+  "value": "Free Box Gutter Clean",
+  "expiryDate": "May 31st",
+  "targetService": "Any Re-pointing quote accepted in May",
+  "description": "Free Box Gutter Clean with any Re-pointing quote accepted in May. Keep your home safe before the winter rain starts."
 }
