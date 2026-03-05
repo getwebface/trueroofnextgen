@@ -221,7 +221,17 @@ const QuoteForm: FC<QuoteFormProps> = ({ ctx }) => {
                         animation: urgency >= 4 ? 'pulseGlow 2s infinite' : undefined,
                         border: urgency >= 4 ? '1px solid rgba(252, 165, 165, 0.5)' : undefined
                     }}>
-                    {sending ? 'Hold on a sec...' : <>{ctaText} &rarr;</>}
+                    {sending ? (
+                        <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}>
+                            <svg className="animate-spin" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" strokeOpacity="0.25"></circle>
+                                <path d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" fill="currentColor"></path>
+                            </svg>
+                            Hold on a sec...
+                        </span>
+                    ) : (
+                        <>{ctaText} &rarr;</>
+                    )}
                 </button>
                 {/* 🧠 Convert UX: Trust signals and friction-reducing microcopy at the point of action. */}
                 <div style={{
