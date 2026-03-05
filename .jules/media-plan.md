@@ -11,3 +11,11 @@ Target: src/content/services/tiled-restoration.md -> 2. Precision Structural Rep
 Type: High-End Photography
 Aesthetic: "The Professional Tradie". Moody, high-contrast, premium, sharp focus. Deep charcoal/slate uniform. High-contrast brand orange (#f97316) accents. Authentic Melbourne architecture.
 Prompt: Shot on Phase One XF, 80mm macro lens. A close-up, highly detailed cinematic shot of a professional tradesman's gloved hands meticulously securing a heavy-duty valley iron on a Melbourne concrete tiled roof. The tradesman wears a dark charcoal premium work shirt with a vivid, sharp orange accent on the cuff. The lighting is "Moody Storm", with deep, dramatic slate-grey storm clouds in the blurred background. The focus is incredibly sharp on the fresh, clean lines of the metal valley iron and the precise placement of the restored roof tiles. No full roof replacements, just localized precision structural repairs. --ar 16:9 --v 6.0
+
+---
+
+ID: SRV-RIDGE-REBEDDING-MACRO
+Target: src/content/services/ridge-cap-rebedding-pointing.md
+Type: High-End Photography
+Aesthetic: "The Professional Tradie". Sharp focus, shallow depth of field, authentic Melbourne architecture, morning "Golden Hour" lighting. High-contrast brand orange (#f97316) accents. Deep charcoal/slate background.
+Prompt: Shot on 85mm macro lens, shallow depth of field. Extreme close up of a gloved hand using a professional pointing trowel to apply smooth, high-contrast orange flexible pointing compound to the ridge cap of a weathered Melbourne terracotta roof tile. The background is beautifully blurred out. High detail on the texture of the trowel and the grain of the terracotta tile. Morning "Golden Hour" lighting casting dramatic shadows, emphasizing the sharp, clean lines of the new flexi-pointing. No full roof replacements, just restoration pointing. No faces, hands and tools only. --ar 16:9 --v 6.0 --style raw
