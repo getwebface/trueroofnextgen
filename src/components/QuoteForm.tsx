@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect, memo, type FC, type FormEvent } from 'react';
 import type { WeatherContext } from '../utils/weatherProcessor';
+import currentCampaign from '../data/active-campaign.json';
 
 interface QuoteFormProps {
     ctx: WeatherContext | null;
@@ -91,9 +92,10 @@ const QuoteForm: FC<QuoteFormProps> = ({ ctx }) => {
         }
     }
 
+    const campaignText = currentCampaign.code ? `Have promo code ${currentCampaign.code}? Let us know when we call. Valid until ${currentCampaign.expiryDate}.` : '';
     const messageHelperText = ctx?.urgency && ctx.urgency >= 4
         ? "We prioritize emergency call-outs. Please provide detail so we can respond effectively."
-        : (ctx?.copyHints?.seasonalTip || "Have a promo code? Let us know when we call.");
+        : `${ctx?.copyHints?.seasonalTip ? ctx.copyHints.seasonalTip + ' ' : ''}${campaignText}`.trim();
 
     const handleFocus = (fieldName: string) => {
         lastActiveField.current = fieldName;
