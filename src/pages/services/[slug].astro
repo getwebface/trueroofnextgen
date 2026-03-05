@@ -67,7 +67,7 @@ const serviceSchema = {
 <MainLayout title={pageTitle} description={pageDescription} schema={serviceSchema}>
 
   {/* ── Service Hero ── */}
-  <section class="hero-section service-hero-section" style="padding: 4rem 0 3.5rem; position: relative; overflow: hidden;">
+  <section class="hero-section service-hero-section py-16" style="position: relative; overflow: hidden;">
     {/* SmartMedia: full-bleed contextual background for this service */}
     <div class="service-hero-smart-bg" aria-hidden="true">
       <SmartMedia
@@ -101,11 +101,11 @@ const serviceSchema = {
 
   {/* ── Service Content ── */}
   {/* 📐 Pixel: Enforcing F-Pattern reading mode alongside a sticky Z-Pattern CTA aside */}
-  <section style="padding: 4rem 0;">
+  <section class="py-16">
     <div class="container grid grid-cols-1 md:grid-cols-[1fr_20rem] gap-8 md:gap-16 items-start">
 
       {/* Main Content */}
-      <div class="content-prose">
+      <div class="content-prose max-w-prose">
         <Content components={{ BeforeAfterSlider, PricingTierCards, ComparisonChecklist }} />
       </div>
 
@@ -142,7 +142,7 @@ const serviceSchema = {
 
   {/* ── Related Services ── */}
   {relatedServices.length > 0 && (
-    <section class="section-dark" style="padding: 4rem 0;">
+    <section class="section-dark py-16">
       <div class="container">
         <h2 class="section-heading" style="margin-bottom: 2rem;">Other <span class="accent-text">Services</span></h2>
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem;">
