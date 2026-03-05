@@ -46,6 +46,27 @@ const QuoteForm: FC<QuoteFormProps> = ({ ctx }) => {
 
     const ctaText = urgencyCTAs[urgency] || urgencyCTAs[1];
 
+    let messagePlaceholder = "Describe the issue or what you've noticed...";
+    if (ctx) {
+        if (ctx.urgency >= 4) {
+            messagePlaceholder = "Please describe the urgent damage (e.g., location of leaks, missing tiles) so we can prepare the right materials...";
+        } else if (ctx.event === 'HEAVY_RAIN' || ctx.event === 'DRIZZLE') {
+            messagePlaceholder = "Noticing any specific leaks or damp spots today? Let us know which rooms are affected...";
+        } else if (ctx.event === 'HIGH_WIND') {
+            messagePlaceholder = "Did you hear any rattling tiles or notice displaced flashings from the wind?";
+        } else if (ctx.event === 'FROST') {
+            messagePlaceholder = "Noticing any cracked mortar or pointing after the cold nights?";
+        } else if (ctx.season === 'AUTUMN') {
+            messagePlaceholder = "Looking for a pre-winter checkup? Let us know if you have specific concerns like blocked valleys...";
+        } else if (ctx.season === 'SPRING') {
+            messagePlaceholder = "Looking for a post-winter checkup? Let us know if you've noticed any new damage...";
+        }
+    }
+
+    const messageHelperText = ctx?.urgency && ctx.urgency >= 4
+        ? "We prioritize emergency call-outs. Please provide detail so we can respond effectively."
+        : (ctx?.copyHints?.seasonalTip || "Have a promo code? Let us know when we call.");
+
     const handleFocus = () => {
         if (!hasTrackedStart) {
             setHasTrackedStart(true);
@@ -151,11 +172,11 @@ const QuoteForm: FC<QuoteFormProps> = ({ ctx }) => {
                 </div>
                 <div className="form-group">
                     <label className="form-label" htmlFor="q-message">More Details (Optional)</label>
-                    <textarea id="q-message" className="form-textarea" placeholder="Describe the issue or what you've noticed..."
+                    <textarea id="q-message" className="form-textarea" placeholder={messagePlaceholder}
                         onFocus={handleFocus}
                         value={formData.message} onChange={e => setFormData(d => ({ ...d, message: e.target.value }))} />
                     <p style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.4)', marginTop: '0.5rem' }}>
-                        Have a promo code? Let us know when we call.
+                        {messageHelperText}
                     </p>
                 </div>
                 {/* 🧠 Convert UX: Adding a directional arrow to the CTA implies forward momentum and increases click-through. */}
