@@ -37,6 +37,17 @@ const BeforeAfterSlider: FC<BeforeAfterSliderProps> = ({
         setSliderPos(newPos);
     };
 
+    const handleDragEnd = () => {
+        if (typeof window !== 'undefined' && (window as any).posthog) {
+            (window as any).posthog.capture('interacted_before_after_slider', {
+                beforeLabel,
+                afterLabel,
+                final_position: Math.round(sliderPos),
+                method: 'drag'
+            });
+        }
+    };
+
     return (
         <div className="my-8">
             {label && (
@@ -82,6 +93,7 @@ const BeforeAfterSlider: FC<BeforeAfterSliderProps> = ({
                     dragElastic={0}
                     dragMomentum={false}
                     onDrag={handleDrag}
+                    onDragEnd={handleDragEnd}
                 >
                     <div className="w-10 h-10 bg-white rounded-full shadow-xl flex items-center justify-center border-4 border-[#3b82f6] text-[#3b82f6]">
                         <ArrowLeftRight size={20} strokeWidth={2.5} />

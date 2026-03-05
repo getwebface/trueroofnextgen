@@ -1,4 +1,4 @@
-import { useState, memo, type FC, type FormEvent } from 'react';
+import { useState, useRef, useEffect, memo, type FC, type FormEvent } from 'react';
 import type { WeatherContext } from '../utils/weatherProcessor';
 
 interface QuoteFormProps {
@@ -43,6 +43,34 @@ const QuoteForm: FC<QuoteFormProps> = ({ ctx }) => {
         message: '',
     });
     const [hasTrackedStart, setHasTrackedStart] = useState(false);
+    const lastActiveField = useRef<string | null>(null);
+    const trackingDataRef = useRef({ hasTrackedStart, submitted, urgency, service: formData.service, suburb: formData.suburb });
+
+    useEffect(() => {
+        trackingDataRef.current = { hasTrackedStart, submitted, urgency, service: formData.service, suburb: formData.suburb };
+    }, [hasTrackedStart, submitted, urgency, formData.service, formData.suburb]);
+
+    useEffect(() => {
+        const handleBeforeUnload = () => {
+            const currentData = trackingDataRef.current;
+            if (currentData.hasTrackedStart && !currentData.submitted && lastActiveField.current) {
+                if (typeof window !== 'undefined' && (window as any).posthog) {
+                    (window as any).posthog.capture('abandoned_quote_form', {
+                        last_field_interacted: lastActiveField.current,
+                        urgency: currentData.urgency,
+                        service: currentData.service,
+                        suburb: currentData.suburb
+                    });
+                }
+            }
+        };
+
+        window.addEventListener('beforeunload', handleBeforeUnload);
+        return () => {
+            window.removeEventListener('beforeunload', handleBeforeUnload);
+            handleBeforeUnload(); // trigger on unmount
+        };
+    }, []);
 
     const ctaText = urgencyCTAs[urgency] || urgencyCTAs[1];
 
@@ -67,7 +95,8 @@ const QuoteForm: FC<QuoteFormProps> = ({ ctx }) => {
         ? "We prioritize emergency call-outs. Please provide detail so we can respond effectively."
         : (ctx?.copyHints?.seasonalTip || "Have a promo code? Let us know when we call.");
 
-    const handleFocus = () => {
+    const handleFocus = (fieldName: string) => {
+        lastActiveField.current = fieldName;
         if (!hasTrackedStart) {
             setHasTrackedStart(true);
             if (typeof window !== 'undefined' && (window as any).trackEvent) {
@@ -140,14 +169,14 @@ const QuoteForm: FC<QuoteFormProps> = ({ ctx }) => {
                     <label className="form-label" htmlFor="q-name">Your Name <span className="text-red-500" aria-hidden="true">*</span></label>
                     <input id="q-name" className="form-input" type="text" placeholder="e.g. John Smith" required aria-required="true"
                         autoComplete="name"
-                        onFocus={handleFocus}
+                        onFocus={() => handleFocus('name')}
                         value={formData.name} onChange={e => setFormData(d => ({ ...d, name: e.target.value }))} />
                 </div>
                 <div className="form-group">
                     <label className="form-label" htmlFor="q-phone">Phone Number <span className="text-red-500" aria-hidden="true">*</span></label>
                     <input id="q-phone" className="form-input" type="tel" placeholder="Your best contact number" required aria-required="true"
                         autoComplete="tel"
-                        onFocus={handleFocus}
+                        onFocus={() => handleFocus('phone')}
                         value={formData.phone} onChange={e => setFormData(d => ({ ...d, phone: e.target.value }))} />
                     {/* 🧠 Convert UX: Explaining why a phone number is needed reduces anxiety and fear of spam, increasing form completion rates. */}
                     <p style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.4)', marginTop: '0.375rem' }}>
@@ -158,13 +187,13 @@ const QuoteForm: FC<QuoteFormProps> = ({ ctx }) => {
                     <label className="form-label" htmlFor="q-suburb">Suburb</label>
                     <input id="q-suburb" className="form-input" type="text" placeholder="e.g. Doncaster"
                         autoComplete="address-level2"
-                        onFocus={handleFocus}
+                        onFocus={() => handleFocus('suburb')}
                         value={formData.suburb} onChange={e => setFormData(d => ({ ...d, suburb: e.target.value }))} />
                 </div>
                 <div className="form-group">
                     <label className="form-label" htmlFor="q-service">Service Needed</label>
                     <select id="q-service" className="form-select"
-                        onFocus={handleFocus}
+                        onFocus={() => handleFocus('service')}
                         value={formData.service} onChange={e => setFormData(d => ({ ...d, service: e.target.value }))}>
                         <option value="">Select a service...</option>
                         {services.map(s => <option key={s} value={s}>{s}</option>)}
@@ -173,7 +202,7 @@ const QuoteForm: FC<QuoteFormProps> = ({ ctx }) => {
                 <div className="form-group">
                     <label className="form-label" htmlFor="q-message">More Details (Optional)</label>
                     <textarea id="q-message" className="form-textarea" placeholder={messagePlaceholder}
-                        onFocus={handleFocus}
+                        onFocus={() => handleFocus('message')}
                         value={formData.message} onChange={e => setFormData(d => ({ ...d, message: e.target.value }))} />
                     <p style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.4)', marginTop: '0.5rem' }}>
                         {messageHelperText}
