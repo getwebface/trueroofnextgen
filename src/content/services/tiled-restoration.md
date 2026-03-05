@@ -18,7 +18,7 @@ A full restoration is the most effective way to extend the life of your tiled ro
 
 <div class="glass-card" style="padding: 1.5rem;">
 
-2. **Precision Structural Repairs:** A cracked valley iron or broken tile isn't just a drip; it's an open door to structural ceiling damage. We meticulously replace all compromised tiles and fortify all valley irons and flashings to withstand Melbourne's worst weather.
+2. **Precision Structural Repairs:** A cracked valley iron or broken tile isn't just a drip; it's an open door to structural ceiling damage. We meticulously perform [broken tile replacement](/services/broken-tile-replacement) for all compromised tiles and fortify all valley irons and flashings to withstand Melbourne's worst weather.
 
 </div>
 
