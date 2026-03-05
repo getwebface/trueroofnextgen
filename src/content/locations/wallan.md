@@ -52,3 +52,30 @@ Our fully insured crews carry over $20M in public liability, so your property is
 </div>
 
 Protect your ceiling from the next southerly buster. For nearby homeowners in older properties, we also provide expert [roof tile restoration in Kilmore](/locations/kilmore).
+
+## Recent Local Project: Weatherproofing in Wallan
+
+Recently, we completed a full restoration and flexi-pointing on an older terracotta roof in Wallan, securing it just before the storm season.
+
+> "After that massive northerly storm last November, a few of our neighbours lost ridge caps. We had True Roof do a full restoration and flexi-pointing a few months prior, and our roof didn't lose a single tile. The 10-Year Guarantee gave us peace of mind, but seeing it hold up in extreme weather proved they know what they're doing."
+> — **M. Davies, Wallan**
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Review",
+  "itemReviewed": {
+    "@id": "https://trueroof.com.au/locations/wallan#service"
+  },
+  "reviewRating": {
+    "@type": "Rating",
+    "ratingValue": "5",
+    "bestRating": "5"
+  },
+  "author": {
+    "@type": "Person",
+    "name": "M. Davies"
+  },
+  "reviewBody": "After that massive northerly storm last November, a few of our neighbours lost ridge caps. We had True Roof do a full restoration and flexi-pointing a few months prior, and our roof didn't lose a single tile. The 10-Year Guarantee gave us peace of mind, but seeing it hold up in extreme weather proved they know what they're doing."
+}
+</script>
