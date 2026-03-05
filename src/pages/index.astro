@@ -136,7 +136,7 @@ const sortedServices = [...services].sort((a, b) => {
                 <h3>{service.data.title}</h3>
                 <p>{service.data.description}</p>
                 {hint && <div class="service-hint">📍 {hint}</div>}
-                <span class="card-link">Learn More →</span>
+                <span class="card-link">Learn about {service.data.title} →</span>
               </div>
             </a>
           );
