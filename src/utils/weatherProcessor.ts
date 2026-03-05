@@ -267,12 +267,15 @@ function rankServices(event: WeatherEvent, season: Season, urgency: UrgencyLevel
     'insurance-roof-repairs': { slug: 'insurance-roof-repairs', weight: 0, trigger: 'storm damage assessment' },
     'ridge-cap-rebedding-pointing': { slug: 'ridge-cap-rebedding-pointing', weight: 0, trigger: 'ridge cap integrity' },
     'strata-roof-maintenance': { slug: 'strata-roof-maintenance', weight: 0, trigger: 'property maintenance' },
+    'broken-tile-replacement': { slug: 'broken-tile-replacement', weight: 0, trigger: 'tile replacement' },
   };
 
   // Hail or heavy storm → insurance + flashings are #1
   if (event === 'HAIL_STORM' || event === 'THUNDERSTORM') {
     serviceMap['insurance-roof-repairs'].weight = 10;
     serviceMap['insurance-roof-repairs'].trigger = 'storm damage — insurance make-safe response';
+    serviceMap['broken-tile-replacement'].weight = 10;
+    serviceMap['broken-tile-replacement'].trigger = 'hail-shattered tiles requiring urgent replacement';
     serviceMap['metal-flashings'].weight = 9;
     serviceMap['metal-flashings'].trigger = 'storm-damaged flashings and valleys';
     serviceMap['tiled-restoration'].weight = 7;
@@ -288,6 +291,8 @@ function rankServices(event: WeatherEvent, season: Season, urgency: UrgencyLevel
   else if (event === 'HEAVY_RAIN' || event === 'DRIZZLE') {
     serviceMap['metal-flashings'].weight = 9;
     serviceMap['metal-flashings'].trigger = 'flashing leaks showing in rain';
+    serviceMap['broken-tile-replacement'].weight = 8;
+    serviceMap['broken-tile-replacement'].trigger = 'cracked tiles leaking directly into ceilings';
     serviceMap['tiled-restoration'].weight = 6;
     serviceMap['tiled-restoration'].trigger = 'cracked pointing letting in water';
     serviceMap['ridge-cap-rebedding-pointing'].weight = 5;
@@ -303,6 +308,8 @@ function rankServices(event: WeatherEvent, season: Season, urgency: UrgencyLevel
   else if (event === 'HIGH_WIND') {
     serviceMap['ridge-cap-rebedding-pointing'].weight = 10;
     serviceMap['ridge-cap-rebedding-pointing'].trigger = 'wind-dislodged ridge caps — urgent';
+    serviceMap['broken-tile-replacement'].weight = 9;
+    serviceMap['broken-tile-replacement'].trigger = 'wind-lifted or debris-smashed tiles';
     serviceMap['tiled-restoration'].weight = 8;
     serviceMap['tiled-restoration'].trigger = 'wind-lifted or displaced tiles';
     serviceMap['metal-flashings'].weight = 7;
@@ -320,6 +327,8 @@ function rankServices(event: WeatherEvent, season: Season, urgency: UrgencyLevel
     serviceMap['ridge-cap-rebedding-pointing'].trigger = 'frost-cracked pointing mortar — freeze-thaw damage';
     serviceMap['tiled-restoration'].weight = 8;
     serviceMap['tiled-restoration'].trigger = 'frost-cracked tiles and coatings';
+    serviceMap['broken-tile-replacement'].weight = 7;
+    serviceMap['broken-tile-replacement'].trigger = 'frost-cracked terracotta tiles';
     serviceMap['metal-flashings'].weight = 6;
     serviceMap['metal-flashings'].trigger = 'metal contraction causing seal gaps';
     serviceMap['cleaning'].weight = 4;
@@ -337,6 +346,8 @@ function rankServices(event: WeatherEvent, season: Season, urgency: UrgencyLevel
     serviceMap['cleaning'].trigger = 'autumn leaf and moss clean before winter';
     serviceMap['ridge-cap-rebedding-pointing'].weight = 7;
     serviceMap['ridge-cap-rebedding-pointing'].trigger = 'secure ridge caps before winter storms';
+    serviceMap['broken-tile-replacement'].weight = 6;
+    serviceMap['broken-tile-replacement'].trigger = 'replace broken tiles before winter rains';
     serviceMap['metal-flashings'].weight = 6;
     serviceMap['metal-flashings'].trigger = 'flashing inspection before winter rain';
     serviceMap['strata-roof-maintenance'].weight = 5;
@@ -348,6 +359,8 @@ function rankServices(event: WeatherEvent, season: Season, urgency: UrgencyLevel
   else if (season === 'WINTER') {
     serviceMap['metal-flashings'].weight = 8;
     serviceMap['metal-flashings'].trigger = 'winter leak diagnosis';
+    serviceMap['broken-tile-replacement'].weight = 8;
+    serviceMap['broken-tile-replacement'].trigger = 'fix cracked tiles causing winter leaks';
     serviceMap['tiled-restoration'].weight = 7;
     serviceMap['tiled-restoration'].trigger = 'winter damage assessment';
     serviceMap['ridge-cap-rebedding-pointing'].weight = 7;
