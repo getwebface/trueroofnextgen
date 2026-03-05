@@ -40,6 +40,16 @@ Our approach ensures your property is protected immediately while laying the gro
 
 </div>
 
+<div class="glass-card" style="border-left: 4px solid #f97316; padding: 1.5rem; margin-top: 2rem; margin-bottom: 2rem;">
+
+**The True Roof Workmanship Guarantee**
+
+When a storm hits, the last thing you need is a fly-by-night storm chaser. We've been providing emergency make-safe repairs and restoring roofs across Melbourne for over 25 years.
+
+Our local crews are fully insured, so your property is completely protected while we work. Every permanent repair we complete is backed by our ironclad **10-Year Workmanship Guarantee**. If there's an issue, we come back and make it right. And we never leave a mess behind.
+
+</div>
+
 ### Restoration over Replacement
 
 Many storm damage assessments hastily suggest a full roof replacement. At True Roof, we know that Melbourne's heritage tiled roofs are incredibly resilient. Often, what looks like catastrophic damage can be completely resolved through our targeted structural repairs and 4-Stage Restoration Process.
