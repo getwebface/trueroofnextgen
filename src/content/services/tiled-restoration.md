@@ -30,7 +30,7 @@ A full restoration is the most effective way to extend the life of your tiled ro
 
 <div class="glass-card" style="padding: 1.5rem;">
 
-4. **Protective Membrane System (Concrete Only):** This isn't just roof paint. We apply a multi-coat protective membrane system that completely seals the concrete, locking out moisture, restoring color, and providing a long-lasting weather shield for decades to come.
+4. **Protective Membrane System (Concrete Only):** This isn't just a standard cosmetic coating. We apply a multi-coat protective membrane system that completely seals the concrete, locking out moisture, restoring color, and providing a long-lasting weather shield for decades to come.
 
 </div>
 

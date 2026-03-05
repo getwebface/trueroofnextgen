@@ -50,7 +50,7 @@ Our fully insured crews carry over $20M in public liability, which means your pr
 
 When we finish a restoration, we don't just walk away—every single job we do is backed by our rock-solid **10-Year Workmanship Guarantee**.
 
-If there’s an issue, we come back and fix it. Plain and simple. Oh, and we always clean up our mess.
+If there’s an issue, we return promptly to make it right. Plain and simple. Oh, and we always clean up our mess.
 
 </div>
 

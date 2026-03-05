@@ -51,7 +51,7 @@ Whether your ridge caps are completely loose or you're starting to notice cracke
 
 ## 🛑 The "Silicone Trap": Is a Quick Patch Destroying Your Ceiling?
 
-**The Problem:** You spot a crack in the mortar along your roof's ridge line. It's just a small gap, so you, or a general handyman, grab a tube of cheap silicone to seal it up.
+**The Problem:** You spot a crack in the mortar along your roof's ridge line. It's just a small gap, so you, or a general handyman, grab a tube of hardware-store silicone to seal it up.
 
 > "It's waterproof, right? A quick patch is all it needs to stop the leak."
 

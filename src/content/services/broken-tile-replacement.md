@@ -20,7 +20,7 @@ Finding an exact match for a weathered, 40-year-old terracotta or concrete tile 
 
 <div class="glass-card" style="padding: 1.5rem;">
 
-**Safe Extraction & Installation:** Old tiles are brittle. Inexperienced foot traffic often breaks three tiles for every one they fix. Our technicians use specialized load-displacement methods to safely extract the broken tile and interlock the replacement without damaging surrounding areas.
+**Safe Extraction & Installation:** Old tiles are brittle. Inexperienced foot traffic often breaks three tiles for every one they attempt to replace. Our technicians use specialized load-displacement methods to safely extract the broken tile and interlock the replacement without damaging surrounding areas.
 
 </div>
 
@@ -44,7 +44,7 @@ Finding an exact match for a weathered, 40-year-old terracotta or concrete tile 
 
 We aren't a fly-by-night handyman service. We've been replacing broken tiles and restoring roofs across Melbourne for over 25 years.
 
-Our fully insured crews carry comprehensive public liability insurance, meaning your property is protected. Every structural repair we perform is backed by our rock-solid **10-Year Workmanship Guarantee**. If there's an issue, we come back and fix it. And we always clean up our mess.
+Our fully insured crews carry comprehensive public liability insurance, meaning your property is protected. Every structural repair we perform is backed by our rock-solid **10-Year Workmanship Guarantee**. If there's an issue, we return promptly to make it right. And we always clean up our mess.
 
 </div>
 
