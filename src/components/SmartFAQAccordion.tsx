@@ -35,6 +35,8 @@ const CategoryTab: FC<{
         className={`faq-tab ${active ? 'active' : ''}`}
         onClick={onClick}
         type="button"
+        role="tab"
+        aria-selected={active}
     >
         {label}
         <span className="faq-tab-count">{count}</span>
