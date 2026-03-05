@@ -47,7 +47,7 @@ We don't deal in temporary superficial solutions. Our specialized process is eng
 
 We aren’t a faceless corporation—we’ve been restoring tiled roofs across the Northern corridor for over 25 years. Wallan gets hit hard by those heavy northerly winds, which means your ridge cap pointing needs to be flexible and tough.
 
-Our fully insured crews carry over $20M in public liability, so your property is completely protected. Every full restoration we do is backed by our rock-solid **10-Year Workmanship Guarantee**. If there’s an issue, we come back and fix it. And we always clean up our mess.
+Our fully insured crews carry over $20M in public liability, so your property is completely protected. Every full restoration we do is backed by our rock-solid **10-Year Workmanship Guarantee**. If there’s an issue, we return promptly to make it right. And we always clean up our mess.
 
 </div>
 

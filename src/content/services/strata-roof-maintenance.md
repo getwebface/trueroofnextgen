@@ -24,7 +24,7 @@ Our 4-Stage Restoration Process is perfectly suited for maximizing the lifespan 
 
 <div class="glass-card" style="padding: 1.5rem;">
 
-3. **Re-bedding & Flexi-Pointing:** Securing ridge caps with standard mortar is a short-term fix. We utilize advanced flexible pointing compounds that accommodate the natural movement of multi-unit developments, providing a permanent, watertight seal that won't crack.
+3. **Re-bedding & Flexi-Pointing:** Securing ridge caps with standard mortar is a short-term, superficial measure. We utilize advanced flexible pointing compounds that accommodate the natural movement of multi-unit developments, providing a permanent, watertight seal that won't crack.
 
 </div>
 

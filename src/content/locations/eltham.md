@@ -57,7 +57,7 @@ Our tailored restoration for Eltham homes includes:
 
 We've been restoring tiled roofs across the Eastern suburbs for over 25 years. We know that Eltham roofs require a specific approach to deal with constant dampness and debris from the canopy above.
 
-Our fully insured local crews carry over $20M in public liability. Every full restoration is backed by our rock-solid **10-Year Workmanship Guarantee**. If there's ever a problem, we come back and fix it. And we always respect your property and clean up our mess.
+Our fully insured local crews carry over $20M in public liability. Every full restoration is backed by our rock-solid **10-Year Workmanship Guarantee**. If there's ever a problem, we return promptly to make it right. And we always respect your property and clean up our mess.
 
 </div>
 

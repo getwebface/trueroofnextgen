@@ -4,7 +4,7 @@ answer: "To temporarily stop a tiled roof leak during heavy rain, place a bucket
 category: "emergency"
 services: ["insurance-roof-repairs", "tiled-restoration"]
 weatherEvents: ["HEAVY_RAIN", "THUNDERSTORM", "HAIL_STORM"]
-tags: ["leak", "heavy rain", "emergency", "temporary fix", "ceiling"]
+tags: ["leak", "heavy rain", "emergency", "temporary solution", "ceiling"]
 basePriority: 9
 locationSlug: "melbourne"
 ---
