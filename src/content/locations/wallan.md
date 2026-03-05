@@ -51,7 +51,7 @@ Our fully insured crews carry over $20M in public liability, so your property is
 
 </div>
 
-Protect your ceiling from the next southerly buster. For nearby homeowners in older properties, we also provide expert [roof tile restoration in Kilmore](/locations/kilmore).
+Protect your ceiling from the next southerly buster. For nearby homeowners in older properties, we also provide expert [roof tile restoration in Kilmore](/locations/kilmore) and specialized [tiled roof restoration in Craigieburn](/locations/craigieburn).
 
 ## Recent Local Project: Weatherproofing in Wallan
 

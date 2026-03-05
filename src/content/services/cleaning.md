@@ -49,7 +49,7 @@ We don't just wash your roof; we decontaminate it. Our specialized process is de
 
 ## Stop the Degradation. Restore the Aesthetic.
 
-Whether you're preparing to sell and need an immediate curb-appeal transformation, or you're protecting your family's biggest asset from insidious water ingress, our biological decontamination process is the critical first step.
+Whether you're preparing to sell and need an immediate curb-appeal transformation, or you're protecting your family's biggest asset from insidious water ingress—especially in leafy environments like [Eltham](/locations/eltham)—our biological decontamination process is the critical first step.
 
 Don't let an inexpensive wash cost you thousands in water damage. Get your roof decontaminated by Melbourne's tiled roof specialists.
 
