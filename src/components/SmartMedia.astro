@@ -114,9 +114,14 @@ function scoreAsset(
   if (entry.weather_affinity === 'all' && score === 0) score += 2;
 
   // +1 per contextKeyword match
-  const entryKeywordsLower = entry.keywords.map(k => k.toLowerCase());
+  // ⚡ Bolt Optimization: Avoid array allocation, check directly
   for (const kw of keywords) {
-    if (entryKeywordsLower.includes(kw.toLowerCase())) score += 1;
+    for (let i = 0; i < entry.keywords.length; i++) {
+      if (entry.keywords[i].toLowerCase() === kw) {
+        score += 1;
+        break;
+      }
+    }
   }
 
   // Multiply by base_score weight (allows manual tuning)
@@ -126,9 +131,12 @@ function scoreAsset(
 // ── Filter + score + sort ─────────────────────────────────────────────────────
 const allEntries = manifest as ManifestEntry[];
 
+// ⚡ Bolt Optimization: Pre-lowercase contextKeywords to avoid doing it per-asset
+const lowerContextKeywords = contextKeywords.map(kw => kw.toLowerCase());
+
 const candidates = allEntries
   .filter(e => preferredType === 'any' || e.type === preferredType)
-  .map(e => ({ entry: e, score: scoreAsset(e, activeAffinities, contextKeywords) }))
+  .map(e => ({ entry: e, score: scoreAsset(e, activeAffinities, lowerContextKeywords) }))
   .filter(({ score }) => score > 0)
   .sort((a, b) => b.score - a.score);
 
