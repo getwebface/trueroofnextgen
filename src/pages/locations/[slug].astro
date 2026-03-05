@@ -77,7 +77,7 @@ const locationSchema = {
 <MainLayout title={pageTitle} description={pageDescription} schema={locationSchema}>
 
   {/* ── Location Hero ── */}
-  <section class="hero-section" style={`padding: 6rem 0 5rem; position: relative; overflow: hidden; ${location.data.hero ? `background: url(${location.data.hero}) center/cover no-repeat;` : ''}`}>
+  <section class="hero-section pt-24 pb-20" style={`position: relative; overflow: hidden; ${location.data.hero ? `background: url(${location.data.hero}) center/cover no-repeat;` : ''}`}>
     {location.data.hero && (
       <div style="position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(15,15,15,0.7) 0%, rgba(15,15,15,0.9) 100%); z-index: 1;"></div>
     )}
@@ -128,9 +128,9 @@ const locationSchema = {
 
   {/* ── Location Content ── */}
   {/* 📐 Pixel: Enforcing F-Pattern reading mode alongside a sticky Z-Pattern CTA aside */}
-  <section style="padding: 4rem 0;">
+  <section class="py-16">
     <div class="container grid grid-cols-1 md:grid-cols-[1fr_20rem] gap-8 md:gap-16 items-start">
-      <div class="content-prose">
+      <div class="content-prose max-w-prose">
         <Content />
 
         {/* Service Focus */}
@@ -184,7 +184,7 @@ const locationSchema = {
 
   {/* ── FAQs ── */}
   {locationFaqs.length > 0 && (
-    <section class="section-dark" style="padding: 4rem 0;">
+    <section class="section-dark py-16">
       <div class="container" style="max-width: 48rem;">
         <h2 class="section-heading" style="text-align: center; margin-bottom: 2rem;">
           FAQs for <span class="accent-text">{location.data.title}</span>
