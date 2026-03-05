@@ -1,7 +1,6 @@
-## 2025-02-24 - Optimizing Middleware Execution on Static Assets
-**Learning:** Cloudflare edge caching for static assets (like `/cdn/` or `/_astro/`) is inefficient when global middleware intercepts every request to compute context (like fetching weather data), causing unnecessary CPU time and rate-limiting issues for external APIs.
-**Action:** When implementing SSR middleware on Cloudflare, always early-return / short-circuit requests matching static asset paths or known proxy extensions to preserve external API quotas, minimize R2 hits, and reduce overall worker execution time.
-
-## 2025-03-04 - Deduplicating Concurrent External Fetch Requests
-**Learning:** During cache misses, concurrent requests reaching the same edge isolate will each trigger an independent `fetch()` to an external API like Open-Meteo, leading to rate limits or quota exhaustion despite caching headers.
-**Action:** When requesting external APIs within Cloudflare Workers, wrap the `fetch` in a module-level `Promise` stored in a global `Map` (keyed by endpoint or variable string) to coalesce simultaneous requests into a single outgoing call. Ensure cleanup inside a `finally` block to prevent memory leaks and handle potential `throw` failures correctly.
+## 2025-03-05 - Missing Cache Response Headers on R2 Edge Proxy
+**Learning:** Returning `object.body` from an R2 bucket using `new Response()` does not automatically attach the required cache headers. R2 requires `Cache-Control` to be explicitly added to the Response object, but `src/pages/cdn/[...path].ts` was already doing this correctly.
+**Action:** Always verify R2 route caching headers are present on `GET` responses.
+## 2025-03-05 - Try/Catch Fallbacks Around caches.default
+**Learning:** `context.locals.runtime.caches.default` can throw errors (like 500s or timeouts) or be unavailable in certain environments/during transient issues, breaking the middleware execution if not caught.
+**Action:** Always wrap `cache.match` and `cache.put` operations in `try/catch` blocks inside middleware to ensure fallback graceful degradation (hitting origin instead of crashing) instead of blocking the request.

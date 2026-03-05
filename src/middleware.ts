@@ -37,7 +37,11 @@ export const onRequest = defineMiddleware(async (context, next) => {
 
   let cachedResponse = undefined;
   if (cache) {
-    cachedResponse = await cache.match(cacheKey);
+    try {
+      cachedResponse = await cache.match(cacheKey);
+    } catch (e) {
+      console.warn('[TrueRoof] Cache read failed (match):', e);
+    }
   }
 
   if (cachedResponse) {
@@ -127,7 +131,15 @@ export const onRequest = defineMiddleware(async (context, next) => {
                 'Cache-Control': 'public, s-maxage=900, stale-while-revalidate=7200, stale-if-error=86400',
               },
             });
-            context.locals.runtime.waitUntil?.(cache.put(cacheKey, responseToCache));
+            context.locals.runtime.waitUntil?.(
+              (async () => {
+                try {
+                  await cache.put(cacheKey, responseToCache);
+                } catch (e) {
+                  console.warn('[TrueRoof] Cache write failed (put):', e);
+                }
+              })()
+            );
           }
         } finally {
           // Remove from map once resolved/rejected
