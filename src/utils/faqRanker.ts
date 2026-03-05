@@ -160,15 +160,28 @@ function buildBoostReason(event: WeatherEvent): string {
 
 type Season = 'SUMMER' | 'AUTUMN' | 'WINTER' | 'SPRING';
 
+// ⚡ Bolt Optimization:
+// Hoisted seasonTags out of the function to prevent object allocation on every call.
+// Pre-lowercased the tags and moved t.toLowerCase() outside the inner loop
+// to significantly reduce redundant string allocations and function calls.
+const seasonTagsSets: Record<Season, string[]> = {
+    SUMMER: ['cleaning', 'algae', 'moss', 'heat', 'uv', 'summer'],
+    AUTUMN: ['maintenance', 'prevention', 'pre-winter', 'autumn'],
+    WINTER: ['leak', 'emergency', 'storm', 'rain', 'frost', 'winter'],
+    SPRING: ['restoration', 'post-winter', 'assessment', 'spring'],
+};
+
 function checkSeasonalRelevance(faq: RankableFAQ, season: Season): boolean {
-    const seasonTags: Record<Season, string[]> = {
-        SUMMER: ['cleaning', 'algae', 'moss', 'heat', 'UV', 'summer'],
-        AUTUMN: ['maintenance', 'prevention', 'pre-winter', 'autumn'],
-        WINTER: ['leak', 'emergency', 'storm', 'rain', 'frost', 'winter'],
-        SPRING: ['restoration', 'post-winter', 'assessment', 'spring'],
-    };
-    const relevantTags = seasonTags[season];
-    return faq.tags.some(t => relevantTags.some(rt => t.toLowerCase().includes(rt.toLowerCase())));
+    const relevantTags = seasonTagsSets[season];
+    return faq.tags.some(t => {
+        const lowerT = t.toLowerCase();
+        for (const rt of relevantTags) {
+            if (lowerT.includes(rt)) {
+                return true;
+            }
+        }
+        return false;
+    });
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
