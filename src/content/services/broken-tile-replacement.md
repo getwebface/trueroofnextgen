@@ -38,6 +38,16 @@ Finding an exact match for a weathered, 40-year-old terracotta or concrete tile 
 
 </div>
 
+<div class="glass-card" style="border-left: 4px solid #f97316; padding: 1.5rem; margin-top: 2rem; margin-bottom: 2rem;">
+
+**The True Roof Workmanship Guarantee**
+
+We aren't a fly-by-night handyman service. We've been replacing broken tiles and restoring roofs across Melbourne for over 25 years.
+
+Our fully insured crews carry comprehensive public liability insurance, meaning your property is protected. Every structural repair we perform is backed by our rock-solid **10-Year Workmanship Guarantee**. If there's an issue, we come back and fix it. And we always clean up our mess.
+
+</div>
+
 ### Stop the Drip Before It Destroys Your Ceiling
 
 Don't let a $50 broken tile cause $5,000 in internal water damage. If you've found pieces of tile in your gutters, or you can see visible cracks from the ground, immediate action is required.
