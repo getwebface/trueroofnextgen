@@ -120,7 +120,7 @@ const serviceSchema = {
             {urgency >= 4 ? 'Priority response for active leaks and storm damage.' : 'No obligation quote with a detailed condition report.'}
           </p>
           <a href="#quote" class="cta-primary" style="width: 100%; font-size: 0.9rem;">
-            {urgency >= 4 ? 'Request Urgent Help' : 'Get Your Quote'}
+            {urgency >= 4 ? 'Request Urgent Help' : `Get Your ${service.data.title} Quote`}
           </a>
           <div style="margin-top: 1rem; display: flex; justify-content: center; gap: 0.5rem;">
             <span class="badge" style={`font-size: 0.7rem; ${urgency >= 4 ? 'background: rgba(239,68,68,0.15); color: #fca5a5; border-color: rgba(239,68,68,0.3);' : ''}`}>{urgency >= 4 ? '🚨 Priority' : '✅ Free'}</span>
@@ -151,7 +151,7 @@ const serviceSchema = {
               <div class="service-icon" set:html={svgIcons[s.data.icon || ''] || defaultIcon} />
               <h3>{s.data.title}</h3>
               <p>{s.data.description}</p>
-              <span class="card-link">Learn More →</span>
+              <span class="card-link">Learn about {s.data.title} →</span>
             </a>
           ))}
         </div>
