@@ -66,3 +66,14 @@ Our fully insured crews carry over $20M in public liability. When we finish a re
 Protecting your property from water ingress now is far more cost-effective than dealing with structural ceiling damage later. We exclusively focus on breathing new life into tiled roofs through tailored, high-quality restoration. For homeowners further up the Hume corridor, we also offer expert [tiled roof restoration in Wallan](/locations/wallan).
 
 </div>
+
+## Recent Local Projects in Craigieburn
+
+<ProjectGallery
+  client:visible
+  images={[
+    { src: "/cdn/craigieburn-roof-clean.jpg", alt: "Freshly cleaned terracotta roof in Craigieburn", caption: "High-Pressure Decontamination" },
+    { src: "/cdn/craigieburn-flexi-point.jpg", alt: "New flexi-pointing applied to ridge caps", caption: "Advanced Flexi-Pointing" },
+    { src: "/cdn/craigieburn-membrane.jpg", alt: "Multi-coat membrane system applied to concrete tiles", caption: "Protective Membrane Coating" }
+  ]}
+/>
