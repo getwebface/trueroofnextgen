@@ -69,6 +69,33 @@ Inexperienced operators blast water *upwards* under your delicate flashings, dir
 
 We don't "wash" your roof. Our 25-year experienced technicians use precisely calibrated, directional pressure systems to strip away decades of buildup *without* scouring the tile face. We eliminate the embedded root systems completely, protecting your home's structural integrity for years to come.
 
+## Recent Local Project: Biological Decontamination in Eltham
+
+Recently, we performed a full biological decontamination on a heavily shaded terracotta roof in Eltham that was suffering from extensive lichen growth.
+
+> "Living under the tree canopy in Eltham means our terracotta roof is constantly battling moss. We used to get a handyman to pressure wash it every few years, but the moss always came back faster and we started noticing leaks. True Roof came in, fully decontaminated the tiles, and treated the root systems. It’s been completely clear for two years now, and no more leaks. The difference between a surface wash and what these guys do is night and day."
+> — **J. Harrison, Eltham**
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Review",
+  "itemReviewed": {
+    "@id": "https://trueroof.com.au/services/cleaning#service"
+  },
+  "reviewRating": {
+    "@type": "Rating",
+    "ratingValue": "5",
+    "bestRating": "5"
+  },
+  "author": {
+    "@type": "Person",
+    "name": "J. Harrison"
+  },
+  "reviewBody": "Living under the tree canopy in Eltham means our terracotta roof is constantly battling moss. We used to get a handyman to pressure wash it every few years, but the moss always came back faster and we started noticing leaks. True Roof came in, fully decontaminated the tiles, and treated the root systems. It’s been completely clear for two years now, and no more leaks. The difference between a surface wash and what these guys do is night and day."
+}
+</script>
+
 ### 🛡️ Don't Risk Your Biggest Asset
 Stop the degradation before it breaches your ceiling.
 
