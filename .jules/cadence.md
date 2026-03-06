@@ -5,3 +5,7 @@
 ## 2025-02-28 - The "Silicone Trap" Objection
 **Insight:** Homeowners try to patch cracked ridge mortar with cheap silicone, failing to realize the structural damage happening underneath.
 **Action:** Use the PAS framework to target the false security of quick patches and present professional re-bedding as the only structural solution.
+
+## 2025-03-05 - The "Just a Crack" Illusion
+**Insight:** Homeowners often view a cracked or broken tile as a minor cosmetic issue, vastly underestimating how quickly it channels water directly into ceiling cavities and structural timber.
+**Action:** Use the Transformation framework to vividly contrast the silent decay caused by a neglected crack against the permanent security and aesthetic matching of a professional structural replacement.
