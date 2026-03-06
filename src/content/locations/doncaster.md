@@ -63,6 +63,6 @@ Our fully insured local crews carry over $20M in public liability. Every full re
 
 <div class="glass-card" style="padding: 1.5rem; margin-top: 2rem;">
 
-Protect your home against Doncaster's high winds and unpredictable weather. We specialize exclusively in bringing existing tiled roofs back to peak condition.
+Protect your home against Doncaster's high winds and unpredictable weather. We specialize exclusively in bringing existing tiled roofs back to peak condition. For properties in nearby leafy areas, we also offer expert [tiled roof restoration in Eltham](/locations/eltham).
 
 </div>
