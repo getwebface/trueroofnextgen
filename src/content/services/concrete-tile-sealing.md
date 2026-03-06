@@ -46,6 +46,16 @@ We don't just "paint" your roof. Standard exterior paint sits on the surface, qu
 
 </div>
 
+<div class="glass-card" style="border-left: 4px solid #f97316; padding: 1.5rem; margin-top: 2rem; margin-bottom: 2rem;">
+
+**The True Roof Workmanship Guarantee**
+
+Applying a membrane system to concrete tiles requires serious expertise, not just a spray gun. We aren't standard house painters; we are specialized roof restorers with over 25 years of local Melbourne experience.
+
+Our fully insured crews carry over $20M in public liability, ensuring your property is completely protected while we work. Every protective membrane system we apply is backed by our rock-solid **10-Year Workmanship Guarantee**. We stand by our preparation and our product. If there’s an issue, we return promptly to make it right. And we always clean up our mess.
+
+</div>
+
 ### Why Membrane Coating is Essential for Concrete Tiles
 
 Many homeowners assume that once concrete tiles lose their color and look weathered, the only option is a massive structural overhaul. This is simply not true. As long as the underlying structure is sound, and any broken tiles have been professionally replaced during our precision structural repairs stage, a high-quality protective membrane will fully restore the watertight integrity and aesthetic appeal of your home.
