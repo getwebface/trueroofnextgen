@@ -41,12 +41,26 @@ const MIME_TYPES: Record<string, string> = {
 // One year in seconds — used for the immutable Cache-Control header.
 const ONE_YEAR = 31_536_000;
 
-export const GET: APIRoute = async ({ params, locals }) => {
+export const GET: APIRoute = async ({ request, params, locals }) => {
     // `params.path` contains everything after /cdn/ (the spread segment).
     const key = params.path;
 
     if (!key) {
         return new Response('Not found', { status: 404 });
+    }
+
+    const cache = locals.runtime?.caches?.default;
+
+    // Attempt to serve from Edge Cache first
+    if (cache) {
+        try {
+            const cachedResponse = await cache.match(request);
+            if (cachedResponse) {
+                return cachedResponse;
+            }
+        } catch (err) {
+            console.warn('[cdn] Cache match error:', err);
+        }
     }
 
     // Retrieve the R2 bucket binding from the Cloudflare runtime env.
@@ -92,5 +106,19 @@ export const GET: APIRoute = async ({ params, locals }) => {
         headers.set('ETag', object.httpEtag);
     }
 
-    return new Response(object.body, { status: 200, headers });
+    const response = new Response(object.body, { status: 200, headers });
+
+    if (cache) {
+        locals.runtime?.waitUntil?.(
+            (async () => {
+                try {
+                    await cache.put(request, response.clone());
+                } catch (err) {
+                    console.warn('[cdn] Cache put error:', err);
+                }
+            })()
+        );
+    }
+
+    return response;
 };
