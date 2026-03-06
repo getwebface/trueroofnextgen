@@ -1,28 +1,34 @@
-import os
 import time
 from playwright.sync_api import sync_playwright
 
-def verify():
+def verify_process_steps():
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True)
-        page = browser.new_page()
+        # Create a new context with a larger viewport
+        context = browser.new_context(viewport={"width": 1280, "height": 1024})
+        page = context.new_page()
 
-        # Go to a location page to check if promo text is there
-        page.goto('http://localhost:8788/locations/melbourne')
+        try:
+            # 1. Start dev server and wait for it to be ready
+            page.goto("http://localhost:3000", timeout=60000)
 
-        time.sleep(3) # Wait for page load
+            # Wait for hydration
+            time.sleep(2)
 
-        # Scroll down to ensure it's in view
-        page.evaluate("window.scrollTo(0, document.body.scrollHeight)")
-        time.sleep(1)
+            # Scroll to process section
+            process_section = page.locator("#process")
+            process_section.scroll_into_view_if_needed()
 
-        # Take screenshot
-        os.makedirs('/home/jules/verification', exist_ok=True)
-        screenshot_path = '/home/jules/verification/verification_melbourne.png'
-        page.screenshot(path=screenshot_path, full_page=True)
-        print(f"Screenshot saved to {screenshot_path}")
+            # Take a screenshot of the process section
+            process_section.screenshot(path="process_steps_verification.png")
+            print("Successfully took screenshot of the process steps section.")
 
-        browser.close()
+        except Exception as e:
+            print(f"Error during verification: {e}")
+            page.screenshot(path="process_steps_error.png")
+            print("Saved error screenshot.")
+        finally:
+            browser.close()
 
-if __name__ == '__main__':
-    verify()
+if __name__ == "__main__":
+    verify_process_steps()

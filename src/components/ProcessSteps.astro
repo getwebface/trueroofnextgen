@@ -1,8 +1,12 @@
 ---
-import { Droplets, Wrench, BrickWall, ShieldCheck } from 'lucide-react';
+import { Droplets, Wrench, BrickWall, ShieldCheck, AlertTriangle, CloudRain, Snowflake } from 'lucide-react';
 import SmartMedia from './SmartMedia.astro';
 
-const steps = [
+const { weatherContext } = Astro.locals;
+const urgency = weatherContext?.urgency || 1;
+const event = weatherContext?.event;
+
+let steps = [
   {
     number: 1,
     title: 'High-Pressure Clean',
@@ -32,13 +36,51 @@ const steps = [
     keywords: ['coating', 'membrane', 'restoration', 'colour'],
   }
 ];
+
+// Contextualize Step 1 and 2 based on weather urgency and event
+if (urgency >= 4) {
+  steps[0] = {
+    number: 1,
+    title: 'Emergency Make-Safe',
+    description: `Immediate response to secure your roof against ${event === 'HAIL_STORM' ? 'hail' : event === 'HIGH_WIND' ? 'wind' : 'storm'} damage.`,
+    icon: AlertTriangle,
+    keywords: ['emergency', 'tarp', 'secure', 'storm', 'damage'],
+  };
+  steps[1] = {
+    number: 2,
+    title: 'Damage Assessment',
+    description: 'Comprehensive evaluation of structural integrity and detailed reporting.',
+    icon: Wrench,
+    keywords: ['repair', 'assessment', 'inspection', 'structural'],
+  };
+} else if (event === 'HEAVY_RAIN' || event === 'DRIZZLE') {
+  steps[0] = {
+    number: 1,
+    title: 'Active Leak Detection',
+    description: 'We use the current rain to pinpoint the exact source of your water ingress.',
+    icon: CloudRain,
+    keywords: ['leak', 'detection', 'rain', 'inspection'],
+  };
+} else if (event === 'FROST') {
+  steps[1] = {
+    number: 2,
+    title: 'Freeze-Thaw Assessment',
+    description: 'Inspect mortar and tiles for micro-cracks caused by overnight frost.',
+    icon: Snowflake,
+    keywords: ['inspection', 'frost', 'cracks', 'mortar'],
+  };
+}
+
+const subheading = urgency >= 4
+  ? "When weather strikes, we adapt our 4-stage process to prioritize your immediate safety and structural integrity."
+  : "Every restoration follows our meticulous 4-stage process — no shortcuts, just quality craftsmanship.";
 ---
 <section class="process-section" id="process">
   <div class="container">
     <div style="text-align: center; margin-bottom: 3rem;">
       <h2 class="section-heading">Our Proven <span class="accent-text">4-Stage</span> Process</h2>
       <p class="section-subheading" style="margin-left: auto; margin-right: auto;">
-        Every restoration follows our meticulous 4-stage process — no shortcuts, just quality craftsmanship.
+        {subheading}
       </p>
     </div>
 
