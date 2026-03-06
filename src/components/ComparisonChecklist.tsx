@@ -32,14 +32,36 @@ export default function ComparisonChecklist({ items = defaultItems }: Comparison
                 {items.map((item, index) => (
                     <div key={index} className="contents">
                         {/* True Roof Column */}
-                        <div className={`p-4 flex items-center justify-start gap-3 border-r border-white/5 ${index !== items.length - 1 ? 'border-b border-white/5' : ''}`}>
+                        <div
+                            className={`p-4 flex items-center justify-start gap-3 border-r border-white/5 ${index !== items.length - 1 ? 'border-b border-white/5' : ''}`}
+                            onClick={() => {
+                                if (typeof window !== 'undefined' && (window as any).posthog) {
+                                    (window as any).posthog.capture('clicked_comparison_item', {
+                                        trueRoofFeature: item.trueRoof,
+                                        competitorFeature: item.otherGuys,
+                                        position: index + 1
+                                    });
+                                }
+                            }}
+                        >
                             <div className="bg-[#f97316]/20 p-1.5 rounded-full flex-shrink-0">
                                 <Check size={18} className="text-[#f97316]" strokeWidth={3} />
                             </div>
                             <span className="text-sm md:text-base font-medium text-left">{item.trueRoof}</span>
                         </div>
                         {/* Other Guys Column */}
-                        <div className={`p-4 flex items-center justify-start gap-3 ${index !== items.length - 1 ? 'border-b border-white/5' : ''}`}>
+                        <div
+                            className={`p-4 flex items-center justify-start gap-3 ${index !== items.length - 1 ? 'border-b border-white/5' : ''}`}
+                            onClick={() => {
+                                if (typeof window !== 'undefined' && (window as any).posthog) {
+                                    (window as any).posthog.capture('clicked_comparison_item', {
+                                        trueRoofFeature: item.trueRoof,
+                                        competitorFeature: item.otherGuys,
+                                        position: index + 1
+                                    });
+                                }
+                            }}
+                        >
                             <div className="bg-red-500/10 p-1.5 rounded-full flex-shrink-0">
                                 <X size={18} className="text-red-400" strokeWidth={3} />
                             </div>
