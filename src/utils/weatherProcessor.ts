@@ -433,6 +433,62 @@ function rankServices(event: WeatherEvent, season: Season, urgency: UrgencyLevel
 // ──────────────────────────────────────────────────
 // Helper: build copy hints
 // ──────────────────────────────────────────────────
+// ⚡ Bolt Optimization:
+// Hoisted static objects out of the buildCopyHints function to prevent
+// memory allocation and garbage collection overhead on every request.
+const URGENCY_LABELS: Record<UrgencyLevel, string> = {
+  5: 'Emergency',
+  4: 'Urgent',
+  3: 'Important',
+  2: 'Seasonal',
+  1: 'Ideal'
+};
+
+const WEATHER_DESCRIPTIONS: Partial<Record<WeatherEvent, string>> = {
+  HAIL_STORM: 'a hailstorm',
+  THUNDERSTORM: 'a thunderstorm',
+  HEAVY_RAIN: 'heavy rain',
+  DRIZZLE: 'rain',
+  HIGH_WIND: 'strong winds',
+  CLEAR_HOT: 'hot sunny conditions',
+  CLEAR_MILD: 'clear mild conditions',
+  OVERCAST: 'overcast skies',
+  FROST: 'frost',
+  FOG: 'foggy conditions',
+  DEFAULT: 'current conditions',
+};
+
+const TIME_GREETINGS: Record<TimeOfDay, string> = {
+  DAWN: 'Early this morning',
+  MORNING: 'This morning',
+  MIDDAY: 'Right now',
+  AFTERNOON: 'This afternoon',
+  EVENING: 'This evening',
+  NIGHT: 'Tonight',
+};
+
+const EMOJIS: Partial<Record<WeatherEvent, string>> = {
+  HAIL_STORM: '🚨',
+  THUNDERSTORM: '⛈️',
+  HEAVY_RAIN: '🌧️',
+  DRIZZLE: '🌦️',
+  HIGH_WIND: '💨',
+  CLEAR_HOT: '☀️',
+  CLEAR_MILD: '🌤️',
+  FROST: '❄️',
+  FOG: '🌫️',
+  OVERCAST: '☁️',
+  DEFAULT: '🏠',
+};
+
+const CTAS_BASE: Record<UrgencyLevel, string> = {
+  5: 'Call',
+  4: 'Book',
+  3: 'Book',
+  2: 'Request',
+  1: 'Schedule',
+};
+
 function buildCopyHints(
   event: WeatherEvent,
   timeOfDay: TimeOfDay,
@@ -441,37 +497,6 @@ function buildCopyHints(
   monthName: string,
   isWeekend: boolean,
 ): CopyHints {
-  const urgencyLabels: Record<UrgencyLevel, string> = {
-    5: 'Emergency',
-    4: 'Urgent',
-    3: 'Important',
-    2: 'Seasonal',
-    1: 'Ideal'
-  };
-
-  const weatherDescriptions: Partial<Record<WeatherEvent, string>> = {
-    HAIL_STORM: 'a hailstorm',
-    THUNDERSTORM: 'a thunderstorm',
-    HEAVY_RAIN: 'heavy rain',
-    DRIZZLE: 'rain',
-    HIGH_WIND: 'strong winds',
-    CLEAR_HOT: 'hot sunny conditions',
-    CLEAR_MILD: 'clear mild conditions',
-    OVERCAST: 'overcast skies',
-    FROST: 'frost',
-    FOG: 'foggy conditions',
-    DEFAULT: 'current conditions',
-  };
-
-  const timeGreetings: Record<TimeOfDay, string> = {
-    DAWN: 'Early this morning',
-    MORNING: 'This morning',
-    MIDDAY: 'Right now',
-    AFTERNOON: 'This afternoon',
-    EVENING: 'This evening',
-    NIGHT: 'Tonight',
-  };
-
   const seasonalTips: Record<Season, string> = {
     SUMMER: `${monthName} is peak season for algae and moss — a clean now prevents tile damage over summer.`,
     AUTUMN: `${monthName} is the critical window before winter — small roof issues become expensive leaks in the cold.`,
@@ -479,35 +504,13 @@ function buildCopyHints(
     SPRING: `Post-winter is the best time to assess damage and restore before the summer heat sets in.`,
   };
 
-  const ctas: Record<UrgencyLevel, string> = {
-    5: 'Call',
-    4: isWeekend ? 'Call' : 'Book',
-    3: 'Book',
-    2: 'Request',
-    1: 'Schedule',
-  };
-
-  const emojis: Partial<Record<WeatherEvent, string>> = {
-    HAIL_STORM: '🚨',
-    THUNDERSTORM: '⛈️',
-    HEAVY_RAIN: '🌧️',
-    DRIZZLE: '🌦️',
-    HIGH_WIND: '💨',
-    CLEAR_HOT: '☀️',
-    CLEAR_MILD: '🌤️',
-    FROST: '❄️',
-    FOG: '🌫️',
-    OVERCAST: '☁️',
-    DEFAULT: '🏠',
-  };
-
   return {
-    urgencyLabel: urgencyLabels[urgency],
-    weatherDescription: weatherDescriptions[event] || 'current conditions',
-    timeGreeting: timeGreetings[timeOfDay],
+    urgencyLabel: URGENCY_LABELS[urgency],
+    weatherDescription: WEATHER_DESCRIPTIONS[event] || 'current conditions',
+    timeGreeting: TIME_GREETINGS[timeOfDay],
     seasonalTip: seasonalTips[season],
-    callToAction: ctas[urgency],
-    bannerEmoji: emojis[event] || '🏠',
+    callToAction: (urgency === 4 && isWeekend) ? 'Call' : CTAS_BASE[urgency],
+    bannerEmoji: EMOJIS[event] || '🏠',
   };
 }
 
