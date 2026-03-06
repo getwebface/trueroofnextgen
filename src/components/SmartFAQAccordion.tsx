@@ -121,11 +121,21 @@ const SmartFAQAccordion: FC<SmartFAQAccordionProps> = ({ items, weatherEvent }) 
     // Build category tabs from the ranked data — auto, not hardcoded
     const categoryGroups = useMemo(() => groupFAQsByCategory(items), [items]);
     const categoryKeys = useMemo(() => {
+        // ⚡ Bolt Optimization: Pre-compute which categories contain boosted FAQs
+        // This reduces the sort comparator from O(M) lookup to O(1) Set check,
+        // eliminating the `.some()` array scan on every comparison iteration.
+        const boostedCategories = new Set<string>();
+        for (const [cat, group] of categoryGroups.entries()) {
+            if (group.some(f => f.weatherBoosted)) {
+                boostedCategories.add(cat);
+            }
+        }
+
         // Order: categories that have weather-boosted FAQs first, then by count
         const keys = [...categoryGroups.keys()];
         return keys.sort((a, b) => {
-            const aBoosted = (categoryGroups.get(a) ?? []).some(f => f.weatherBoosted);
-            const bBoosted = (categoryGroups.get(b) ?? []).some(f => f.weatherBoosted);
+            const aBoosted = boostedCategories.has(a);
+            const bBoosted = boostedCategories.has(b);
             if (aBoosted && !bBoosted) return -1;
             if (!aBoosted && bBoosted) return 1;
             return (categoryGroups.get(b)?.length ?? 0) - (categoryGroups.get(a)?.length ?? 0);
