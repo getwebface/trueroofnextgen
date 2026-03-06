@@ -147,7 +147,7 @@ const serviceSchema = {
         <h2 class="section-heading" style="margin-bottom: 2rem;">Other <span class="accent-text">Services</span></h2>
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem;">
           {relatedServices.map(s => (
-            <a href={`/services/${s.slug}`} class="service-card">
+            <a href={`/services/${s.slug}`} class="service-card" aria-label={`Learn more about our ${s.data.title} service`}>
               <div class="service-icon" set:html={svgIcons[s.data.icon || ''] || defaultIcon} />
               <h3>{s.data.title}</h3>
               <p>{s.data.description}</p>

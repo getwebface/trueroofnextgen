@@ -120,7 +120,7 @@ const sortedServices = [...services].sort((a, b) => {
           const hint = serviceUrgencyMap[service.slug];
           const icon = svgIcons[service.data.icon || ''] || defaultIcon;
           return (
-            <a href={`/services/${service.slug}`} class={`service-card ${i === 0 ? 'featured' : ''}`}>
+            <a href={`/services/${service.slug}`} class={`service-card ${i === 0 ? 'featured' : ''}`} aria-label={`Learn more about our ${service.data.title} service`}>
               {/* Contextual SmartMedia Thumbnail */}
               <div class="service-card-media" aria-hidden="true">
                 <SmartMedia
@@ -151,7 +151,7 @@ const sortedServices = [...services].sort((a, b) => {
             {sortedServices.slice(3).map((service) => {
               const icon = svgIcons[service.data.icon || ''] || defaultIcon;
               return (
-                <a href={`/services/${service.slug}`} class="service-compact-tile">
+                <a href={`/services/${service.slug}`} class="service-compact-tile" aria-label={`Learn more about our ${service.data.title} service`}>
                   <span class="service-compact-icon" set:html={icon} />
                   <div class="service-compact-body">
                     <div class="service-compact-title">{service.data.title}</div>
@@ -184,7 +184,7 @@ const sortedServices = [...services].sort((a, b) => {
       </div>
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem;">
         {locations.map(location => (
-          <a href={`/locations/${location.slug}`} class="location-card">
+          <a href={`/locations/${location.slug}`} class="location-card" aria-label={`Roof restoration services in ${location.data.title}`}>
             {/* Contextual SmartMedia Location Thumbnail */}
             <div class="location-card-media" aria-hidden="true">
               <SmartMedia
