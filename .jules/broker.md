@@ -5,3 +5,4 @@
 ## 2024-05-28 - Pre-Winter Prep Campaign Injection
 **Learning:** When injecting campaign offers into existing components like `QuoteForm.tsx`, existing conditional logic (like `ctx?.copyHints?.seasonalTip`) can overwrite or clash with the campaign text if not handled carefully.
 **Action:** Always concatenate campaign text with existing contextual hints (e.g., `${existingTip} ${campaignText}`) rather than replacing them, to maintain both weather/seasonality context and the promotional offer.
+## 2026-03-06 - [Autumn Promo Update] **Learning:** Aligning central JSON campaign data with Astro/React component context keywords ensures high relevance across all sub-pages while maintaining site-wide consistency. **Action:** Continue mapping central deals to localized variables.
