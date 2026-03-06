@@ -5,3 +5,7 @@
 ## 2026-03-05 - Eastern Suburbs Tree Canopy Impact
 **Learning:** Learned that the Eastern Suburbs edge (e.g., Eltham) requires heavy focus on moss/lichen cleaning due to dense tree canopies overhanging 1970s terracotta and concrete tiles.
 **Action:** When targeting heavily treed Eastern suburbs, emphasize high-pressure biological decontamination and preventative maintenance in the `weatherOverrides` and body copy.
+
+## 2024-05-22 - Doncaster Elevated Topography Exposure
+**Learning:** Learned that Doncaster's specific housing trend features elevated topography around Doncaster Hill, significantly exposing original 1970s terracotta roofs to high winds which accelerate the degradation of mortar.
+**Action:** When targeting Doncaster and similar elevated Eastern suburbs, prioritize content detailing precision re-bedding and flexible pointing to secure ridge caps against heavy wind exposure.
