@@ -19,3 +19,11 @@ Target: src/content/services/ridge-cap-rebedding-pointing.md
 Type: High-End Photography
 Aesthetic: "The Professional Tradie". Sharp focus, shallow depth of field, authentic Melbourne architecture, morning "Golden Hour" lighting. High-contrast brand orange (#f97316) accents. Deep charcoal/slate background.
 Prompt: Shot on 85mm macro lens, shallow depth of field. Extreme close up of a gloved hand using a professional pointing trowel to apply smooth, high-contrast orange flexible pointing compound to the ridge cap of a weathered Melbourne terracotta roof tile. The background is beautifully blurred out. High detail on the texture of the trowel and the grain of the terracotta tile. Morning "Golden Hour" lighting casting dramatic shadows, emphasizing the sharp, clean lines of the new flexi-pointing. No full roof replacements, just restoration pointing. No faces, hands and tools only. --ar 16:9 --v 6.0 --style raw
+
+---
+
+ID: SRV-TILED-RESTORATION-HERO
+Target: src/content/services/tiled-restoration.md
+Type: High-End Photography
+Aesthetic: "The Craftsman". Premium, sharp focus, morning "Golden Hour" lighting. Deep charcoal/slate workwear. High-contrast brand orange (#f97316) tools/accents. Melbourne concrete tiles.
+Prompt: Shot on 85mm macro lens, shallow depth of field. A highly detailed, extreme close up of a professional tradesman's gloved hand firmly gripping a high-pressure wand, actively blasting away lichen from a weathered Monier concrete roof tile. The water beads and sprays dynamically, catching the morning "Golden Hour" lighting. The background is beautifully blurred into deep charcoal and slate tones, emphasizing the sharp, clean lines of the newly restored tile sections. High contrast brand orange (#f97316) accents on the pressure wand nozzle. No full bodies, no faces, just hands, tools, and precise craftsmanship. No full roof replacements, strictly restoration. --ar 16:9 --v 6.0 --style raw
