@@ -5,7 +5,12 @@ icon: "shield-check"
 conversionGoal: "membrane_coating_quote"
 ---
 
-Unlike terracotta, concrete roof tiles are highly porous. Over decades of exposure to Melbourne's harsh sun and driving rain, the original factory color fades, and the surface becomes increasingly absorbent. This isn't just a cosmetic issue. As your tiles absorb more water, they become significantly heavier, placing unnecessary stress on your roof's structural timber. In winter, this trapped moisture can freeze and expand, leading to micro-fractures and ultimately, water ingress into your ceiling cavity.
+Unlike terracotta, concrete roof tiles are highly porous. Over decades of exposure to Melbourne's harsh sun and driving rain, the original factory color fades, and the surface becomes increasingly absorbent. This isn't just a cosmetic issue.
+
+As your tiles absorb more water, they create severe structural vulnerabilities:
+- **Excess Weight**: placing unnecessary stress on your roof's structural timber.
+- **Micro-Fractures**: from trapped moisture expanding in winter.
+- **Water Ingress**: leading ultimately to costly ceiling cavity damage.
 
 Applying a protective membrane is the critical final stage—**Stage 4: Protective Membrane System**—of our comprehensive 4-Stage Restoration Process for concrete tiled roofs.
 
