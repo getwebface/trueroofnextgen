@@ -7,9 +7,9 @@ Attaching additional modules:
 ├────────────────────────────────────────────────┼──────┼─────────────┤
 │ _@astrojs-ssr-adapter.mjs                      │ esm  │ 0.14 KiB    │
 ├────────────────────────────────────────────────┼──────┼─────────────┤
-│ _astro-internal_middleware.mjs                 │ esm  │ 21.85 KiB   │
+│ _astro-internal_middleware.mjs                 │ esm  │ 21.83 KiB   │
 ├────────────────────────────────────────────────┼──────┼─────────────┤
-│ chunks/PromoCard_CpR4THuM.mjs                  │ esm  │ 452.17 KiB  │
+│ chunks/PromoCard_CjeUtsbS.mjs                  │ esm  │ 452.28 KiB  │
 ├────────────────────────────────────────────────┼──────┼─────────────┤
 │ chunks/_@astro-renderers_CEJWRsGy.mjs          │ esm  │ 545.23 KiB  │
 ├────────────────────────────────────────────────┼──────┼─────────────┤
@@ -17,7 +17,7 @@ Attaching additional modules:
 ├────────────────────────────────────────────────┼──────┼─────────────┤
 │ chunks/_astro_assets_CNb8CKId.mjs              │ esm  │ 67.32 KiB   │
 ├────────────────────────────────────────────────┼──────┼─────────────┤
-│ chunks/_astro_data-layer-content_BRsCETpb.mjs  │ esm  │ 170.95 KiB  │
+│ chunks/_astro_data-layer-content_vlKhPzKm.mjs  │ esm  │ 171.49 KiB  │
 ├────────────────────────────────────────────────┼──────┼─────────────┤
 │ chunks/astro/server_BMeHAjsF.mjs               │ esm  │ 249.30 KiB  │
 ├────────────────────────────────────────────────┼──────┼─────────────┤
@@ -43,7 +43,7 @@ Attaching additional modules:
 ├────────────────────────────────────────────────┼──────┼─────────────┤
 │ chunks/sharp_BtYEJfXF.mjs                      │ esm  │ 3.09 KiB    │
 ├────────────────────────────────────────────────┼──────┼─────────────┤
-│ manifest_CwyjaA3D.mjs                          │ esm  │ 19.20 KiB   │
+│ manifest_BJcJncA6.mjs                          │ esm  │ 19.20 KiB   │
 ├────────────────────────────────────────────────┼──────┼─────────────┤
 │ noop-entrypoint.mjs                            │ esm  │ 0.09 KiB    │
 ├────────────────────────────────────────────────┼──────┼─────────────┤
@@ -51,391 +51,36 @@ Attaching additional modules:
 ├────────────────────────────────────────────────┼──────┼─────────────┤
 │ pages/cdn/_---path_.astro.mjs                  │ esm  │ 2.47 KiB    │
 ├────────────────────────────────────────────────┼──────┼─────────────┤
-│ pages/index.astro.mjs                          │ esm  │ 65.48 KiB   │
+│ pages/index.astro.mjs                          │ esm  │ 66.05 KiB   │
 ├────────────────────────────────────────────────┼──────┼─────────────┤
-│ pages/locations/_slug_.astro.mjs               │ esm  │ 13.31 KiB   │
+│ pages/locations/_slug_.astro.mjs               │ esm  │ 13.05 KiB   │
 ├────────────────────────────────────────────────┼──────┼─────────────┤
-│ pages/services/_slug_.astro.mjs                │ esm  │ 27.19 KiB   │
+│ pages/services/_slug_.astro.mjs                │ esm  │ 27.21 KiB   │
 ├────────────────────────────────────────────────┼──────┼─────────────┤
 │ renderers.mjs                                  │ esm  │ 0.13 KiB    │
 ├────────────────────────────────────────────────┼──────┼─────────────┤
-│ Total (27 modules)                             │      │ 1853.17 KiB │
+│ Total (27 modules)                             │      │ 1854.13 KiB │
 └────────────────────────────────────────────────┴──────┴─────────────┘
 ✨ Compiled Worker successfully
 Your Worker has access to the following bindings:
 Binding                                                                   Resource                  Mode
 env.IMAGES (trueroof-images)                                              R2 Bucket                 local
 env.CF_PAGES ("1")                                                        Environment Variable      local
-env.CF_PAGES_BRANCH ("jules-12629061576701021827-8e7e756d")               Environment Variable      local
-env.CF_PAGES_COMMIT_SHA ("6427d448872a5ad4a4c13fcd8d29e4a78592f...")      Environment Variable      local
-env.CF_PAGES_URL ("https://6427d44.trueroofnextgen.pages...")             Environment Variable      local
+env.CF_PAGES_BRANCH ("jules-7085336428345414849-159dba53")                Environment Variable      local
+env.CF_PAGES_COMMIT_SHA ("93e810f36e583379b00372e303b557599ff51...")      Environment Variable      local
+env.CF_PAGES_URL ("https://93e810f.trueroofnextgen.pages...")             Environment Variable      local
 
-*** Fatal uncaught kj::Exception: kj/async-io-unix.c++:945: failed: ::bind(sockfd, &addr.generic, addrlen): Address already in use; toString() = 127.0.0.1:8788
-stack: /app/node_modules/.pnpm/@cloudflare+workerd-linux-64@1.20260305.0/node_modules/@cloudflare/workerd-linux-64/bin/workerd@4eda016 /app/node_modules/.pnpm/@cloudflare+workerd-linux-64@1.20260305.0/node_modules/@cloudflare/workerd-linux-64/bin/workerd@4ed9de9 /app/node_modules/.pnpm/@cloudflare+workerd-linux-64@1.20260305.0/node_modules/@cloudflare/workerd-linux-64/bin/workerd@4ed855d /app/node_modules/.pnpm/@cloudflare+workerd-linux-64@1.20260305.0/node_modules/@clou[wrangler:info] GET /services/tiled-restoration 200 OK (492ms)
-[wrangler:info] GET /_astro/index.D-LeSFhz.css 200 OK (4ms)
-[wrangler:info] GET /cdn/hero-tiles-rain.jpg 404 Not Found (7ms)
+⎔ Starting local server...
+[wrangler:info] Ready on http://localhost:8788
+[wrangler:info] GET / 200 OK (620ms)
+[wrangler:info] GET /_astro/index.DIQUxMsr.css 200 OK (9ms)
+[wrangler:info] GET /_astro/index.BujUscWW.css 200 OK (11ms)
+[wrangler:info] GET /_astro/WeatherHero.DHA71sv8.js 200 OK (4ms)
 [wrangler:info] GET /_astro/client.Dc9Vh3na.js 200 OK (7ms)
-[wrangler:info] GET /_astro/QuoteForm.8F8OpFSQ.js 200 OK (8ms)
-[wrangler:info] GET /_astro/proxy.FN46-Sxf.js 200 OK (9ms)
-[wrangler:info] GET /_astro/use-reduced-motion.DxEDGpM-.js 200 OK (14ms)
-[wrangler:info] GET /_astro/index.DiEladB3.js 200 OK (17ms)
-[wrangler:info] GET /_astro/index.DzWqXxpp.js 200 OK (18ms)
-This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). The promise rejected with the reason:
-Error: ENOENT: no such file or directory, scandir '/app/dist/_worker.js'
-    at async Object.readdir (node:internal/fs/promises:952:18)
-    at async getFiles (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:42860:23)
-    at async matchFiles (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:43030:20)
-    at async findAdditionalModules (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:42901:20)
-    at async produceWorkerBundleForWorkerJSDirectory (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:223353:29)
-    at async runBuild (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:229064:34)
-    at async FSWatcher.<anonymous> (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:229082:15)
-This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). The promise rejected with the reason:
-Error: ENOENT: no such file or directory, scandir '/app/dist/_worker.js'
-    at async Object.readdir (node:internal/fs/promises:952:18)
-    at async getFiles (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:42860:23)
-    at async matchFiles (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:43030:20)
-    at async findAdditionalModules (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:42901:20)
-    at async produceWorkerBundleForWorkerJSDirectory (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:223353:29)
-    at async runBuild (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:229064:34)
-    at async FSWatcher.<anonymous> (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:229082:15)
-This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). The promise rejected with the reason:
-Error: ENOENT: no such file or directory, scandir '/app/dist/_worker.js'
-    at async Object.readdir (node:internal/fs/promises:952:18)
-    at async getFiles (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:42860:23)
-    at async matchFiles (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:43030:20)
-    at async findAdditionalModules (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:42901:20)
-    at async produceWorkerBundleForWorkerJSDirectory (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:223353:29)
-    at async runBuild (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:229064:34)
-    at async FSWatcher.<anonymous> (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:229082:15)
-This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). The promise rejected with the reason:
-Error: ENOENT: no such file or directory, scandir '/app/dist/_worker.js'
-    at async Object.readdir (node:internal/fs/promises:952:18)
-    at async getFiles (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:42860:23)
-    at async matchFiles (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:43030:20)
-    at async findAdditionalModules (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:42901:20)
-    at async produceWorkerBundleForWorkerJSDirectory (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:223353:29)
-    at async runBuild (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:229064:34)
-    at async FSWatcher.<anonymous> (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:229082:15)
-This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). The promise rejected with the reason:
-Error: ENOENT: no such file or directory, scandir '/app/dist/_worker.js'
-    at async Object.readdir (node:internal/fs/promises:952:18)
-    at async getFiles (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:42860:23)
-    at async matchFiles (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:43030:20)
-    at async findAdditionalModules (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:42901:20)
-    at async produceWorkerBundleForWorkerJSDirectory (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:223353:29)
-    at async runBuild (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:229064:34)
-    at async FSWatcher.<anonymous> (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:229082:15)
-This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). The promise rejected with the reason:
-Error: ENOENT: no such file or directory, scandir '/app/dist/_worker.js'
-    at async Object.readdir (node:internal/fs/promises:952:18)
-    at async getFiles (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:42860:23)
-    at async matchFiles (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:43030:20)
-    at async findAdditionalModules (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:42901:20)
-    at async produceWorkerBundleForWorkerJSDirectory (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:223353:29)
-    at async runBuild (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:229064:34)
-    at async FSWatcher.<anonymous> (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:229082:15)
-This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). The promise rejected with the reason:
-Error: ENOENT: no such file or directory, scandir '/app/dist/_worker.js'
-    at async Object.readdir (node:internal/fs/promises:952:18)
-    at async getFiles (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:42860:23)
-    at async matchFiles (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:43030:20)
-    at async findAdditionalModules (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:42901:20)
-    at async produceWorkerBundleForWorkerJSDirectory (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:223353:29)
-    at async runBuild (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:229064:34)
-    at async FSWatcher.<anonymous> (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:229082:15)
-This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). The promise rejected with the reason:
-Error: ENOENT: no such file or directory, scandir '/app/dist/_worker.js'
-    at async Object.readdir (node:internal/fs/promises:952:18)
-    at async getFiles (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:42860:23)
-    at async matchFiles (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:43030:20)
-    at async findAdditionalModules (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:42901:20)
-    at async produceWorkerBundleForWorkerJSDirectory (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:223353:29)
-    at async runBuild (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:229064:34)
-    at async FSWatcher.<anonymous> (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:229082:15)
-This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). The promise rejected with the reason:
-Error: ENOENT: no such file or directory, scandir '/app/dist/_worker.js'
-    at async Object.readdir (node:internal/fs/promises:952:18)
-    at async getFiles (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:42860:23)
-    at async matchFiles (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:43030:20)
-    at async findAdditionalModules (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:42901:20)
-    at async produceWorkerBundleForWorkerJSDirectory (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:223353:29)
-    at async runBuild (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:229064:34)
-    at async FSWatcher.<anonymous> (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:229082:15)
-This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). The promise rejected with the reason:
-Error: ENOENT: no such file or directory, scandir '/app/dist/_worker.js'
-    at async Object.readdir (node:internal/fs/promises:952:18)
-    at async getFiles (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:42860:23)
-    at async matchFiles (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:43030:20)
-    at async findAdditionalModules (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:42901:20)
-    at async produceWorkerBundleForWorkerJSDirectory (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:223353:29)
-    at async runBuild (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:229064:34)
-    at async FSWatcher.<anonymous> (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:229082:15)
-This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). The promise rejected with the reason:
-Error: ENOENT: no such file or directory, scandir '/app/dist/_worker.js'
-    at async Object.readdir (node:internal/fs/promises:952:18)
-    at async getFiles (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:42860:23)
-    at async matchFiles (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:43030:20)
-    at async findAdditionalModules (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:42901:20)
-    at async produceWorkerBundleForWorkerJSDirectory (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:223353:29)
-    at async runBuild (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:229064:34)
-    at async FSWatcher.<anonymous> (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:229082:15)
-This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). The promise rejected with the reason:
-Error: ENOENT: no such file or directory, scandir '/app/dist/_worker.js'
-    at async Object.readdir (node:internal/fs/promises:952:18)
-    at async getFiles (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:42860:23)
-    at async matchFiles (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:43030:20)
-    at async findAdditionalModules (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:42901:20)
-    at async produceWorkerBundleForWorkerJSDirectory (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:223353:29)
-    at async runBuild (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:229064:34)
-    at async FSWatcher.<anonymous> (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:229082:15)
-This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). The promise rejected with the reason:
-Error: ENOENT: no such file or directory, scandir '/app/dist/_worker.js'
-    at async Object.readdir (node:internal/fs/promises:952:18)
-    at async getFiles (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:42860:23)
-    at async matchFiles (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:43030:20)
-    at async findAdditionalModules (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:42901:20)
-    at async produceWorkerBundleForWorkerJSDirectory (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:223353:29)
-    at async runBuild (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:229064:34)
-    at async FSWatcher.<anonymous> (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:229082:15)
-This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). The promise rejected with the reason:
-Error: ENOENT: no such file or directory, scandir '/app/dist/_worker.js'
-    at async Object.readdir (node:internal/fs/promises:952:18)
-    at async getFiles (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:42860:23)
-    at async matchFiles (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:43030:20)
-    at async findAdditionalModules (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:42901:20)
-    at async produceWorkerBundleForWorkerJSDirectory (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:223353:29)
-    at async runBuild (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:229064:34)
-    at async FSWatcher.<anonymous> (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:229082:15)
-This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). The promise rejected with the reason:
-Error: ENOENT: no such file or directory, scandir '/app/dist/_worker.js'
-    at async Object.readdir (node:internal/fs/promises:952:18)
-    at async getFiles (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:42860:23)
-    at async matchFiles (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:43030:20)
-    at async findAdditionalModules (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:42901:20)
-    at async produceWorkerBundleForWorkerJSDirectory (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:223353:29)
-    at async runBuild (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:229064:34)
-    at async FSWatcher.<anonymous> (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:229082:15)
-This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). The promise rejected with the reason:
-Error: ENOENT: no such file or directory, scandir '/app/dist/_worker.js'
-    at async Object.readdir (node:internal/fs/promises:952:18)
-    at async getFiles (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:42860:23)
-    at async matchFiles (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:43030:20)
-    at async findAdditionalModules (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:42901:20)
-    at async produceWorkerBundleForWorkerJSDirectory (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:223353:29)
-    at async runBuild (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:229064:34)
-    at async FSWatcher.<anonymous> (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:229082:15)
-This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). The promise rejected with the reason:
-Error: ENOENT: no such file or directory, scandir '/app/dist/_worker.js'
-    at async Object.readdir (node:internal/fs/promises:952:18)
-    at async getFiles (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:42860:23)
-    at async matchFiles (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:43030:20)
-    at async findAdditionalModules (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:42901:20)
-    at async produceWorkerBundleForWorkerJSDirectory (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:223353:29)
-    at async runBuild (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:229064:34)
-    at async FSWatcher.<anonymous> (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:229082:15)
-This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). The promise rejected with the reason:
-Error: ENOENT: no such file or directory, scandir '/app/dist/_worker.js'
-    at async Object.readdir (node:internal/fs/promises:952:18)
-    at async getFiles (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:42860:23)
-    at async matchFiles (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:43030:20)
-    at async findAdditionalModules (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:42901:20)
-    at async produceWorkerBundleForWorkerJSDirectory (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:223353:29)
-    at async runBuild (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:229064:34)
-    at async FSWatcher.<anonymous> (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:229082:15)
-This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). The promise rejected with the reason:
-Error: ENOENT: no such file or directory, scandir '/app/dist/_worker.js'
-    at async Object.readdir (node:internal/fs/promises:952:18)
-    at async getFiles (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:42860:23)
-    at async matchFiles (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:43030:20)
-    at async findAdditionalModules (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:42901:20)
-    at async produceWorkerBundleForWorkerJSDirectory (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:223353:29)
-    at async runBuild (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:229064:34)
-    at async FSWatcher.<anonymous> (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:229082:15)
-This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). The promise rejected with the reason:
-Error: ENOENT: no such file or directory, scandir '/app/dist/_worker.js'
-    at async Object.readdir (node:internal/fs/promises:952:18)
-    at async getFiles (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:42860:23)
-    at async matchFiles (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:43030:20)
-    at async findAdditionalModules (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:42901:20)
-    at async produceWorkerBundleForWorkerJSDirectory (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:223353:29)
-    at async runBuild (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:229064:34)
-    at async FSWatcher.<anonymous> (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:229082:15)
-This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). The promise rejected with the reason:
-Error: ENOENT: no such file or directory, scandir '/app/dist/_worker.js'
-    at async Object.readdir (node:internal/fs/promises:952:18)
-    at async getFiles (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:42860:23)
-    at async matchFiles (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:43030:20)
-    at async findAdditionalModules (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:42901:20)
-    at async produceWorkerBundleForWorkerJSDirectory (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:223353:29)
-    at async runBuild (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:229064:34)
-    at async FSWatcher.<anonymous> (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:229082:15)
-This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). The promise rejected with the reason:
-Error: ENOENT: no such file or directory, scandir '/app/dist/_worker.js'
-    at async Object.readdir (node:internal/fs/promises:952:18)
-    at async getFiles (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:42860:23)
-    at async matchFiles (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:43030:20)
-    at async findAdditionalModules (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:42901:20)
-    at async produceWorkerBundleForWorkerJSDirectory (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:223353:29)
-    at async runBuild (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:229064:34)
-    at async FSWatcher.<anonymous> (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:229082:15)
-This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). The promise rejected with the reason:
-Error: ENOENT: no such file or directory, scandir '/app/dist/_worker.js'
-    at async Object.readdir (node:internal/fs/promises:952:18)
-    at async getFiles (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:42860:23)
-    at async matchFiles (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:43030:20)
-    at async findAdditionalModules (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:42901:20)
-    at async produceWorkerBundleForWorkerJSDirectory (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:223353:29)
-    at async runBuild (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:229064:34)
-    at async FSWatcher.<anonymous> (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:229082:15)
-This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). The promise rejected with the reason:
-Error: ENOENT: no such file or directory, scandir '/app/dist/_worker.js'
-    at async Object.readdir (node:internal/fs/promises:952:18)
-    at async getFiles (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:42860:23)
-    at async matchFiles (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:43030:20)
-    at async findAdditionalModules (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:42901:20)
-    at async produceWorkerBundleForWorkerJSDirectory (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:223353:29)
-    at async runBuild (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:229064:34)
-    at async FSWatcher.<anonymous> (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:229082:15)
-This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). The promise rejected with the reason:
-Error: ENOENT: no such file or directory, scandir '/app/dist/_worker.js'
-    at async Object.readdir (node:internal/fs/promises:952:18)
-    at async getFiles (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:42860:23)
-    at async matchFiles (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:43030:20)
-    at async findAdditionalModules (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:42901:20)
-    at async produceWorkerBundleForWorkerJSDirectory (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:223353:29)
-    at async runBuild (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:229064:34)
-    at async FSWatcher.<anonymous> (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:229082:15)
-This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). The promise rejected with the reason:
-Error: ENOENT: no such file or directory, scandir '/app/dist/_worker.js'
-    at async Object.readdir (node:internal/fs/promises:952:18)
-    at async getFiles (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:42860:23)
-    at async matchFiles (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:43030:20)
-    at async findAdditionalModules (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:42901:20)
-    at async produceWorkerBundleForWorkerJSDirectory (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:223353:29)
-    at async runBuild (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:229064:34)
-    at async FSWatcher.<anonymous> (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:229082:15)
-This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). The promise rejected with the reason:
-Error: ENOENT: no such file or directory, scandir '/app/dist/_worker.js'
-    at async Object.readdir (node:internal/fs/promises:952:18)
-    at async getFiles (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:42860:23)
-    at async matchFiles (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:43030:20)
-    at async findAdditionalModules (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:42901:20)
-    at async produceWorkerBundleForWorkerJSDirectory (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:223353:29)
-    at async runBuild (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:229064:34)
-    at async FSWatcher.<anonymous> (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:229082:15)
-This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). The promise rejected with the reason:
-Error: ENOENT: no such file or directory, scandir '/app/dist/_worker.js'
-    at async Object.readdir (node:internal/fs/promises:952:18)
-    at async getFiles (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:42860:23)
-    at async matchFiles (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:43030:20)
-    at async findAdditionalModules (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:42901:20)
-    at async produceWorkerBundleForWorkerJSDirectory (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:223353:29)
-    at async runBuild (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:229064:34)
-    at async FSWatcher.<anonymous> (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:229082:15)
-This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). The promise rejected with the reason:
-Error: ENOENT: no such file or directory, scandir '/app/dist/_worker.js'
-    at async Object.readdir (node:internal/fs/promises:952:18)
-    at async getFiles (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:42860:23)
-    at async matchFiles (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:43030:20)
-    at async findAdditionalModules (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:42901:20)
-    at async produceWorkerBundleForWorkerJSDirectory (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:223353:29)
-    at async runBuild (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:229064:34)
-    at async FSWatcher.<anonymous> (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:229082:15)
-This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). The promise rejected with the reason:
-Error: ENOENT: no such file or directory, scandir '/app/dist/_worker.js'
-    at async Object.readdir (node:internal/fs/promises:952:18)
-    at async getFiles (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:42860:23)
-    at async matchFiles (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:43030:20)
-    at async findAdditionalModules (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:42901:20)
-    at async produceWorkerBundleForWorkerJSDirectory (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:223353:29)
-    at async runBuild (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:229064:34)
-    at async FSWatcher.<anonymous> (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:229082:15)
-This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). The promise rejected with the reason:
-Error: ENOENT: no such file or directory, scandir '/app/dist/_worker.js'
-    at async Object.readdir (node:internal/fs/promises:952:18)
-    at async getFiles (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:42860:23)
-    at async matchFiles (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:43030:20)
-    at async findAdditionalModules (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:42901:20)
-    at async produceWorkerBundleForWorkerJSDirectory (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:223353:29)
-    at async runBuild (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:229064:34)
-    at async FSWatcher.<anonymous> (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:229082:15)
-This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). The promise rejected with the reason:
-Error: ENOENT: no such file or directory, scandir '/app/dist/_worker.js'
-    at async Object.readdir (node:internal/fs/promises:952:18)
-    at async getFiles (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:42860:23)
-    at async matchFiles (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:43030:20)
-    at async findAdditionalModules (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:42901:20)
-    at async produceWorkerBundleForWorkerJSDirectory (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:223353:29)
-    at async runBuild (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:229064:34)
-    at async FSWatcher.<anonymous> (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:229082:15)
-This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). The promise rejected with the reason:
-Error: ENOENT: no such file or directory, scandir '/app/dist/_worker.js'
-    at async Object.readdir (node:internal/fs/promises:952:18)
-    at async getFiles (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:42860:23)
-    at async matchFiles (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:43030:20)
-    at async findAdditionalModules (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:42901:20)
-    at async produceWorkerBundleForWorkerJSDirectory (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:223353:29)
-    at async runBuild (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:229064:34)
-    at async FSWatcher.<anonymous> (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:229082:15)
-This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). The promise rejected with the reason:
-Error: ENOENT: no such file or directory, scandir '/app/dist/_worker.js'
-    at async Object.readdir (node:internal/fs/promises:952:18)
-    at async getFiles (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:42860:23)
-    at async matchFiles (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:43030:20)
-    at async findAdditionalModules (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:42901:20)
-    at async produceWorkerBundleForWorkerJSDirectory (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:223353:29)
-    at async runBuild (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:229064:34)
-    at async FSWatcher.<anonymous> (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:229082:15)
-This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). The promise rejected with the reason:
-Error: ENOENT: no such file or directory, scandir '/app/dist/_worker.js'
-    at async Object.readdir (node:internal/fs/promises:952:18)
-    at async getFiles (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:42860:23)
-    at async matchFiles (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:43030:20)
-    at async findAdditionalModules (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:42901:20)
-    at async produceWorkerBundleForWorkerJSDirectory (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:223353:29)
-    at async runBuild (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:229064:34)
-    at async FSWatcher.<anonymous> (/app/node_modules/.pnpm/wrangler@4.69.0_@cloudflare+workers-types@4.20260301.1/node_modules/wrangler/wrangler-dist/cli.js:229082:15)
-⎔ Reloading local server...
-⎔ Local server updated and ready
-⎔ Reloading local server...
-⎔ Local server updated and ready
-⎔ Reloading local server...
-⎔ Local server updated and ready
-⎔ Reloading local server...
-⎔ Local server updated and ready
-[wrangler:info] GET /services/tiled-restoration 200 OK (540ms)
-[wrangler:info] GET /_astro/index.D-LeSFhz.css 200 OK (6ms)
-[wrangler:info] GET /cdn/hero-tiles-rain.jpg 404 Not Found (13ms)
-[wrangler:info] GET /_astro/QuoteForm.8F8OpFSQ.js 200 OK (7ms)
-[wrangler:info] GET /_astro/client.Dc9Vh3na.js 200 OK (5ms)
-[wrangler:info] GET /_astro/use-reduced-motion.DxEDGpM-.js 200 OK (9ms)
-[wrangler:info] GET /_astro/proxy.FN46-Sxf.js 200 OK (15ms)
-[wrangler:info] GET /_astro/index.DzWqXxpp.js 200 OK (21ms)
-[wrangler:info] GET /_astro/index.DiEladB3.js 200 OK (20ms)
-[wrangler:info] GET /services/tiled-restoration 200 OK (490ms)
-[wrangler:info] GET /_astro/index.D-LeSFhz.css 200 OK (6ms)
-[wrangler:info] GET /cdn/hero-tiles-rain.jpg 404 Not Found (6ms)
-[wrangler:info] GET /_astro/QuoteForm.8F8OpFSQ.js 200 OK (7ms)
-[wrangler:info] GET /_astro/client.Dc9Vh3na.js 200 OK (7ms)
-[wrangler:info] GET /_astro/proxy.FN46-Sxf.js 200 OK (5ms)
-[wrangler:info] GET /_astro/use-reduced-motion.DxEDGpM-.js 200 OK (12ms)
-[wrangler:info] GET /_astro/index.DiEladB3.js 200 OK (14ms)
-[wrangler:info] GET /_astro/index.DzWqXxpp.js 200 OK (13ms)
-[wrangler:info] GET /services/tiled-restoration 200 OK (482ms)
-[wrangler:info] GET /_astro/index.D-LeSFhz.css 200 OK (4ms)
-[wrangler:info] GET /cdn/hero-tiles-rain.jpg 404 Not Found (7ms)
-[wrangler:info] GET /_astro/client.Dc9Vh3na.js 200 OK (11ms)
-[wrangler:info] GET /_astro/QuoteForm.8F8OpFSQ.js 200 OK (11ms)
-[wrangler:info] GET /_astro/proxy.FN46-Sxf.js 200 OK (9ms)
+[wrangler:info] GET /cdn/hero-tiles-rain.jpg 404 Not Found (20ms)
+[wrangler:info] GET /cdn/Texture_Psychology_Tile_Transformation_Video.mp4 404 Not Found (6ms)
 [wrangler:info] GET /_astro/use-reduced-motion.DxEDGpM-.js 200 OK (19ms)
-[wrangler:info] GET /_astro/index.DiEladB3.js 200 OK (20ms)
-[wrangler:info] GET /_astro/index.DzWqXxpp.js 200 OK (21ms)
-[wrangler:info] GET /services/tiled-restoration 200 OK (484ms)
-[wrangler:info] GET /_astro/index.D-LeSFhz.css 200 OK (5ms)
-[wrangler:info] GET /cdn/hero-tiles-rain.jpg 404 Not Found (6ms)
+[wrangler:info] GET /_astro/proxy.FN46-Sxf.js 200 OK (21ms)
+[wrangler:info] GET /_astro/index.DiEladB3.js 200 OK (21ms)
 [wrangler:info] GET /_astro/QuoteForm.8F8OpFSQ.js 200 OK (4ms)
-[wrangler:info] GET /_astro/client.Dc9Vh3na.js 200 OK (9ms)
-[wrangler:info] GET /_astro/use-reduced-motion.DxEDGpM-.js 200 OK (13ms)
-[wrangler:info] GET /_astro/proxy.FN46-Sxf.js 200 OK (15ms)
-[wrangler:info] GET /_astro/index.DiEladB3.js 200 OK (13ms)
-[wrangler:info] GET /_astro/index.DzWqXxpp.js 200 OK (14ms)
+[wrangler:info] GET /_astro/index.DzWqXxpp.js 200 OK (4ms)
