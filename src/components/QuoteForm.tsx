@@ -149,7 +149,7 @@ const QuoteForm: FC<QuoteFormProps> = ({ ctx }) => {
                     >
                         <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>✅</div>
                         <h3 style={{ fontFamily: 'Outfit, sans-serif', fontWeight: 800, fontSize: '1.5rem', color: 'white', marginBottom: '0.75rem' }}>
-                            {urgency >= 4 ? 'On It — We\'ll Call You Shortly' : 'Thanks! We\'ll Be in Touch.'}
+                            {urgency >= 4 ? 'On It — We\'ll Call You Shortly' : 'Too easy! We\'ll be in touch.'}
                         </h3>
                         <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.95rem', lineHeight: 1.6, marginBottom: '1.5rem' }}>
                             {urgency >= 4
