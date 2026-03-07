@@ -9,3 +9,7 @@
 ## 2025-03-05 - The "Just a Crack" Illusion
 **Insight:** Homeowners often view a cracked or broken tile as a minor cosmetic issue, vastly underestimating how quickly it channels water directly into ceiling cavities and structural timber.
 **Action:** Use the Transformation framework to vividly contrast the silent decay caused by a neglected crack against the permanent security and aesthetic matching of a professional structural replacement.
+
+## 2025-03-10 - The "Winter Anxiety" Pain Point
+**Insight:** Homeowners experience severe anxiety during heavy downpours, worrying about silent leaks and internal water damage caused by a neglected roof.
+**Action:** Use the Empathy/Story framework to validate their internal frustration and fear, positioning a comprehensive 4-stage restoration as the definitive solution for peace of mind.
