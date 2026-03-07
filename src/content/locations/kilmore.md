@@ -61,6 +61,6 @@ Our fully insured crews carry over $20M in public liability, ensuring your histo
 
 <div class="glass-card" style="padding: 1.5rem; margin-top: 2rem;">
 
-Whether you are preserving the classic look of a heritage property or refreshing a more recent build, our restorative process ensures your tiled roof is ready to face the future without compromising the town's historic charm.
+Whether you are preserving the classic look of a heritage property or refreshing a more recent build, our restorative process ensures your tiled roof is ready to face the future without compromising the town's historic charm. For homes further along the Northern corridor, we also offer [specialist tiled roof restoration in Broadford](/locations/broadford).
 
 </div>

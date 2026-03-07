@@ -63,6 +63,6 @@ Our fully insured local crews carry over $20M in public liability. Every full re
 
 <div class="glass-card" style="padding: 1.5rem; margin-top: 2rem;">
 
-Don't let moss and lichen destroy your tiles and cause structural water damage. We specialize exclusively in bringing existing tiled roofs back to life.
+Don't let moss and lichen destroy your tiles and cause structural water damage. We specialize exclusively in bringing existing tiled roofs back to life. For nearby homes, we also offer [specialist tiled roof restoration in Templestowe](/locations/templestowe).
 
 </div>
