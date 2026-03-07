@@ -6,3 +6,6 @@
 **Learning:** When injecting campaign offers into existing components like `QuoteForm.tsx`, existing conditional logic (like `ctx?.copyHints?.seasonalTip`) can overwrite or clash with the campaign text if not handled carefully.
 **Action:** Always concatenate campaign text with existing contextual hints (e.g., `${existingTip} ${campaignText}`) rather than replacing them, to maintain both weather/seasonality context and the promotional offer.
 ## 2026-03-06 - [Autumn Promo Update] **Learning:** Aligning central JSON campaign data with Astro/React component context keywords ensures high relevance across all sub-pages while maintaining site-wide consistency. **Action:** Continue mapping central deals to localized variables.
+## 2025-03-07 - Dynamic Campaign Season Injection
+**Learning:** Hardcoded temporal or contextual strings (like "this autumn") in React/Astro components break site-wide consistency when the central campaign changes seasons.
+**Action:** Always include a `season` field in the central `active-campaign.json` ledger, and pass that dynamically into contextual UI messaging (like `PromoCard.astro`), ensuring a Single Source of Truth for the campaign logic.
