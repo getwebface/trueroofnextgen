@@ -9,7 +9,7 @@ import { Phone, ClipboardList, ShieldCheck } from 'lucide-react';
 export interface Props {
   title?: string;
   description?: string;
-  schema?: Record<string, any>;
+  schema?: Record<string, any> | Record<string, any>[];
 }
 
 const { title, description, schema } = Astro.props;
@@ -92,8 +92,9 @@ const defaultLocalBusiness: Record<string, any> = {
 };
 
 // Check if page provided its own LocalBusiness (like location pages)
-const isCustomLocalBusiness = schema && (schema["@type"] === "RoofingContractor" || schema["@type"] === "LocalBusiness");
-const localBusinessEntity = isCustomLocalBusiness ? schema : defaultLocalBusiness;
+const schemasArray = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
+const customLocalBusiness = schemasArray.find(s => s["@type"] === "RoofingContractor" || s["@type"] === "LocalBusiness");
+const localBusinessEntity = customLocalBusiness || defaultLocalBusiness;
 
 if (offerCatalogEntity) {
   localBusinessEntity.hasOfferCatalog = offerCatalogEntity;
@@ -117,13 +118,15 @@ const graph: Record<string, any>[] = [
   breadcrumbListEntity
 ];
 
-// If a schema was passed that IS NOT a LocalBusiness override (like a Service),
-// add it to the graph and connect it to the WebPage.
-if (schema && !isCustomLocalBusiness) {
-  const pageSpecificSchema = { ...schema };
-  delete pageSpecificSchema["@context"];
-  pageSpecificSchema.mainEntityOfPage = { "@id": canonicalUrlStr };
-  graph.push(pageSpecificSchema);
+// If any schemas were passed that ARE NOT LocalBusiness overrides (like a Service or FAQPage),
+// add them to the graph and connect them to the WebPage.
+for (const s of schemasArray) {
+  if (s !== customLocalBusiness) {
+    const pageSpecificSchema = { ...s };
+    delete pageSpecificSchema["@context"];
+    pageSpecificSchema.mainEntityOfPage = { "@id": canonicalUrlStr };
+    graph.push(pageSpecificSchema);
+  }
 }
 
 const finalSchema = {

@@ -73,8 +73,25 @@ const locationSchema = {
   }
 };
 
+const schemas = [locationSchema];
+
+if (locationFaqs.length > 0) {
+  schemas.push({
+    "@type": "FAQPage",
+    "@id": `https://trueroof.com.au/locations/${slug}#faq`,
+    "mainEntity": locationFaqs.map(faq => ({
+      "@type": "Question",
+      "name": faq.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faq.answer
+      }
+    }))
+  });
+}
+
 ---
-<MainLayout title={pageTitle} description={pageDescription} schema={locationSchema}>
+<MainLayout title={pageTitle} description={pageDescription} schema={schemas}>
 
   {/* ── Location Hero ── */}
   <section class="hero-section pt-24 pb-20" style={`position: relative; overflow: hidden; ${location.data.hero ? `background: url(${location.data.hero}) center/cover no-repeat;` : ''}`}>

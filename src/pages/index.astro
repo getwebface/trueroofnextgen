@@ -67,8 +67,22 @@ const sortedServices = [...services].sort((a, b) => {
   if (bi === -1) return -1; // b not in list, put a first
   return ai - bi; // both in list, sort by order
 });
+
+// Construct dynamic FAQPage schema
+const faqSchema = {
+  "@type": "FAQPage",
+  "@id": "https://trueroof.com.au/#faq",
+  "mainEntity": rankedFaqs.map(faq => ({
+    "@type": "Question",
+    "name": faq.question,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": faq.answer
+    }
+  }))
+};
 ---
-<MainLayout title="True Roof — Melbourne Tile Restoration Specialists" description="Melbourne's trusted tile restoration experts. Professional cleaning, re-bedding, flexi-pointing, metal flashing repairs. Free inspections. 25+ years experience.">
+<MainLayout title="True Roof — Melbourne Tile Restoration Specialists" description="Melbourne's trusted tile restoration experts. Professional cleaning, re-bedding, flexi-pointing, metal flashing repairs. Free inspections. 25+ years experience." schema={faqSchema}>
 
   <!-- Hero Section — SmartMedia full-bleed background + React weather overlay -->
   <div class="hero-smart-wrapper">
