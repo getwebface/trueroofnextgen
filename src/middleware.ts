@@ -30,7 +30,10 @@ export const onRequest = defineMiddleware(async (context, next) => {
   };
 
   // Cloudflare Cache API for weather data
-  const cacheUrl = new URL(`https://weather-cache.local/?city=${encodeURIComponent(city)}`);
+  // 🌐 Edge Optimization: Unify cache key across all suburbs to maximize Edge Hit Ratio.
+  // Since Open-Meteo fetches hardcoded Melbourne CBD coordinates, fragmenting the cache
+  // by the user's specific cf.city causes redundant API calls and rate-limiting.
+  const cacheUrl = new URL(`https://weather-cache.local/melbourne-weather`);
   const cacheKeyStr = cacheUrl.toString();
   const cacheKey = new Request(cacheKeyStr);
   const cache = context.locals.runtime?.caches?.default;
