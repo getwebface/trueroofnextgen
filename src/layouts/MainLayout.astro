@@ -140,6 +140,23 @@ const finalSchema = {
     <link rel="canonical" href={canonicalURL} />
     <script type="application/ld+json" set:html={JSON.stringify(finalSchema)} />
     <meta name="description" content={description || "Melbourne's trusted tile restoration experts. Professional cleaning, re-bedding, flexi-pointing, metal flashing repairs. Free inspections. 25+ years experience."} />
+
+    <!-- SEO Best Practice: OpenGraph and Twitter Cards ensure rich snippet generation when links are shared,
+         increasing click-through rates (CTR) and providing search engines with structured social signals. -->
+    <!-- OpenGraph Meta Tags -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title || "True Roof — Melbourne Tile Restoration Specialists"} />
+    <meta property="og:description" content={description || "Melbourne's trusted tile restoration experts. Professional cleaning, re-bedding, flexi-pointing, metal flashing repairs. Free inspections. 25+ years experience."} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:site_name" content="True Roof" />
+    <meta property="og:image" content={new URL('/images/hero-tiles-rain.jpg', Astro.site || Astro.url)} />
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title || "True Roof — Melbourne Tile Restoration Specialists"} />
+    <meta name="twitter:description" content={description || "Melbourne's trusted tile restoration experts. Professional cleaning, re-bedding, flexi-pointing, metal flashing repairs. Free inspections. 25+ years experience."} />
+    <meta name="twitter:image" content={new URL('/images/hero-tiles-rain.jpg', Astro.site || Astro.url)} />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     {/* Preload the two most critical font weights to begin downloading immediately */}
