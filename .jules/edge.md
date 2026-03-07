@@ -4,3 +4,6 @@
 ## 2025-03-05 - Try/Catch Fallbacks Around caches.default
 **Learning:** `context.locals.runtime.caches.default` can throw errors (like 500s or timeouts) or be unavailable in certain environments/during transient issues, breaking the middleware execution if not caught.
 **Action:** Always wrap `cache.match` and `cache.put` operations in `try/catch` blocks inside middleware to ensure fallback graceful degradation (hitting origin instead of crashing) instead of blocking the request.
+## 2025-03-05 - Normalizing Cache Keys for Hardcoded Geographies
+**Learning:** When an external API fetch uses hardcoded geographic coordinates (e.g. Melbourne CBD), including the user's specific edge location (`cf.city`) in the `caches.default` key fractures the cache. This causes redundant external API calls for the exact same data across different suburbs (e.g. Richmond vs Brunswick), wasting rate limits and hurting TTFB.
+**Action:** Always decouple the cache key from user-specific location data if the underlying API fetch is geographically static.
