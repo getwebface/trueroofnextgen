@@ -178,6 +178,25 @@ const serviceSchema = {
           {urgency >= 4 && <span class="badge" style="background: rgba(239,68,68,0.15); color: #fca5a5; border-color: rgba(239,68,68,0.3);">🚨 Urgent Response</span>}
         </div>
         <PromoCard contextType="service" serviceName={service.data.title} contextKeywords={serviceKeywords} />
+
+        {/* 🧠 Convert UX: Placing social proof immediately adjacent to the lead capture form significantly increases conversion rates by providing third-party validation at the highest point of friction. */}
+        <div class="glass-card" style="margin-top: 2rem; padding: 1.5rem; background: rgba(255,255,255,0.02); border-left: 4px solid var(--color-brand-orange);">
+          <div style="display: flex; gap: 0.25rem; color: #f59e0b; margin-bottom: 0.75rem; font-size: 1.1rem;">
+            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+          </div>
+          <p style="color: rgba(255,255,255,0.8); font-size: 0.95rem; line-height: 1.6; font-style: italic; margin-bottom: 1rem;">
+            "These guys are the real deal. Had a leak for months that two other companies couldn't fix. True Roof found it in 10 minutes and sorted the whole roof. Highly recommend for {service.data.title}."
+          </p>
+          <div style="display: flex; align-items: center; gap: 0.75rem;">
+            <div style="width: 2.5rem; height: 2.5rem; background: rgba(249, 115, 22, 0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Outfit', sans-serif; font-weight: 700; color: white;">
+              MB
+            </div>
+            <div>
+              <div style="font-family: 'Outfit', sans-serif; font-weight: 700; color: white; font-size: 0.95rem;">Mark B.</div>
+              <div style="color: rgba(255,255,255,0.4); font-size: 0.8rem;">Melbourne, Verified Customer</div>
+            </div>
+          </div>
+        </div>
       </div>
       <QuoteForm client:visible ctx={weatherContext} />
     </div>
