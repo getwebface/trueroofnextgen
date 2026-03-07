@@ -27,3 +27,11 @@ Target: src/content/services/tiled-restoration.md
 Type: High-End Photography
 Aesthetic: "The Craftsman". Premium, sharp focus, morning "Golden Hour" lighting. Deep charcoal/slate workwear. High-contrast brand orange (#f97316) tools/accents. Melbourne concrete tiles.
 Prompt: Shot on 85mm macro lens, shallow depth of field. A highly detailed, extreme close up of a professional tradesman's gloved hand firmly gripping a high-pressure wand, actively blasting away lichen from a weathered Monier concrete roof tile. The water beads and sprays dynamically, catching the morning "Golden Hour" lighting. The background is beautifully blurred into deep charcoal and slate tones, emphasizing the sharp, clean lines of the newly restored tile sections. High contrast brand orange (#f97316) accents on the pressure wand nozzle. No full bodies, no faces, just hands, tools, and precise craftsmanship. No full roof replacements, strictly restoration. --ar 16:9 --v 6.0 --style raw
+
+---
+
+ID: SRV-BROKEN-TILE-REPLACEMENT-MACRO
+Target: src/content/services/broken-tile-replacement.md
+Type: High-End Photography
+Aesthetic: "The Craftsman". Sharp focus, shallow depth of field, authentic Melbourne architecture, morning "Golden Hour" lighting. Deep charcoal/slate workwear. High-contrast brand orange (#f97316) accents.
+Prompt: Shot on 85mm macro lens, shallow depth of field. An extreme close-up of a professional tradesman's gloved hands meticulously interlocking a salvaged terracotta roof tile into an existing weathered Melbourne roof. The tradesman wears a dark charcoal premium work shirt with a vivid orange accent on the cuff. The background is beautifully blurred out into slate and charcoal tones. Focus is razor-sharp on the gloved fingers securing the tile and the authentic texture of the aging terracotta. Morning "Golden Hour" lighting casts dramatic, rich shadows, emphasizing structural integrity and precision craftsmanship. No full bodies, no faces. No full roof replacements, strictly restoration. --ar 16:9 --v 6.0 --style raw
