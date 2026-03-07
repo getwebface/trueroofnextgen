@@ -66,3 +66,30 @@ Our fully insured local crews carry over $20M in public liability. Every full re
 Protect your home against Doncaster's high winds and unpredictable weather. We specialize exclusively in bringing existing tiled roofs back to peak condition. For properties in nearby leafy areas, we also offer expert [tiled roof restoration in Eltham](/locations/eltham).
 
 </div>
+
+## Recent Local Project: High Wind Protection in Doncaster
+
+Recently, we completed precision re-bedding and advanced flexi-pointing on an elevated 1970s terracotta roof in Doncaster, securing it against the Eastern suburbs' high winds.
+
+> "Our original terracotta ridge caps were starting to lift and the mortar was crumbling, making us really nervous during those high wind warnings on Doncaster Hill. True Roof came out, completely removed the old cement, and re-bedded everything with flexi-pointing. The roof feels incredibly solid now, and their 10-Year Guarantee gives us genuine peace of mind."
+> — **P. Reynolds, Doncaster**
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Review",
+  "itemReviewed": {
+    "@id": "https://trueroof.com.au/locations/doncaster#service"
+  },
+  "reviewRating": {
+    "@type": "Rating",
+    "ratingValue": "5",
+    "bestRating": "5"
+  },
+  "author": {
+    "@type": "Person",
+    "name": "P. Reynolds"
+  },
+  "reviewBody": "Our original terracotta ridge caps were starting to lift and the mortar was crumbling, making us really nervous during those high wind warnings on Doncaster Hill. True Roof came out, completely removed the old cement, and re-bedded everything with flexi-pointing. The roof feels incredibly solid now, and their 10-Year Guarantee gives us genuine peace of mind."
+}
+</script>
