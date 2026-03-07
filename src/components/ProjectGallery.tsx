@@ -24,10 +24,26 @@ export default function ProjectGallery({ images }: ProjectGalleryProps) {
                     <div
                         key={index}
                         className="glass-card overflow-hidden cursor-pointer group"
-                        onClick={() => setSelectedImage(index)}
+                        onClick={() => {
+                            setSelectedImage(index);
+                            if (typeof window !== 'undefined' && (window as any).posthog) {
+                                (window as any).posthog.capture('clicked_gallery_image', {
+                                    image_index: index,
+                                    image_src: image.src,
+                                    image_alt: image.alt,
+                                });
+                            }
+                        }}
                         onKeyDown={(e) => {
                             if (e.key === 'Enter' || e.key === ' ') {
                                 setSelectedImage(index);
+                                if (typeof window !== 'undefined' && (window as any).posthog) {
+                                    (window as any).posthog.capture('clicked_gallery_image', {
+                                        image_index: index,
+                                        image_src: image.src,
+                                        image_alt: image.alt,
+                                    });
+                                }
                                 e.preventDefault();
                             }
                         }}
@@ -57,7 +73,14 @@ export default function ProjectGallery({ images }: ProjectGalleryProps) {
             {selectedImage !== null && (
                 <div
                     className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-sm p-4"
-                    onClick={() => setSelectedImage(null)}
+                    onClick={() => {
+                        if (typeof window !== 'undefined' && (window as any).posthog) {
+                            (window as any).posthog.capture('closed_gallery_lightbox', {
+                                image_index: selectedImage,
+                            });
+                        }
+                        setSelectedImage(null);
+                    }}
                 >
                     <div
                         className="relative max-w-5xl w-full max-h-[90vh] flex flex-col items-center justify-center"
@@ -65,7 +88,14 @@ export default function ProjectGallery({ images }: ProjectGalleryProps) {
                     >
                         <button
                             className="absolute -top-12 right-0 text-white/70 hover:text-white p-2 transition-colors"
-                            onClick={() => setSelectedImage(null)}
+                            onClick={() => {
+                                if (typeof window !== 'undefined' && (window as any).posthog) {
+                                    (window as any).posthog.capture('closed_gallery_lightbox', {
+                                        image_index: selectedImage,
+                                    });
+                                }
+                                setSelectedImage(null);
+                            }}
                             aria-label="Close lightbox"
                         >
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
@@ -88,7 +118,14 @@ export default function ProjectGallery({ images }: ProjectGalleryProps) {
                                     className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/80 text-white p-3 rounded-full backdrop-blur-md transition-colors"
                                     onClick={(e) => {
                                         e.stopPropagation();
-                                        setSelectedImage((prev) => prev !== null ? (prev === 0 ? images.length - 1 : prev - 1) : null);
+                                        const newIndex = selectedImage !== null ? (selectedImage === 0 ? images.length - 1 : selectedImage - 1) : null;
+                                        if (typeof window !== 'undefined' && (window as any).posthog && newIndex !== null) {
+                                            (window as any).posthog.capture('navigated_gallery_lightbox', {
+                                                direction: 'prev',
+                                                new_index: newIndex,
+                                            });
+                                        }
+                                        setSelectedImage(newIndex);
                                     }}
                                     aria-label="Previous image"
                                 >
@@ -98,7 +135,14 @@ export default function ProjectGallery({ images }: ProjectGalleryProps) {
                                     className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/80 text-white p-3 rounded-full backdrop-blur-md transition-colors"
                                     onClick={(e) => {
                                         e.stopPropagation();
-                                        setSelectedImage((prev) => prev !== null ? (prev === images.length - 1 ? 0 : prev + 1) : null);
+                                        const newIndex = selectedImage !== null ? (selectedImage === images.length - 1 ? 0 : selectedImage + 1) : null;
+                                        if (typeof window !== 'undefined' && (window as any).posthog && newIndex !== null) {
+                                            (window as any).posthog.capture('navigated_gallery_lightbox', {
+                                                direction: 'next',
+                                                new_index: newIndex,
+                                            });
+                                        }
+                                        setSelectedImage(newIndex);
                                     }}
                                     aria-label="Next image"
                                 >
