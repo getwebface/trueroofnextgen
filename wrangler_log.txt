@@ -9,7 +9,7 @@ Attaching additional modules:
 ├────────────────────────────────────────────────┼──────┼─────────────┤
 │ _astro-internal_middleware.mjs                 │ esm  │ 21.85 KiB   │
 ├────────────────────────────────────────────────┼──────┼─────────────┤
-│ chunks/PromoCard_DW03Z1PQ.mjs                  │ esm  │ 450.74 KiB  │
+│ chunks/PromoCard_1xGo6dqD.mjs                  │ esm  │ 452.17 KiB  │
 ├────────────────────────────────────────────────┼──────┼─────────────┤
 │ chunks/_@astro-renderers_CEJWRsGy.mjs          │ esm  │ 545.23 KiB  │
 ├────────────────────────────────────────────────┼──────┼─────────────┤
@@ -17,7 +17,7 @@ Attaching additional modules:
 ├────────────────────────────────────────────────┼──────┼─────────────┤
 │ chunks/_astro_assets_CNb8CKId.mjs              │ esm  │ 67.32 KiB   │
 ├────────────────────────────────────────────────┼──────┼─────────────┤
-│ chunks/_astro_data-layer-content_CpBQTsOA.mjs  │ esm  │ 145.85 KiB  │
+│ chunks/_astro_data-layer-content_DtVzeqrS.mjs  │ esm  │ 167.75 KiB  │
 ├────────────────────────────────────────────────┼──────┼─────────────┤
 │ chunks/astro/server_BMeHAjsF.mjs               │ esm  │ 249.30 KiB  │
 ├────────────────────────────────────────────────┼──────┼─────────────┤
@@ -43,7 +43,7 @@ Attaching additional modules:
 ├────────────────────────────────────────────────┼──────┼─────────────┤
 │ chunks/sharp_BtYEJfXF.mjs                      │ esm  │ 3.09 KiB    │
 ├────────────────────────────────────────────────┼──────┼─────────────┤
-│ manifest_AkGHPJ8G.mjs                          │ esm  │ 19.20 KiB   │
+│ manifest_Cr65xlzQ.mjs                          │ esm  │ 19.20 KiB   │
 ├────────────────────────────────────────────────┼──────┼─────────────┤
 │ noop-entrypoint.mjs                            │ esm  │ 0.09 KiB    │
 ├────────────────────────────────────────────────┼──────┼─────────────┤
@@ -59,29 +59,27 @@ Attaching additional modules:
 ├────────────────────────────────────────────────┼──────┼─────────────┤
 │ renderers.mjs                                  │ esm  │ 0.13 KiB    │
 ├────────────────────────────────────────────────┼──────┼─────────────┤
-│ Total (27 modules)                             │      │ 1822.61 KiB │
+│ Total (27 modules)                             │      │ 1845.94 KiB │
 └────────────────────────────────────────────────┴──────┴─────────────┘
 ✨ Compiled Worker successfully
 Your Worker has access to the following bindings:
 Binding                                                                   Resource                  Mode
 env.IMAGES (trueroof-images)                                              R2 Bucket                 local
 env.CF_PAGES ("1")                                                        Environment Variable      local
-env.CF_PAGES_BRANCH ("jules-7130595806758268451-0e58fa59")                Environment Variable      local
-env.CF_PAGES_COMMIT_SHA ("3f4908f4e99eb84a41d07b89837360f00866d...")      Environment Variable      local
-env.CF_PAGES_URL ("https://3f4908f.trueroofnextgen.pages...")             Environment Variable      local
+env.CF_PAGES_BRANCH ("jules-15357931174623770442-937407b2")               Environment Variable      local
+env.CF_PAGES_COMMIT_SHA ("d0446fae9edb0c4e7554185983aac5be0ecbd...")      Environment Variable      local
+env.CF_PAGES_URL ("https://d0446fa.trueroofnextgen.pages...")             Environment Variable      local
 
 ⎔ Starting local server...
 [wrangler:info] Ready on http://localhost:8788
-[wrangler:info] GET / 200 OK (618ms)
-[wrangler:info] GET /_astro/index.B91XQrUt.css 200 OK (9ms)
-[wrangler:info] GET /_astro/index.BujUscWW.css 200 OK (13ms)
-[wrangler:info] GET /_astro/WeatherHero.DHA71sv8.js 200 OK (5ms)
-[wrangler:info] GET /_astro/client.Dc9Vh3na.js 200 OK (12ms)
-[wrangler:info] GET /cdn/hero-tiles-rain.jpg 404 Not Found (34ms)
-[wrangler:info] GET /cdn/Texture_Psychology_Tile_Transformation_Video.mp4 404 Not Found (6ms)
-[wrangler:info] GET /_astro/proxy.FN46-Sxf.js 200 OK (6ms)
-[wrangler:info] GET /_astro/use-reduced-motion.DxEDGpM-.js 200 OK (18ms)
-[wrangler:info] GET /_astro/index.DiEladB3.js 200 OK (21ms)
-[wrangler:info] GET /_astro/SmartFAQAccordion.Chq8k2m9.js 200 OK (5ms)
-[wrangler:info] GET /_astro/index.DzWqXxpp.js 200 OK (4ms)
-[wrangler:info] GET /_astro/QuoteForm.8F8OpFSQ.js 200 OK (4ms)
+[wrangler:info] GET /faqs/cost-of-tiled-roof-restoration 404 Not Found (541ms)
+[wrangler:info] GET / 200 OK (545ms)
+[wrangler:info] GET /_astro/index.D-LeSFhz.css 200 OK (6ms)
+[wrangler:info] GET /_astro/index.BujUscWW.css 200 OK (8ms)
+[wrangler:info] GET /_astro/WeatherHero.DHA71sv8.js 200 OK (7ms)
+[wrangler:info] GET /_astro/client.Dc9Vh3na.js 200 OK (6ms)
+[wrangler:info] GET /cdn/hero-tiles-rain.jpg 404 Not Found (31ms)
+[wrangler:info] GET /cdn/Texture_Psychology_Tile_Transformation_Video.mp4 404 Not Found (13ms)
+[wrangler:info] GET /_astro/proxy.FN46-Sxf.js 200 OK (17ms)
+[wrangler:info] GET /_astro/index.DiEladB3.js 200 OK (5ms)
+[wrangler:info] GET /_astro/use-reduced-motion.DxEDGpM-.js 200 OK (11ms)
