@@ -224,25 +224,6 @@ const SmartFAQAccordion: FC<SmartFAQAccordionProps> = ({ items, weatherEvent }) 
                         : `↓ Show ${filtered.length - INITIAL_VISIBLE} more question${filtered.length - INITIAL_VISIBLE === 1 ? '' : 's'}`}
                 </button>
             )}
-
-            {/* ── Schema.org FAQPage — includes ALL FAQs for full SEO coverage ── */}
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{
-                    __html: JSON.stringify({
-                        '@context': 'https://schema.org',
-                        '@type': 'FAQPage',
-                        mainEntity: items.map(faq => ({
-                            '@type': 'Question',
-                            name: faq.question,
-                            acceptedAnswer: {
-                                '@type': 'Answer',
-                                text: faq.answer,
-                            },
-                        })),
-                    }),
-                }}
-            />
         </div>
     );
 };
