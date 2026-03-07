@@ -20,7 +20,9 @@ const {
 let contextDescription = currentCampaign.description;
 
 if (contextType === 'location' && locationName) {
-  contextDescription = `Since our crews are working in the ${locationName} area this autumn, use code ${currentCampaign.code} to claim a ${currentCampaign.value} with any accepted restoration quote.`;
+  // @ts-expect-error - season is added to the dynamic JSON but might not be in older types
+  const seasonString = currentCampaign.season || 'month';
+  contextDescription = `Since our crews are working in the ${locationName} corridor this ${seasonString}, use code ${currentCampaign.code} to claim a ${currentCampaign.value} with any accepted quote.`;
 } else if (contextType === 'service' && serviceName) {
   contextDescription = `Book your ${serviceName} before ${currentCampaign.expiryDate} and we'll include a ${currentCampaign.value} (Code: ${currentCampaign.code}) to protect your property.`;
 }

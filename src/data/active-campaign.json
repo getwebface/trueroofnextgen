@@ -1,9 +1,10 @@
 {
   "isActive": true,
-  "title": "Autumn Gutter Clear-Out Promo",
-  "code": "AUTUMN26",
-  "value": "Free Box Gutter Clean",
-  "expiryDate": "May 31st",
-  "targetService": "Any Re-pointing quote accepted in Autumn",
-  "description": "Free Box Gutter Clean with any Re-pointing quote accepted in Autumn. Keep your home safe before the winter rain starts."
+  "title": "Winter Prep: Waived Call-Out Fee",
+  "code": "WINTERPREP",
+  "value": "Waived $150 Call-Out Fee",
+  "expiryDate": "June 30th",
+  "targetService": "All initial inspections",
+  "season": "winter",
+  "description": "We are waiving our standard call-out fee for all pre-winter roof inspections booked this month."
 }
