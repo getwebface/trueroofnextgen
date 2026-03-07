@@ -1,5 +1,34 @@
 ---
 import SmartMedia from './SmartMedia.astro';
+
+const { weatherContext } = Astro.locals;
+const event = weatherContext?.event;
+const season = weatherContext?.season;
+const urgency = weatherContext?.urgency || 1;
+
+let popularBadgeText = "MOST POPULAR";
+let popularDescription = "Essential repairs for older roofs.";
+let premiumDescription = "Complete aesthetic &amp; structural overhaul.";
+let popularCtaText = "Get a Free Quote &rarr;";
+
+if (urgency >= 4) {
+  popularBadgeText = "URGENT MAKE-SAFE";
+  popularDescription = "Prioritized repairs to stop immediate damage.";
+  premiumDescription = "Not recommended until weather clears.";
+  popularCtaText = "Request Urgent Help &rarr;";
+} else if (event === 'HEAVY_RAIN' || event === 'DRIZZLE') {
+  popularBadgeText = "STOPS ACTIVE LEAKS";
+  popularDescription = "Essential repairs to seal your roof today.";
+} else if (event === 'FROST') {
+  popularBadgeText = "FROST PROTECTION";
+  popularDescription = "Secure cracked mortar against freeze-thaw.";
+} else if (season === 'AUTUMN') {
+  popularBadgeText = "WINTER PREP";
+  popularDescription = "Essential repairs before the winter rain.";
+} else if (season === 'SUMMER' && event === 'CLEAR_HOT') {
+  popularBadgeText = "HEAT SHIELD";
+  premiumDescription = "Thermal membrane to cool your home.";
+}
 ---
 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 my-8 items-stretch">
 
@@ -38,11 +67,11 @@ import SmartMedia from './SmartMedia.astro';
         preferredType="image"
       />
       <div class="pricing-media-overlay"></div>
-      <div class="pricing-popular-badge">MOST POPULAR</div>
+      <div class="pricing-popular-badge">{popularBadgeText}</div>
       <div class="pricing-tier-badge pricing-tier-badge--white">Point</div>
     </div>
     <div class="pricing-body">
-      <p class="text-sm text-white/70 mb-4">Essential repairs for older roofs.</p>
+      <p class="text-sm text-white/70 mb-4">{popularDescription}</p>
       <ul class="list-none p-0 text-sm text-left mb-6 space-y-2">
         <li>✅ Biological Decontamination</li>
         <li>✅ High-Pressure Wash</li>
@@ -50,7 +79,7 @@ import SmartMedia from './SmartMedia.astro';
         <li>✅ Re-bedding &amp; Pointing</li>
       </ul>
       {/* 🧠 UX Principle: Benefit-driven CTA reduces friction and explicitly states value. Tracking intent adds data for CRO. */}
-      <a href="#quote" class="cta-primary block w-full text-center" onclick="window.trackEvent && window.trackEvent('clicked_pricing_tier', { tier: 'Point' })">Get a Free Quote &rarr;</a>
+      <a href="#quote" class="cta-primary block w-full text-center" onclick="window.trackEvent && window.trackEvent('clicked_pricing_tier', { tier: 'Point' })" set:html={popularCtaText}></a>
     </div>
   </div>
 
@@ -67,7 +96,7 @@ import SmartMedia from './SmartMedia.astro';
       <div class="pricing-tier-badge pricing-tier-badge--amber">Full Restoration</div>
     </div>
     <div class="pricing-body">
-      <p class="text-sm text-white/70 mb-4">Complete aesthetic &amp; structural overhaul.</p>
+      <p class="text-sm text-white/70 mb-4" set:html={premiumDescription}></p>
       <ul class="list-none p-0 text-sm text-left mb-6 space-y-2">
         <li>✅ Everything in Point</li>
         <li>✅ Protective Membrane</li>
